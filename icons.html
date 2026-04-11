@@ -50,7 +50,7 @@
 
 
 <script type="module">
-    import {createItemList} from "./src/script.js"
+    import {createItemList, thumbUrl} from "./src/script.js"
     document.addEventListener('DOMContentLoaded', () => {
 
         const iconList = createItemList({
@@ -64,7 +64,7 @@
                 const filePathPNG = `https://star-assets.github.io/${icon}`;
                 div.innerHTML = `
                     <a href="${filePath}" target="_blank">
-                        <img src="${filePathPNG}" alt="${name}" loading="lazy">
+                        <img src="${thumbUrl(filePathPNG, '60x60,fit')}" alt="${name}" loading="lazy">
                     </a>
                     <span class="tooltip">${name}</span>
                     <span class="btn copy-btn" data-copy=${name}>⎘</span>

@@ -50,7 +50,7 @@
 
 
 <script type="module">
-    import {createItemList} from "./src/script.js"
+    import {createItemList, thumbUrl} from "./src/script.js"
     document.addEventListener('DOMContentLoaded', () => {
 
         function parseIniString(iniText) {
@@ -87,7 +87,7 @@
                 const filePathPNG = `https://star-assets.github.io/${icon}`;
                 div.innerHTML = `
                     <a href="${filePathPNG}" target="_blank">
-                        <img src="${filePathPNG.replace(".png",".small.png")}" alt="${name}" loading="lazy">
+                        <img src="${thumbUrl(filePathPNG, '300x200,fit')}" alt="${name}" loading="lazy">
                     </a>
                     <span class="tooltip">${name}</span>
                     <span class="btn copy-btn" data-copy=${name}>⎘</span>

@@ -108,7 +108,7 @@
 </div>
 
 <script type="module">
-    import {createItemList} from "./src/script.js"
+    import {createItemList, thumbUrl} from "./src/script.js"
     import "./src/player.js"
 
     
@@ -126,7 +126,7 @@
                 const filePathPNG = `https://star-assets.github.io/${icon}`;
                 div.innerHTML = `
                     <a href="https://star-assets.github.io/models-glb/${name}.glb" target="_blank">
-                        <img src="${filePathPNG.toLowerCase()}" alt="${name}" loading="lazy">
+                        <img src="${thumbUrl(filePathPNG.toLowerCase(), '152x152,fit')}" alt="${name}" loading="lazy">
                     </a>
                     <span class="tooltip">${name}</span>
                     <span class="btn copy-btn" data-copy=${name}>⎘</span>

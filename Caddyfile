@@ -1,5 +1,12 @@
 :80 {
 	root * /srv
+
+	# Proxy thumbnail requests to imageproxy for on-the-fly resizing
+	# URL pattern: /thumbs/{options}/{remote_url}
+	handle_path /thumbs/* {
+		reverse_proxy imageproxy:8222
+	}
+
 	file_server
 
 	# Enable gzip/zstd compression

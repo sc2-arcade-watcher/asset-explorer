@@ -7,3 +7,15 @@ services:
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - .:/srv:ro
+    depends_on:
+      - imageproxy
+
+  imageproxy:
+    image: ghcr.io/willnorris/imageproxy
+    restart: unless-stopped
+    command: -addr 0.0.0.0:8222 -cache /cache -allowHosts star-assets.github.io,dist.sc2arcade.com
+    volumes:
+      - imageproxy-cache:/cache
+
+volumes:
+  imageproxy-cache:

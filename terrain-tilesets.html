@@ -40,10 +40,11 @@
 </article>
 
 <script type="module">
-    import { createLocalItemList } from "./src/script.js"
+    import { createLocalItemList, thumbUrl } from "./src/script.js"
     document.addEventListener('DOMContentLoaded', () => {
         const list = createLocalItemList({
             list: 'terrain-tilesets',
+            baseUrl: 'https://dist.sc2arcade.com/star-assets',
             containerSelector: '.icons-grid',
             searchInputSelector: '#icon-search',
             renderItemFn: ({ file, icon, name }) => {
@@ -51,7 +52,7 @@
                 div.className = 'icon-item';
                 div.innerHTML = `
                     <a href="${file}" target="_blank">
-                        <img src="${icon}" alt="${name}" loading="lazy">
+                        <img src="${thumbUrl(icon, '300x200,fit')}" alt="${name}" loading="lazy">
                     </a>
                     <span class="tooltip">${name}</span>
                     <span class="btn copy-btn" data-copy="${name}">⎘</span>

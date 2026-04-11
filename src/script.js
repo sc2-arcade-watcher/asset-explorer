@@ -2,6 +2,19 @@
 import JSZip from '../lib/jszip.js';
 
 /**
+ * Wraps a remote image URL through the local imageproxy for resized thumbnails.
+ * Returns the original URL unchanged when running on GitHub Pages (no proxy available).
+ *
+ * @param {string} url - Full remote image URL
+ * @param {string} options - imageproxy option string, e.g. "152x152,fit"
+ * @returns {string} Proxied thumbnail URL, or original URL on GitHub Pages
+ */
+export function thumbUrl(url, options) {
+  if (location.hostname.endsWith('.github.io')) return url;
+  return `/thumbs/${options}/${url}`;
+}
+
+/**
  * Downloads a StarCraft 2 model along with its textures into a ZIP file.
  * - Extracts .dds texture names from the model binary.
  * - Matches them with provided texture repositories.
@@ -370,7 +383,7 @@ export function createItemList({
  * Loads a single INI file where the section header is the folder path and entries are
  * filenames without extension. Produces items with file === icon === "{folder}/{name}.jpg".
  */
-export function createLocalItemList({ list, ext = 'jpg', ...rest }) {
+export function createLocalItemList({ list, ext = 'jpg', baseUrl = '', ...rest }) {
   return createItemList({
     ...rest,
     list,
@@ -378,7 +391,8 @@ export function createLocalItemList({ list, ext = 'jpg', ...rest }) {
       const iniData = await loadIniFile(list, signal);
       return Object.entries(iniData).flatMap(([folder, files]) =>
         files.map(name => {
-          const url = `${folder}/${encodeURIComponent(name)}.${ext}`;
+          const path = `${folder}/${encodeURIComponent(name)}.${ext}`;
+          const url = baseUrl ? `${baseUrl}/${path}` : path;
           return { file: url, icon: url, name };
         })
       );
