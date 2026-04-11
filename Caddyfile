@@ -1,0 +1,16 @@
+:80 {
+	root * /srv
+	file_server
+
+	# Enable gzip/zstd compression
+	encode zstd gzip
+
+	# Cache static assets aggressively
+	@static {
+		path *.js *.css *.html *.png *.jpg *.svg *.woff *.woff2 *.ttf *.glb *.ini
+	}
+	header @static Cache-Control "public, max-age=3600"
+
+	# Fallback to index.html for unknown paths
+	try_files {path} {path}/ /index.html
+}
