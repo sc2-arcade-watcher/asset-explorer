@@ -1,3 +1,4 @@
+.worktrees/
 **.env
 **/.DS_Store
 
