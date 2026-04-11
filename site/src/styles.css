@@ -676,11 +676,11 @@ footer {
   text-align: center;
   font-size: 0.8em;
   color: #666;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   flex-shrink: 0;
   box-shadow: #000000 0 0 10px;
   z-index: 1;
-  padding: 16px 20px;
+  padding: 0.4rem 0.4rem;
   border-top: 1px solid rgba(224, 74, 20, 0.25);
   width: 100%;
 }
@@ -699,10 +699,10 @@ footer .discord a {
 /* Attribution */
 
 .attribution {
+  margin: 0 auto;
   color: #888;
   font-size: 0.8em;
   line-height: 1.5;
-  margin: 0;
   font-family: 'SourceSansPro', sans-serif;
   font-weight: 300;
 }
