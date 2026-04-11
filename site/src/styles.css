@@ -673,38 +673,24 @@ header.small-header h1 {
 /* Footer */
 
 footer {
-  text-align: center;
-  font-size: 0.8em;
-  color: #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: rgba(0, 0, 0, 0.7);
   flex-shrink: 0;
-  box-shadow: #000000 0 0 10px;
-  z-index: 1;
-  padding: 0.4rem 0.4rem;
+  padding: 0.6rem;
   border-top: 1px solid rgba(224, 74, 20, 0.25);
   width: 100%;
 }
 
-footer .discord {
-  margin: 0;
-  position: absolute;
-  right: 9px;
-  bottom: 9px;
+footer a {
+  display: flex;
+  color: #555;
+  transition: color 0.2s;
 }
 
-footer .discord a {
-  padding: 5px;
-}
-
-/* Attribution */
-
-.attribution {
-  margin: 0 auto;
-  color: #888;
-  font-size: 0.8em;
-  line-height: 1.5;
-  font-family: 'SourceSansPro', sans-serif;
-  font-weight: 300;
+footer a:hover {
+  color: #e04a14;
 }
 
 .attribution-card {
