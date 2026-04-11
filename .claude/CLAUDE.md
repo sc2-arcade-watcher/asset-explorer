@@ -9,7 +9,7 @@ Served at `https://asset-explorer.sc2arcade.com`
 - **Web content lives in `site/`** — Caddy mounts `./site:/srv:ro`; `Caddyfile` and `docker-compose.yml` stay at repo root (not web-accessible)
 - **Assets hosted externally** at `https://star-assets.github.io/` (separate repos per asset type)
 - **Vendored deps:** Three.js (`site/lib/three/`), JSZip (`site/lib/jszip.js`)
-- **No build step** — `package.json` was deleted
+- **No build step** — site is pure static files; `package.json` exists only for test tooling (`@playwright/test`)
 
 ## HTML Pages
 
@@ -49,14 +49,39 @@ filename2
 ```
 Each asset type has `{type}.ini` (DDS originals) + `{type}-png.ini` (PNG previews). Assets only render if present in both files.
 
+## Local Dev & Testing
+
+```bash
+cp .env.example .env && make dev     # start stack, cache disabled
+make test                            # all tests (INI + HTTP smoke + browser)
+make test-ini                        # INI integrity only (no stack needed)
+make test-smoke BASE_URL=http://...  # smoke against a running stack
+```
+
+**Package manager:** pnpm. Run `pnpm install` once before tests.
+
+**CI** (`.github/workflows/test.yml`) runs three jobs on push/PR:
+- `ini` — bash, no server
+- `smoke` — Playwright `request` fixture, python3 static server auto-started
+- `browser` — Playwright chromium, python3 static server auto-started
+
+Deployment smoke tests (full Docker stack + imageproxy) are manual only.
+
 ## Key Directories
 
 ```
 / (repo root — not web-accessible)
-├── Caddyfile
-├── docker-compose.yml
-├── readme.md
-├── img/               ← source image assets (arc.png, favicon.ico, logo.png)
+├── Caddyfile                           ← snippets + {$VAR:default} env vars
+├── docker-compose.yml                  ← base; vars from .env
+├── docker-compose.override.example.yml ← copy to .override.yml on server
+├── .env.example                        ← copy to .env
+├── Makefile
+├── package.json                        ← @playwright/test only
+├── playwright.config.js
+├── test/
+│   ├── ini-integrity.sh
+│   ├── smoke.spec.js   (HTTP/api tests)
+│   └── browser.spec.js (chromium tests)
 └── site/              ← Caddy root (mounted as /srv)
     ├── index.html
     ├── 404.html

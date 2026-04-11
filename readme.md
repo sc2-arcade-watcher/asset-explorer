@@ -16,13 +16,16 @@ Served at `https://asset-explorer.sc2arcade.com`
 
 ## Architecture
 
-Pure static site — no build step, no framework. Vanilla HTML/CSS/ES modules.
+Pure static site — no build step, no framework. Vanilla HTML/CSS/ES modules served by Caddy, with an imageproxy sidecar for thumbnail resizing.
 
 ```
 / (repo root)
-├── Caddyfile
-├── docker-compose.yml
-└── site/               ← web root (Caddy mounts ./site:/srv)
+├── Caddyfile                          ← snippet-based config, env-driven
+├── docker-compose.yml                 ← base service definitions
+├── docker-compose.override.example.yml ← copy to .override.yml on server
+├── .env.example                       ← copy to .env and fill in values
+├── Makefile                           ← dev/test shortcuts
+└── site/                              ← web root (Caddy mounts ./site:/srv)
     ├── index.html
     ├── 404.html
     ├── <category>.html
@@ -42,10 +45,47 @@ Assets are hosted externally at `https://star-assets.github.io/` and referenced 
 ## Running Locally
 
 ```bash
-docker compose up
+cp .env.example .env          # adjust HTTP_PORT etc. if needed
+make dev                      # start stack with cache disabled (no-store)
 ```
 
 Opens at `http://localhost:8080`.
+
+For production caching (`Cache-Control: public, max-age=3600`):
+
+```bash
+make up
+```
+
+## Testing
+
+```bash
+pnpm install                  # first time only
+make test                     # INI integrity + HTTP smoke + browser tests
+make test-ini                 # INI file pairing check (no stack needed)
+make test-smoke               # Playwright tests (auto-starts static server)
+```
+
+To test against a running stack or production:
+
+```bash
+make test-smoke BASE_URL=http://localhost:8080
+make test-smoke BASE_URL=https://asset-explorer.sc2arcade.com
+```
+
+CI runs `ini`, `smoke`, and `browser` jobs on every push and pull request.
+Deployment-specific tests (full Docker stack with imageproxy) are run manually.
+
+## Production Deployment
+
+```bash
+cp .env.example .env
+cp docker-compose.override.example.yml docker-compose.override.yml
+# edit both files for your environment
+docker compose up -d
+```
+
+The override file binds the port to `127.0.0.1` (loopback only) so a host-level reverse proxy handles TLS.
 
 ## Attribution
 
