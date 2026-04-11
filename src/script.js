@@ -114,9 +114,11 @@ export function flattenRepoFiles(repoMap) {
 
 /**
  * Loads an INI file from ./list/{list}.ini and parses it.
+ * @param {string} list
+ * @param {AbortSignal} [signal]
  */
-export async function loadIniFile(list) {
-  const response = await fetch(`./list/${list}.ini`);
+export async function loadIniFile(list, signal) {
+  const response = await fetch(`./list/${list}.ini`, signal ? { signal } : undefined);
   if (!response.ok) throw new Error(`Failed to load ${list}`);
   const text = await response.text();
   return parseIniString(text);
@@ -146,12 +148,18 @@ export function watchImages({ selector = 'img', onLoad = null, onError = null, f
 }
 
 /**
- * Creates an interactive item list with search, pagination, and lazy image handling.
- * Fixes: Pagination now updates properly after search.
+ * Creates an interactive item list with search, pagination, and lazy image loading.
+ *
+ * Images are loaded via IntersectionObserver — src is only set when an image
+ * enters the viewport (with a 200px look-ahead). Navigating to a new page
+ * disconnects the previous observer and cancels any in-flight image requests.
+ *
+ * INI file fetches use AbortController so a rapid reload/search won't leave
+ * stale network requests queued behind the new one.
  *
  * @param {object} options
  * @param {string} options.list - INI list key (loads list/{list}.ini and list/{list}-png.ini)
- * @param {Function} [options.loadFn] - Optional custom async loader returning [{file, icon, name}].
+ * @param {Function} [options.loadFn] - Optional custom async loader: (signal) => [{file, icon, name}].
  *   When provided, skips the default dual-INI loading and merging.
  */
 export function createItemList({
@@ -175,18 +183,25 @@ export function createItemList({
   let currentPage = 1;
 
   let debounceTimer = null;
+  let loadController = null;   // AbortController for INI fetch cancellation
+  let imageObserver = null;    // IntersectionObserver for lazy image loading
 
   async function load() {
+    // Abort any previous in-flight INI fetch
+    if (loadController) loadController.abort();
+    loadController = new AbortController();
+    const { signal } = loadController;
+
     const preloader = document.getElementById('preloader');
     if (preloader) preloader.style.display = 'flex';
 
     try {
       if (loadFn) {
-        allItems = await loadFn();
+        allItems = await loadFn(signal);
       } else {
         const [ddsFiles, pngFiles] = await Promise.all([
-          loadIniFile(list),
-          loadIniFile(`${list}-png`)
+          loadIniFile(list, signal),
+          loadIniFile(`${list}-png`, signal)
         ]);
 
         const ddsList = flattenRepoFiles(ddsFiles);
@@ -215,6 +230,7 @@ export function createItemList({
       renderPage(1);
       attachSearch();
     } catch (e) {
+      if (e.name === 'AbortError') return; // Silently drop cancelled loads
       console.error('Error loading items:', e);
     } finally {
       if (preloader) preloader.style.display = 'none';
@@ -222,6 +238,15 @@ export function createItemList({
   }
 
   function renderPage(page) {
+    // Disconnect previous observer — stops queued lazy loads for old-page images
+    if (imageObserver) {
+      imageObserver.disconnect();
+      imageObserver = null;
+    }
+
+    // Cancel any in-flight image requests from the outgoing page
+    container.querySelectorAll('img').forEach(img => { img.src = ''; });
+
     container.innerHTML = '';
     currentPage = page;
 
@@ -235,17 +260,38 @@ export function createItemList({
       fragment.appendChild(renderItemFn(item));
     }
 
-    container.appendChild(fragment);
-    renderPaginationControls(currentPage, totalPages);
-
-    watchImages({
-      selector: '.icons-grid img',
-      onError: img => console.warn('Failed to load:', img.src)
+    // Images inside a DocumentFragment don't load until inserted into the live DOM.
+    // Move src → data-src here so the browser never starts a request for off-screen images.
+    fragment.querySelectorAll('img[src]').forEach(img => {
+      img.dataset.src = img.getAttribute('src');
+      img.removeAttribute('src');
     });
+
+    container.appendChild(fragment);
+
+    // Lazily reveal images as they scroll into view (200px look-ahead)
+    imageObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const img = entry.target;
+        if (img.dataset.src) {
+          img.onload = () => { img.classList.add('loaded'); img.onload = null; };
+          img.onerror = () => { img.onerror = null; };
+          img.src = img.dataset.src;
+          delete img.dataset.src;
+        }
+        obs.unobserve(img);
+      });
+    }, { rootMargin: '200px 0px' });
+
+    container.querySelectorAll('img').forEach(img => imageObserver.observe(img));
+
+    renderPaginationControls(currentPage, totalPages);
 
     if (onRendered) {
       onRendered(pageItems, filteredItems, allItems);
-      document.getElementById("icons-count").textContent = `${filteredItems.length} / ${allItems.length} icons`;
+      const countEl = document.getElementById('icons-count');
+      if (countEl) countEl.textContent = `${filteredItems.length} / ${allItems.length} icons`;
     }
   }
 
@@ -328,8 +374,8 @@ export function createLocalItemList({ list, ext = 'jpg', ...rest }) {
   return createItemList({
     ...rest,
     list,
-    loadFn: async () => {
-      const iniData = await loadIniFile(list);
+    loadFn: async (signal) => {
+      const iniData = await loadIniFile(list, signal);
       return Object.entries(iniData).flatMap(([folder, files]) =>
         files.map(name => {
           const url = `${folder}/${encodeURIComponent(name)}.${ext}`;
