@@ -1,15 +1,17 @@
 .worktrees/
-**.env
 **/.DS_Store
-
-# Node modules and dependency files
-/node_modules/
-/package-lock.json
-
-
-#temp files
 .Temp
 
+# Environment — copy .env.example to .env and fill in values
+**.env
+
+# Docker Compose production override — copy docker-compose.override.example.yml
+docker-compose.override.yml
+
+# Node
+/node_modules/
+
+# Local assets (large binary tree, not tracked except terrain subdirs)
 assets
 !assets/Cliffs/
 !assets/Cliffs/**
