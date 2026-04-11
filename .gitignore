@@ -9,3 +9,10 @@
 #temp files
 .Temp
 
+assets
+!assets/Cliffs/
+!assets/Cliffs/**
+!assets/Doodads/
+!assets/Doodads/**
+!assets/Tilesets/
+!assets/Tilesets/**

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SC2 All Races Assets – Terrain Tilesets</title>
+
+    <link rel="icon" href="https://star-assets.github.io/buttons-png/arc.png" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/styles.css">
+
+    <meta name="description" content="Preview of StarCraft II terrain tileset assets in the SC2 All Races Archive.">
+    <meta property="og:title" content="SC2 All Races Terrain Tilesets Archive" />
+    <meta property="og:description" content="Browse StarCraft II terrain tilesets for modding." />
+    <meta property="og:image" content="https://star-assets.github.io/buttons-png/arc.png" />
+    <base href="/explorer/"/>
+</head>
+<body>
+<header class="small-header">
+    <div class="logo-container">
+        <a href="./" style="display: flex; align-items: center; text-decoration: none;">
+            <img src="https://star-assets.github.io/buttons-png/arc.png" alt="SC2 All Races Logo" />
+            <h1>ALL Races Assets</h1>
+        </a>
+    </div>
+    <input type="search" id="icon-search" placeholder="Search tilesets..." aria-label="Search tilesets" />
+    <button class="fullscreen-btn" id="fullscreen-toggle" title="Toggle Fullscreen">⤢</button>
+</header>
+<article>
+    <p>Preview StarCraft II terrain tilesets from the archive. <span id="icons-count"></span></p>
+
+    <div class="icons-grid art-grid" id="icons-grid">
+        <div id="preloader" class="grid-preloader" aria-label="Loading tilesets" role="status" aria-live="polite">
+            <div class="spinner"></div>
+        </div>
+    </div>
+</article>
+
+<script type="module">
+    import { createLocalItemList } from "./src/script.js"
+    document.addEventListener('DOMContentLoaded', () => {
+        const list = createLocalItemList({
+            list: 'terrain-tilesets',
+            containerSelector: '.icons-grid',
+            searchInputSelector: '#icon-search',
+            renderItemFn: ({ file, icon, name }) => {
+                const div = document.createElement('div');
+                div.className = 'icon-item';
+                div.innerHTML = `
+                    <a href="${file}" target="_blank">
+                        <img src="${icon}" alt="${name}" loading="lazy">
+                    </a>
+                    <span class="tooltip">${name}</span>
+                    <span class="btn copy-btn" data-copy="${name}">⎘</span>
+                `;
+                return div;
+            },
+            onRendered: (list, filtered, all) => {
+                document.getElementById('icons-count').textContent = `${filtered.length} / ${all.length}`;
+            }
+        });
+        list.load();
+    });
+</script>
+
+<footer>
+    SC2 All Races Assets Archive
+    <div class="discord">
+        <a href="https://discord.gg/tR6958REu2" target="_blank" rel="noopener" title="All Races Discord">
+            <img src="./img/discord.svg" alt="Discord" class="discord-icon">
+        </a>
+    </div>
+</footer>
+
+</body>
+</html>

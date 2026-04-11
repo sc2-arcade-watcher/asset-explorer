@@ -148,9 +148,15 @@ export function watchImages({ selector = 'img', onLoad = null, onError = null, f
 /**
  * Creates an interactive item list with search, pagination, and lazy image handling.
  * Fixes: Pagination now updates properly after search.
+ *
+ * @param {object} options
+ * @param {string} options.list - INI list key (loads list/{list}.ini and list/{list}-png.ini)
+ * @param {Function} [options.loadFn] - Optional custom async loader returning [{file, icon, name}].
+ *   When provided, skips the default dual-INI loading and merging.
  */
 export function createItemList({
   list,
+  loadFn,
   containerSelector,
   searchInputSelector,
   renderItemFn,
@@ -175,30 +181,34 @@ export function createItemList({
     if (preloader) preloader.style.display = 'flex';
 
     try {
-      const [ddsFiles, pngFiles] = await Promise.all([
-        loadIniFile(list),
-        loadIniFile(`${list}-png`)
-      ]);
+      if (loadFn) {
+        allItems = await loadFn();
+      } else {
+        const [ddsFiles, pngFiles] = await Promise.all([
+          loadIniFile(list),
+          loadIniFile(`${list}-png`)
+        ]);
 
-      const ddsList = flattenRepoFiles(ddsFiles);
-      const pngList = flattenRepoFiles(pngFiles);
+        const ddsList = flattenRepoFiles(ddsFiles);
+        const pngList = flattenRepoFiles(pngFiles);
 
-      // Index for quick lookup
-      const ddsIndex = Object.fromEntries(ddsList.map(({ file, repo }) => [file.toLowerCase(), { file, repo }]));
-      const pngIndex = Object.fromEntries(pngList.map(({ file, repo }) => [file.toLowerCase(), { file, repo }]));
+        // Index for quick lookup
+        const ddsIndex = Object.fromEntries(ddsList.map(({ file, repo }) => [file.toLowerCase(), { file, repo }]));
+        const pngIndex = Object.fromEntries(pngList.map(({ file, repo }) => [file.toLowerCase(), { file, repo }]));
 
-      // Merge lists by filename
-      allItems = Object.keys(ddsIndex).map(key => {
-        const dds = ddsIndex[key];
-        const png = pngIndex[key];
-        if (!png) return null;
+        // Merge lists by filename
+        allItems = Object.keys(ddsIndex).map(key => {
+          const dds = ddsIndex[key];
+          const png = pngIndex[key];
+          if (!png) return null;
 
-        return {
-          file: `${dds.repo}/${dds.file}.dds`,
-          icon: `${png.repo}/${png.file}.png`,
-          name: png.file
-        };
-      }).filter(Boolean);
+          return {
+            file: `${dds.repo}/${dds.file}.dds`,
+            icon: `${png.repo}/${png.file}.png`,
+            name: png.file
+          };
+        }).filter(Boolean);
+      }
 
       filteredItems = allItems;
 
@@ -307,4 +317,25 @@ export function createItemList({
   });
 
   return { load };
+}
+
+/**
+ * Variant of createItemList for locally-hosted single-file assets (e.g. JPGs in assets/).
+ * Loads a single INI file where the section header is the folder path and entries are
+ * filenames without extension. Produces items with file === icon === "{folder}/{name}.jpg".
+ */
+export function createLocalItemList({ list, ext = 'jpg', ...rest }) {
+  return createItemList({
+    ...rest,
+    list,
+    loadFn: async () => {
+      const iniData = await loadIniFile(list);
+      return Object.entries(iniData).flatMap(([folder, files]) =>
+        files.map(name => {
+          const url = `${folder}/${encodeURIComponent(name)}.${ext}`;
+          return { file: url, icon: url, name };
+        })
+      );
+    },
+  });
 }
