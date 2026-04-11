@@ -6,7 +6,7 @@ services:
       - "8080:80"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - .:/srv:ro
+      - ./site:/srv:ro
     depends_on:
       - imageproxy
 

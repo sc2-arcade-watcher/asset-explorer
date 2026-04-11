@@ -44,8 +44,8 @@ h1 {
   font-family: 'Starcraft', sans-serif;
   margin: 0.2em 0;
   font-size: 2.2em;
-  color: #00d8ff;
-  text-shadow: 0 0 10px #00d8ff;
+  color: #e04a14;
+  text-shadow: 0 0 10px #e04a14;
 }
 
 p {
@@ -73,9 +73,9 @@ p {
 
 .links a {
   text-decoration: none;
-  color: #00d8ff;
+  color: #e04a14;
   background: linear-gradient(145deg, #12181f, #0e141a);
-  border: 1px solid #00d8ff;
+  border: 1px solid #e04a14;
   border-radius: 4px;
   padding: 12px 20px;
   text-align: center;
@@ -83,8 +83,8 @@ p {
 }
 
 .links a:hover {
-  background: #00d8ff;
-  color: #111;
+  background: #e04a14;
+  color: #fff;
 }
 
 /* Discord button */
@@ -162,7 +162,7 @@ article {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border: 1px solid #00d8ff;
+  border: 1px solid #e04a14;
   border-radius: 4px;
   background: #12181f;
   margin-bottom: 0;
@@ -179,7 +179,7 @@ article {
   cursor: pointer;
   opacity: 0;
   display: block;
-  border: 1px solid #00d8ff;
+  border: 1px solid #e04a14;
   border-radius: 4px;
   background: #12181f;
   position: relative;
@@ -195,7 +195,7 @@ article {
 }
 
 .icon-item a {
-  color: #00d8ff;
+  color: #e04a14;
   text-decoration: none;
   font-size: 0.8em;
   word-break: break-word;
@@ -212,8 +212,8 @@ article {
   bottom: 110%;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 216, 255, 0.9);
-  color: #111;
+  background: rgba(224, 74, 20, 0.92);
+  color: #fff;
   padding: 6px 12px;
   border-radius: 6px;
   white-space: nowrap;
@@ -222,7 +222,7 @@ article {
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.3s ease;
-  box-shadow: 0 0 10px #00d8ff88;
+  box-shadow: 0 0 10px #e04a1488;
   z-index: 9999 !important; /* Ensure tooltip is on top */
 }
 
@@ -234,7 +234,7 @@ article {
   transform: translateX(-50%);
   border-width: 6px;
   border-style: solid;
-  border-color: rgba(0, 216, 255, 0.9) transparent transparent transparent;
+  border-color: rgba(224, 74, 20, 0.92) transparent transparent transparent;
 }
 
 .icon-item:hover .tooltip {
@@ -251,7 +251,7 @@ article {
 }
 
 .back-home {
-  color: #00d8ff;
+  color: #e04a14;
   text-decoration: none;
   font-weight: 600;
   font-size: 1em;
@@ -259,7 +259,7 @@ article {
 }
 
 .back-home:hover {
-  color: #00ffff;
+  color: #ff6a30;
   text-decoration: underline;
 }
 
@@ -276,20 +276,20 @@ article {
   width: 100%;
   padding: 8px 12px;
   font-size: 1em;
-  border: 1px solid #00d8ff;
+  border: 1px solid #e04a14;
   border-radius: 4px;
   background: #12181f;
-  color: #00d8ff;
+  color: #e04a14;
   outline: none;
   transition: border-color 0.2s ease;
 }
 
 #icon-search::placeholder {
-  color: #004f60;
+  color: #5a2a10;
 }
 
 #icon-search:focus {
-  border-color: #00ffff;
+  border-color: #ff6a30;
 }
 
 /* Spinner styles */
@@ -307,7 +307,7 @@ article {
   width: 28px;
   height: 28px;
   margin: -14px 0 0 -14px;
-  border: 3px solid #00d8ff;
+  border: 3px solid #e04a14;
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -318,7 +318,7 @@ article {
   width: 76px;
   height: 76px;
   object-fit: contain;
-  border: 1px solid #00d8ff;
+  border: 1px solid #e04a14;
   border-radius: 4px;
   background: #12181f;
   padding: 4px;
@@ -350,7 +350,7 @@ article {
 .spinner {
   width: 48px;
   height: 48px;
-  border: 6px solid #00d8ff;
+  border: 6px solid #e04a14;
   border-top: 6px solid transparent;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -381,7 +381,7 @@ header.small-header img {
 
 header.small-header h1 {
   font-size: 1.1em;
-  color: #00d8ff;
+  color: #e04a14;
   margin: 0 0.5em;
   cursor: pointer;
 }
@@ -456,15 +456,15 @@ header.small-header h1 {
     justify-content: center;
     align-items: center;
     font-family: 'Orbitron', sans-serif;
-    color: #00d8ff;
+    color: #e04a14;
 }
 
 .pagination button {
   padding: 6px 12px;
   font-size: 1em;
-  border: 1px solid #00d8ff;
+  border: 1px solid #e04a14;
   background: #0b0f14;
-  color: #00d8ff;
+  color: #e04a14;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -475,7 +475,7 @@ header.small-header h1 {
 }
 
 .pagination button.active {
-  background: #00d8ff;
+  background: #e04a14;
   color: black;
   font-weight: bold;
 }
@@ -525,7 +525,7 @@ header.small-header h1 {
   position: absolute;
   background: rgba(0, 0, 0, 0.5);
   border: none;
-  color: #00d8ff;
+  color: #e04a14;
   font-size: 18px;
   cursor: pointer;
   border-radius: 4px;
@@ -560,7 +560,7 @@ header.small-header h1 {
 
 .fullscreen-btn {
   border: none;
-  background: #00d8ff;
+  background: #e04a14;
   font-size: 28px;
   cursor: pointer;
   border-radius: 4px;
@@ -638,7 +638,7 @@ header.small-header h1 {
 
   ::-webkit-scrollbar-thumb {
     border-radius: 20px;
-    background-color: #03d8ff;
+    background-color: #e04a14;
     min-height: 100px;
   }
 }
@@ -646,19 +646,16 @@ header.small-header h1 {
 /* Footer */
 
 footer {
-    display: none;
   text-align: center;
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #666;
   background: rgba(0, 0, 0, 0.6);
   flex-shrink: 0;
   box-shadow: #000000 0 0 10px;
   z-index: 1;
-  height: 0;
-  padding: 0;
-  overflow: visible;
-  font-size: 0;
-  position: relative;
+  padding: 16px 20px;
+  border-top: 1px solid rgba(224, 74, 20, 0.25);
+  width: 100%;
 }
 
 footer .discord {
@@ -670,4 +667,170 @@ footer .discord {
 
 footer .discord a {
   padding: 5px;
+}
+
+/* Attribution */
+
+.attribution {
+  color: #888;
+  font-size: 0.8em;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.attribution-card {
+  margin: 20px auto;
+  max-width: 700px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(224, 74, 20, 0.35);
+  border-radius: 6px;
+  padding: 16px 20px;
+  font-size: 0.9em;
+  color: #aaa;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.attribution-card p {
+  margin: 0 0 8px;
+  font-size: 1em;
+  color: #aaa;
+  text-align: left;
+}
+
+.attribution-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* Community section */
+
+.community-section {
+  margin: 30px auto;
+  max-width: 900px;
+  width: 90%;
+}
+
+.community-section h2 {
+  font-family: 'Orbitron', sans-serif;
+  color: #e04a14;
+  font-size: 1.2em;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.discord-widgets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.discord-widget {
+  background: #12181f;
+  border: 1px solid #e04a14;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+.discord-widget:hover {
+  box-shadow: 0 0 12px rgba(224, 74, 20, 0.55);
+}
+
+.discord-widget img.widget-banner {
+  width: 100%;
+  height: 76px;
+  object-fit: cover;
+  display: block;
+}
+
+.discord-widget .widget-info {
+  padding: 10px 12px;
+}
+
+.discord-widget .widget-name {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #e04a14;
+  margin: 0 0 4px;
+}
+
+.discord-widget .widget-desc {
+  font-size: 0.78em;
+  color: #888;
+  margin: 0;
+}
+
+.discord-widget .widget-online {
+  font-size: 0.72em;
+  color: #5a5;
+  margin: 4px 0 0;
+}
+
+.discord-widget-fallback {
+  background: #12181f;
+  border: 1px solid #e04a14;
+  border-radius: 6px;
+  padding: 14px 16px;
+  text-decoration: none;
+  display: block;
+  transition: box-shadow 0.2s ease;
+}
+
+.discord-widget-fallback:hover {
+  box-shadow: 0 0 12px rgba(224, 74, 20, 0.55);
+}
+
+.discord-widget-fallback .widget-name {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #e04a14;
+  margin: 0 0 4px;
+}
+
+.discord-widget-fallback .widget-desc {
+  font-size: 0.78em;
+  color: #888;
+  margin: 0;
+}
+
+/* Header logo styles (landing page) */
+
+.header-icon {
+  max-width: 60px;
+  vertical-align: middle;
+}
+
+.header-logo {
+  max-height: 40px;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+/* Category page subtitle in small header */
+
+header.small-header .subtitle {
+  font-size: 0.68em;
+  color: #9aa0a8;
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+@media screen and (max-width: 600px) {
+  .discord-widgets-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-logo {
+    max-height: 28px;
+  }
+
+  header.small-header .subtitle {
+    display: none;
+  }
 }

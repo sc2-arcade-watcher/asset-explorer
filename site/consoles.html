@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>SC2 All Races Assets – Portraits Archive</title>
+    <title>SC2Mapster Asset Explorer – Consoles</title>
 
-    <link rel="icon" href="https://star-assets.github.io/buttons-png/arc.png" type="image/png" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" media="print" onload="this.media='all'">
@@ -15,32 +15,33 @@
 
     <!-- Optional SEO meta -->
     <meta name="description" content="Preview of StarCraft II icon assets in the SC2 All Races Archive.">
-    <meta property="og:title" content="SC2 All Races Portraits Archive" />
-    <meta property="og:description" content="Browse and download StarCraft II portraits for modding." />
-    <meta property="og:image" content="https://star-assets.github.io/buttons-png/arc.png" />
+    <meta property="og:title" content="SC2 All Races consoles Archive" />
+    <meta property="og:description" content="Browse and download StarCraft II consoles for modding." />
+    <meta property="og:image" content="img/arc.png" />
 </head>
 <body>
 <header class="small-header">
     <div class="logo-container">
         <a href="./" style="display: flex; align-items: center; text-decoration: none;">
-            <img src="https://star-assets.github.io/buttons-png/arc.png" alt="SC2 All Races Logo" />
-            <h1>ALL Races Assets</h1>
+            <img src="img/arc.png" alt="SC2Mapster Asset Explorer Logo" />
+            <div><h1>SC2Mapster Asset Explorer</h1>
+            <p class="subtitle">Consoles</p></div>
         </a>
     </div>
-    <input type="search" id="icon-search" placeholder="Search portraits..." aria-label="Search portraits" />
+    <input type="search" id="icon-search" placeholder="Search consoles..." aria-label="Search consoles" />
     <button class="fullscreen-btn" id="fullscreen-toggle" title="Toggle Fullscreen">⤢</button>
 </header>
 <article>
         
-    <p>Preview and download StarCraft II portraits from the archive. <span id="icons-count"></span></p>
+    <p>Preview and download StarCraft II consoles from the archive. <span id="icons-count"></span></p>
 
 
 
     <!--<div class="search-container">-->
     <!--    <input type="text" id="icon-search" placeholder="Search icons by name..." autocomplete="off" />-->
     <!--</div>-->
-    <div class="icons-grid portraits-grid" id="icons-grid">
-        <div id="preloader" class="grid-preloader" aria-label="Loading portraits" role="status" aria-live="polite">
+    <div class="icons-grid art-grid" id="icons-grid">
+        <div id="preloader" class="grid-preloader" aria-label="Loading consoles" role="status" aria-live="polite">
             <div class="spinner"></div>
         </div>
         <!-- icons will be injected here -->
@@ -77,7 +78,7 @@
 
 
         const iconList = createItemList({
-            list: 'portraits',
+            list: 'consoles',
             containerSelector: '.icons-grid',
             searchInputSelector: '#icon-search',
             renderItemFn: ({file, icon, name}) => {
@@ -87,7 +88,7 @@
                 const filePathPNG = `https://star-assets.github.io/${icon}`;
                 div.innerHTML = `
                     <a href="${filePath}" target="_blank">
-                        <img src="${thumbUrl(filePathPNG, '200x300,fit')}" alt="${name}" loading="lazy">
+                        <img src="${thumbUrl(filePathPNG, '300x200,fit')}" alt="${name}" loading="lazy">
                     </a>
                     <span class="tooltip">${name}</span>
                     <span class="btn copy-btn" data-copy=${name}>⎘</span>
@@ -105,12 +106,8 @@
 
 
 <footer>
-     SC2 All Races Assets Archive
-    <div class="discord">
-        <a href="https://discord.gg/tR6958REu2" target="_blank" rel="noopener" title="All Races Discord">
-            <img src="./img/discord.svg" alt="Discord" class="discord-icon">
-        </a>
-    </div>
+  <p class="attribution">SC2Mapster Asset Explorer — a community resource for StarCraft II mapmakers<br>
+  Assets belong to their respective authors. Always credit the original creator.</p>
 </footer>
 
 </body>

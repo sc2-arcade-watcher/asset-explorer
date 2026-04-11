@@ -4,36 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>SC2 All Races Assets – Terrain Doodads</title>
+    <title>SC2Mapster Asset Explorer – Terrain Cliffs</title>
 
-    <link rel="icon" href="https://star-assets.github.io/buttons-png/arc.png" type="image/png" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap"></noscript>
     <link rel="stylesheet" href="./src/styles.css">
 
-    <meta name="description" content="Preview of StarCraft II terrain doodad assets in the SC2 All Races Archive.">
-    <meta property="og:title" content="SC2 All Races Terrain Doodads Archive" />
-    <meta property="og:description" content="Browse StarCraft II terrain doodads for modding." />
-    <meta property="og:image" content="https://star-assets.github.io/buttons-png/arc.png" />
+    <meta name="description" content="Preview of StarCraft II terrain cliff assets in the SC2 All Races Archive.">
+    <meta property="og:title" content="SC2 All Races Terrain Cliffs Archive" />
+    <meta property="og:description" content="Browse StarCraft II terrain cliff styles for modding." />
+    <meta property="og:image" content="img/arc.png" />
 </head>
 <body>
 <header class="small-header">
     <div class="logo-container">
         <a href="./" style="display: flex; align-items: center; text-decoration: none;">
-            <img src="https://star-assets.github.io/buttons-png/arc.png" alt="SC2 All Races Logo" />
-            <h1>ALL Races Assets</h1>
+            <img src="img/arc.png" alt="SC2Mapster Asset Explorer Logo" />
+            <div><h1>SC2Mapster Asset Explorer</h1>
+            <p class="subtitle">Terrain Cliffs</p></div>
         </a>
     </div>
-    <input type="search" id="icon-search" placeholder="Search doodads..." aria-label="Search doodads" />
+    <input type="search" id="icon-search" placeholder="Search cliffs..." aria-label="Search cliffs" />
     <button class="fullscreen-btn" id="fullscreen-toggle" title="Toggle Fullscreen">⤢</button>
 </header>
 <article>
-    <p>Preview StarCraft II terrain doodads from the archive. <span id="icons-count"></span></p>
+    <p>Preview StarCraft II terrain cliff styles from the archive. <span id="icons-count"></span></p>
 
-    <div class="icons-grid" id="icons-grid">
-        <div id="preloader" class="grid-preloader" aria-label="Loading doodads" role="status" aria-live="polite">
+    <div class="icons-grid art-grid" id="icons-grid">
+        <div id="preloader" class="grid-preloader" aria-label="Loading cliffs" role="status" aria-live="polite">
             <div class="spinner"></div>
         </div>
     </div>
@@ -43,7 +44,7 @@
     import { createLocalItemList, thumbUrl } from "./src/script.js"
     document.addEventListener('DOMContentLoaded', () => {
         const list = createLocalItemList({
-            list: 'terrain-doodads',
+            list: 'terrain-cliffs',
             baseUrl: 'https://dist.sc2arcade.com/star-assets',
             containerSelector: '.icons-grid',
             searchInputSelector: '#icon-search',
@@ -52,7 +53,7 @@
                 div.className = 'icon-item';
                 div.innerHTML = `
                     <a href="${file}" target="_blank">
-                        <img src="${thumbUrl(icon, '152x152,fit')}" alt="${name}" loading="lazy">
+                        <img src="${thumbUrl(icon, '300x200,fit')}" alt="${name}" loading="lazy">
                     </a>
                     <span class="tooltip">${name}</span>
                     <span class="btn copy-btn" data-copy="${name}">⎘</span>
@@ -68,12 +69,8 @@
 </script>
 
 <footer>
-    SC2 All Races Assets Archive
-    <div class="discord">
-        <a href="https://discord.gg/tR6958REu2" target="_blank" rel="noopener" title="All Races Discord">
-            <img src="./img/discord.svg" alt="Discord" class="discord-icon">
-        </a>
-    </div>
+  <p class="attribution">SC2Mapster Asset Explorer — a community resource for StarCraft II mapmakers<br>
+  Assets belong to their respective authors. Always credit the original creator.</p>
 </footer>
 
 </body>
