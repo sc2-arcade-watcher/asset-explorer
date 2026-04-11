@@ -3,7 +3,10 @@ services:
     image: caddy:2-alpine
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "${HTTP_PORT:-8080}:80"
+    environment:
+      - CACHE_CONTROL=${CACHE_CONTROL:-public, max-age=3600}
+      - IMAGEPROXY_ADDR=${IMAGEPROXY_ADDR:-imageproxy:8222}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./site:/srv:ro
@@ -13,9 +16,14 @@ services:
   imageproxy:
     image: ghcr.io/willnorris/imageproxy
     restart: unless-stopped
-    command: -addr 0.0.0.0:8222 -cache /cache -allowHosts star-assets.github.io,dist.sc2arcade.com
+    command: -addr 0.0.0.0:8222 -cache /cache -allowHosts ${IMAGEPROXY_ALLOW_HOSTS:-star-assets.github.io,dist.sc2arcade.com}
     volumes:
       - imageproxy-cache:/cache
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8222/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
 
 volumes:
   imageproxy-cache:

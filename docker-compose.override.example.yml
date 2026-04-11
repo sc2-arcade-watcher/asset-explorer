@@ -1,0 +1,18 @@
+# Production overrides for docker-compose.yml.
+#
+# Copy to docker-compose.override.yml (gitignored) on the production server
+# and adjust values. Docker Compose merges this file automatically on `docker compose up`.
+#
+# Minimal usage: just ensure .env is populated correctly — the base compose file
+# already reads all runtime config from environment variables.
+# Use this file for host-level or infra-level settings that differ from dev.
+
+services:
+  explorer:
+    # Bind to loopback only — let a reverse proxy (e.g. Caddy on the host) handle TLS
+    ports:
+      - "127.0.0.1:${HTTP_PORT:-8080}:80"
+    restart: always
+
+  imageproxy:
+    restart: always
