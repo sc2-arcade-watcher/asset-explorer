@@ -1,0 +1,49 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Deployment-specific tests (hitting the live Docker stack with imageproxy)
+# are run manually via `make test-smoke BASE_URL=https://asset-explorer.sc2arcade.com`.
+
+jobs:
+  ini:
+    name: INI Integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash test/ini-integrity.sh
+
+  smoke:
+    name: HTTP Smoke (api)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # No BASE_URL → playwright.config.js starts python3 http.server against site/
+      - run: pnpm run test:smoke
+
+  browser:
+    name: Browser (chromium)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm run test:browser
