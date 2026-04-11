@@ -1,0 +1,12 @@
+{
+  "name": "explorer-tests",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --project=api",
+    "test:browser": "playwright test --project=chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.51.0"
+  }
+}

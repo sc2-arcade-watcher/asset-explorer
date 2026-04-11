@@ -25,7 +25,7 @@ test-ini: ## Validate INI file pairing and structure (no stack needed)
 	@bash test/ini-integrity.sh
 
 test-smoke: ## HTTP smoke tests against BASE_URL (stack must be running)
-	@npx playwright test
+	@pnpm test
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
