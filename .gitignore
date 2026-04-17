@@ -1,4 +1,5 @@
 .worktrees/
+.claude/worktrees/
 **/.DS_Store
 .Temp
 
@@ -17,12 +18,3 @@ docker-compose.override.yml
 # Playwright test artifacts
 /test-results/
 /.playwright-mcp/
-
-# Local assets (large binary tree, not tracked except terrain subdirs)
-assets
-!assets/Cliffs/
-!assets/Cliffs/**
-!assets/Doodads/
-!assets/Doodads/**
-!assets/Tilesets/
-!assets/Tilesets/**
