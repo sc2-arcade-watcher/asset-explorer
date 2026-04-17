@@ -37,3 +37,34 @@ test('discord widget container renders fallback cards', async ({ page }) => {
   const cards = page.locator('#discord-widgets .discord-widget-fallback');
   await expect(cards).not.toHaveCount(0);
 });
+
+test('icon-item border uses ::before overlay, not element border', async ({ page }) => {
+  await page.goto('/buttons.html');
+  // Wait for at least one icon-item to be rendered
+  await page.waitForSelector('.icon-item');
+
+  const borderStyle = await page.evaluate(() => {
+    const item = document.querySelector('.icon-item');
+    const style = getComputedStyle(item);
+    return {
+      borderTopWidth: style.borderTopWidth,
+      borderRightWidth: style.borderRightWidth,
+      borderBottomWidth: style.borderBottomWidth,
+      borderLeftWidth: style.borderLeftWidth,
+    };
+  });
+
+  // The element itself must have no border (0px) — border lives in ::before overlay
+  expect(borderStyle.borderTopWidth).toBe('0px');
+  expect(borderStyle.borderRightWidth).toBe('0px');
+  expect(borderStyle.borderBottomWidth).toBe('0px');
+  expect(borderStyle.borderLeftWidth).toBe('0px');
+
+  const pseudoBorder = await page.evaluate(() => {
+    const item = document.querySelector('.icon-item');
+    return getComputedStyle(item, '::before').borderTopWidth;
+  });
+
+  // The ::before pseudo-element must carry the 1px border
+  expect(pseudoBorder).toBe('1px');
+});

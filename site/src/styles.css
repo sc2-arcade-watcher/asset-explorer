@@ -191,12 +191,21 @@ article {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border: 1px solid #e04a14;
   border-radius: 4px;
   background: #12181f;
   margin-bottom: 0;
   position: relative; /* Ensure positioning context */
   z-index: 1;
+}
+
+.icon-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid #e04a14;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .icon-item img {
