@@ -47,31 +47,17 @@
 
 
 <script type="module">
-    import {createItemList, thumbUrl} from "./src/script.js"
+    import { createItemList, makeRenderItem } from "./src/script.js";
     document.addEventListener('DOMContentLoaded', () => {
-
-        const iconList = createItemList({
+        createItemList({
             list: 'icons',
             containerSelector: '.icons-grid',
             searchInputSelector: '#icon-search',
-            renderItemFn: ({file, icon, name}) => {
-                const div = document.createElement('div');
-                div.className = 'icon-item';
-                const filePath = `https://star-assets.github.io/${file}`;
-                const filePathPNG = `https://star-assets.github.io/${icon}`;
-                div.innerHTML = `
-                    <a href="${filePath}" target="_blank">
-                        <img src="${thumbUrl(filePathPNG, '60x60,fit')}" alt="${name}" loading="lazy">
-                    </a>
-                    <span class="tooltip">${name}</span>
-                    <span class="btn copy-btn" data-copy=${name}>⎘</span>
-                `;
-                return div;
-            },
-            onRendered: (list,filtered,all) => {
-            }
-        });
-        iconList.load();
+            renderItemFn: makeRenderItem({
+                thumbSize: '60x60,fit',
+                assetBase: 'https://star-assets.github.io/',
+            }),
+        }).load();
     });
 </script>
 

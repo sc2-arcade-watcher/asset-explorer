@@ -138,6 +138,35 @@ export async function loadIniFile(list, signal) {
 }
 
 /**
+ * Default item renderer used by every category grid page.
+ *
+ * Produces the shared card DOM (anchor + image + tooltip + copy button).
+ * Most pages only vary by three things:
+ *   - `thumbSize`  — imageproxy option string, e.g. '152x152,fit'
+ *   - `hrefFrom`   — 'file' (the .dds original) or 'icon' (the .png preview)
+ *   - `assetBase`  — URL prefix; '' when item.file/item.icon are already absolute
+ *                    (terrain pages use createLocalItemList, which emits absolute URLs)
+ *
+ * Pages whose cards need materially different markup (currently only models.html,
+ * which links to a separate GLB repo) should pass their own `renderItemFn` instead.
+ */
+export function makeRenderItem({ thumbSize, hrefFrom = 'file', assetBase = '' }) {
+  return ({ file, icon, name }) => {
+    const href = assetBase + (hrefFrom === 'icon' ? icon : file);
+    const imgSrc = thumbUrl(assetBase + icon, thumbSize);
+    const div = document.createElement('div');
+    div.className = 'icon-item';
+    div.innerHTML = `
+      <a href="${href}" target="_blank">
+        <img src="${imgSrc}" alt="${name}" loading="lazy">
+      </a>
+      <span class="tooltip">${name}</span>
+      <span class="btn copy-btn" data-copy="${name}">⎘</span>`;
+    return div;
+  };
+}
+
+/**
  * Watches images in the DOM and applies fade-in class when loaded.
  */
 export function watchImages({ selector = 'img', onLoad = null, onError = null, fadeInClass = 'loaded' } = {}) {
@@ -301,11 +330,10 @@ export function createItemList({
 
     renderPaginationControls(currentPage, totalPages);
 
-    if (onRendered) {
-      onRendered(pageItems, filteredItems, allItems);
-      const countEl = document.getElementById('icons-count');
-      if (countEl) countEl.textContent = `${filteredItems.length} / ${allItems.length} icons`;
-    }
+    const countEl = document.getElementById('icons-count');
+    if (countEl) countEl.textContent = `${filteredItems.length} / ${allItems.length} icons`;
+
+    if (onRendered) onRendered(pageItems, filteredItems, allItems);
   }
 
   function renderPaginationControls(current, total) {

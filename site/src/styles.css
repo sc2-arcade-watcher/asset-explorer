@@ -166,12 +166,6 @@ filter: brightness(1000%);
   grid-template-columns: repeat(auto-fill, 90px);
 }
 
-.portraits-grid img {
-  width: 90px;
-  height: 138px;
-  object-fit: cover;
-}
-
 article {
   display: flex;
   flex-direction: column;
@@ -613,36 +607,40 @@ header.small-header h1 {
   flex-grow: 1;
 }
 
-/* Portrait grids */
+/* Portrait grids — tile drives aspect, image fills it (matches 200x300 proxy thumbs). */
 
 .portraits-grid {
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 }
 
-.portraits-grid .icon-item,
-.portraits-grid .icon-item img {
+.portraits-grid .icon-item {
   width: 100px;
-  height: 150px;
+  aspect-ratio: 2 / 3;
 }
 
 .portraits-grid .icon-item img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  box-sizing: border-box;
 }
 
-/* Art grid */
+/* Art grid — tile drives aspect, image fills it (matches 300x200 proxy thumbs). */
 
 .icons-grid.art-grid {
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 
-.icons-grid.art-grid .icon-item,
-.icons-grid.art-grid .icon-item img {
+.icons-grid.art-grid .icon-item {
   width: 150px;
-  height: 100px;
+  aspect-ratio: 3 / 2;
 }
 
 .icons-grid.art-grid .icon-item img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  box-sizing: border-box;
 }
 
 /* Small icons grid */
