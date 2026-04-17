@@ -138,6 +138,120 @@ export async function loadIniFile(list, signal) {
 }
 
 /**
+ * Walks up from `el` and returns the nearest ancestor whose overflow establishes
+ * a scrolling context. Returns null if there isn't one (i.e. the viewport scrolls).
+ *
+ * The category pages make `<article>` the scroll container (overflow: auto),
+ * which breaks IntersectionObservers that default to the viewport root —
+ * thresholds never fire when the window itself doesn't scroll.
+ */
+function getScrollParent(el) {
+  let node = el?.parentElement;
+  while (node && node !== document.body && node !== document.documentElement) {
+    const s = getComputedStyle(node);
+    const overflowY = s.overflowY;
+    if (overflowY === 'auto' || overflowY === 'scroll') return node;
+    node = node.parentElement;
+  }
+  return null;
+}
+
+/**
+ * Builds a labelled `<select>` for the grid toolbar.
+ */
+function buildSelect(labelText, value, options, className, onChange) {
+  const label = document.createElement('label');
+  label.className = className + '-label';
+  const span = document.createElement('span');
+  span.textContent = labelText;
+  const select = document.createElement('select');
+  select.className = className;
+  for (const opt of options) {
+    const o = document.createElement('option');
+    o.value = String(opt);
+    o.textContent = String(opt).charAt(0).toUpperCase() + String(opt).slice(1);
+    if (String(opt) === String(value)) o.selected = true;
+    select.appendChild(o);
+  }
+  select.addEventListener('change', (e) => onChange(e.target.value));
+  label.appendChild(span);
+  label.appendChild(select);
+  return label;
+}
+
+/**
+ * Lazily imports PhotoSwipe and injects its stylesheet on first call.
+ * Both are fetched only when the user actually opens a preview, so
+ * non-clickers pay nothing.
+ */
+let pswpModulePromise = null;
+let pswpCssInjected = false;
+function loadPhotoSwipe() {
+  if (!pswpCssInjected) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = new URL('../lib/photoswipe/photoswipe.css', import.meta.url).href;
+    document.head.appendChild(link);
+    pswpCssInjected = true;
+  }
+  if (!pswpModulePromise) {
+    pswpModulePromise = import('../lib/photoswipe/photoswipe.esm.js').then(m => m.default);
+  }
+  return pswpModulePromise;
+}
+
+/**
+ * Opens `item.icon` in a PhotoSwipe overlay. Uses the clicked thumbnail's
+ * aspect ratio for placeholder dimensions — PhotoSwipe fits to viewport,
+ * then adjusts once the full image loads. A custom "copy name" button is
+ * injected into the overlay chrome via registerElement.
+ */
+async function openLightbox(item, triggerImg) {
+  const PhotoSwipe = await loadPhotoSwipe();
+
+  // Natural dimensions of the already-loaded thumbnail give us the aspect
+  // ratio; scale to a generous placeholder so PhotoSwipe allows meaningful
+  // max-zoom. The real image replaces these dims on load.
+  const natW = triggerImg?.naturalWidth || 3;
+  const natH = triggerImg?.naturalHeight || 2;
+  const scale = 2048 / Math.max(natW, natH);
+  const width = Math.round(natW * scale);
+  const height = Math.round(natH * scale);
+
+  const pswp = new PhotoSwipe({
+    dataSource: [{
+      src: item.icon,
+      width,
+      height,
+      msrc: triggerImg?.currentSrc || triggerImg?.src || undefined,
+      alt: item.name,
+    }],
+    index: 0,
+    bgOpacity: 0.95,
+    showHideAnimationType: 'fade',
+    closeTitle: 'Close',
+    zoomTitle: 'Zoom',
+    arrowPrevTitle: '',
+    arrowNextTitle: '',
+  });
+
+  pswp.on('uiRegister', () => {
+    pswp.ui.registerElement({
+      name: 'copy-btn',
+      ariaLabel: 'Copy name',
+      order: 9,
+      isButton: true,
+      html: '<span style="font-size:20px;line-height:1">⎘</span>',
+      onClick: () => {
+        navigator.clipboard.writeText(item.name).catch(() => {});
+      },
+    });
+  });
+
+  pswp.init();
+}
+
+/**
  * Watches images in the DOM and applies fade-in class when loaded.
  */
 export function watchImages({ selector = 'img', onLoad = null, onError = null, fadeInClass = 'loaded' } = {}) {
@@ -161,46 +275,172 @@ export function watchImages({ selector = 'img', onLoad = null, onError = null, f
 }
 
 /**
- * Creates an interactive item list with search, pagination, and lazy image loading.
+ * Creates an interactive item list with search, infinite scroll, and lazy image loading.
  *
- * Images are loaded via IntersectionObserver — src is only set when an image
- * enters the viewport (with a 200px look-ahead). Navigating to a new page
- * disconnects the previous observer and cancels any in-flight image requests.
+ * Initial render shows `batchSize` items; an IntersectionObserver on a sentinel
+ * appended after the grid triggers the next batch when the user scrolls near it.
+ * Images are additionally lazy-loaded via a second IntersectionObserver — src is
+ * only set when a tile enters the viewport (with a 200px look-ahead), so off-screen
+ * tiles never issue network requests.
  *
  * INI file fetches use AbortController so a rapid reload/search won't leave
  * stale network requests queued behind the new one.
+ *
+ * Default renderer is composed from `thumbnail` + `hrefBuilder` + optional
+ * `onItemClick`. Pages needing materially different markup (models.html) pass
+ * their own `renderItemFn` as an escape hatch.
  *
  * @param {object} options
  * @param {string} options.list - INI list key (loads list/{list}.ini and list/{list}-png.ini)
  * @param {Function} [options.loadFn] - Optional custom async loader: (signal) => [{file, icon, name}].
  *   When provided, skips the default dual-INI loading and merging.
+ * @param {string} [options.assetBase=''] - URL prefix applied to `{repo}/{file}` when using the
+ *   default loader. Not used when `loadFn` is provided.
+ * @param {{size: string}} [options.thumbnail] - imageproxy option string, e.g. {size: '152x152,fit'}.
+ *   Required unless `renderItemFn` is provided.
+ * @param {(item) => string} [options.hrefBuilder] - URL for the tile's anchor. Defaults to item.file.
+ * @param {(item, event) => void} [options.onItemClick] - If provided, preventDefault + call this
+ *   instead of opening the anchor href in a new tab. Overrides the default lightbox.
+ * @param {boolean} [options.lightbox=true] - When true (the default) and no `onItemClick` is
+ *   given, clicking a tile opens `item.icon` in a PhotoSwipe overlay. Middle-click and
+ *   ctrl/cmd-click are left to the browser so the anchor's download still works.
+ * @param {Function} [options.renderItemFn] - Escape hatch: full custom renderer (item) => HTMLElement.
+ *   When provided, overrides thumbnail/hrefBuilder/onItemClick/lightbox.
+ * @param {number|'all'} [options.batchSize=200] - Items appended per infinite-scroll batch.
+ *   'all' disables the sentinel and renders everything up front.
+ * @param {Array<number|'all'>} [options.batchSizeOptions] - Items-per-batch values for the
+ *   toolbar picker. Pass `null` to suppress the batch picker. Default [100, 200, 500, 'all'].
+ * @param {string} [options.previewSize='medium'] - Initial CSS size. One of
+ *   'small' | 'medium' | 'large' | 'list'. Stored in localStorage per list.
+ * @param {string[]} [options.previewSizeOptions] - Size values for the toolbar picker.
+ *   Pass `null` to suppress the size picker. Default ['small','medium','large','list'].
  */
 export function createItemList({
   list,
   loadFn,
   containerSelector,
   searchInputSelector,
+  assetBase = '',
+  thumbnail,
+  hrefBuilder = (item) => item.file,
+  onItemClick,
+  lightbox = true,
   renderItemFn,
   onRendered,
   debounceDelay = 300,
-  itemsPerPage = 200
+  batchSize = 200,
+  batchSizeOptions = [100, 200, 500, 'all'],
+  previewSize = 'medium',
+  previewSizeOptions = ['small', 'medium', 'large', 'list'],
 }) {
   const container = document.querySelector(containerSelector);
   const searchInput = document.querySelector(searchInputSelector);
-  const paginationEl = document.createElement('div');
-  paginationEl.className = 'pagination';
-  container.after(paginationEl);
+
+  const prefsKey = `grid:${list}`;
+  const readPref = (key, fallback) => {
+    try { return localStorage.getItem(`${prefsKey}:${key}`) ?? fallback; }
+    catch { return fallback; }
+  };
+  const writePref = (key, val) => {
+    try { localStorage.setItem(`${prefsKey}:${key}`, String(val)); } catch { /* ignore */ }
+  };
+
+  // Resolve initial prefs: stored value wins if valid, else the caller's default.
+  const storedSize = readPref('preview', null);
+  if (previewSizeOptions?.includes(storedSize)) previewSize = storedSize;
+  container.dataset.previewSize = previewSize;
+
+  const storedBatch = readPref('batch', null);
+  if (storedBatch !== null) {
+    const parsed = storedBatch === 'all' ? 'all' : Number(storedBatch);
+    if (batchSizeOptions?.includes(parsed)) batchSize = parsed;
+  }
+
+  // Scroll container — `<article>` has overflow:auto on category pages, so both
+  // IntersectionObservers must use it as root (viewport root never fires when
+  // window itself doesn't scroll). Null means viewport, which is the correct fallback.
+  const scrollRoot = getScrollParent(container);
+  const scrollTarget = scrollRoot ?? window;
+
+  // Toolbar with view-size + batch-size selects, injected above the grid.
+  let toolbar = null;
+  if (previewSizeOptions || batchSizeOptions) {
+    toolbar = document.createElement('div');
+    toolbar.className = 'grid-toolbar';
+    if (previewSizeOptions) toolbar.appendChild(buildSelect('View', previewSize, previewSizeOptions, 'grid-size-select', (v) => {
+      previewSize = v;
+      container.dataset.previewSize = v;
+      writePref('preview', v);
+    }));
+    if (batchSizeOptions) toolbar.appendChild(buildSelect('Per batch', batchSize, batchSizeOptions, 'grid-batch-select', (v) => {
+      batchSize = v === 'all' ? 'all' : Number(v);
+      writePref('batch', batchSize);
+      // If scrolled past the sentinel already, render more now; otherwise next
+      // scroll trigger will use the new size.
+      if (rendered < filteredItems.length) renderNextBatch();
+    }));
+    container.before(toolbar);
+  }
+
+  // Sentinel below the grid drives infinite-scroll batch appends
+  const sentinel = document.createElement('div');
+  sentinel.className = 'grid-sentinel';
+  container.after(sentinel);
+
+  // Back-to-top floating button — visible after user scrolls past 800px.
+  const backToTop = document.createElement('button');
+  backToTop.className = 'grid-back-to-top';
+  backToTop.setAttribute('aria-label', 'Back to top');
+  backToTop.textContent = '↑';
+  backToTop.addEventListener('click', () => {
+    scrollTarget.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  document.body.appendChild(backToTop);
+  const onScroll = () => {
+    const y = scrollRoot ? scrollRoot.scrollTop : window.scrollY;
+    backToTop.classList.toggle('visible', y > 800);
+  };
+  scrollTarget.addEventListener('scroll', onScroll, { passive: true });
+
+  // Default renderer composed from thumbnail/hrefBuilder/onItemClick/lightbox.
+  // Click wiring: explicit onItemClick wins, else default lightbox if enabled,
+  // else plain new-tab anchor. Modifier/middle clicks are always passed through
+  // so the anchor's download still works via ctrl/cmd/middle-click.
+  const clickHandler = onItemClick ?? (lightbox ? (item, e) => {
+    const img = e.currentTarget.querySelector('img');
+    openLightbox(item, img);
+  } : null);
+  const render = renderItemFn ?? ((item) => {
+    const href = hrefBuilder(item);
+    const imgSrc = thumbUrl(item.icon, thumbnail.size);
+    const div = document.createElement('div');
+    div.className = 'icon-item';
+    div.innerHTML = `
+      <a href="${href}"${clickHandler ? '' : ' target="_blank"'}>
+        <img src="${imgSrc}" alt="${item.name}" loading="lazy">
+      </a>
+      <span class="tooltip">${item.name}</span>
+      <span class="btn copy-btn" data-copy="${item.name}">⎘</span>`;
+    if (clickHandler) {
+      div.querySelector('a').addEventListener('click', (e) => {
+        if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
+        e.preventDefault();
+        clickHandler(item, e);
+      });
+    }
+    return div;
+  });
 
   let allItems = [];
   let filteredItems = [];
-  let currentPage = 1;
+  let rendered = 0;             // count of items currently in DOM
 
   let debounceTimer = null;
-  let loadController = null;   // AbortController for INI fetch cancellation
-  let imageObserver = null;    // IntersectionObserver for lazy image loading
+  let loadController = null;    // AbortController for INI fetch cancellation
+  let imageObserver = null;     // IntersectionObserver for lazy image reveal
+  let sentinelObserver = null;  // IntersectionObserver for infinite scroll
 
   async function load() {
-    // Abort any previous in-flight INI fetch
     if (loadController) loadController.abort();
     loadController = new AbortController();
     const { signal } = loadController;
@@ -220,69 +460,41 @@ export function createItemList({
         const ddsList = flattenRepoFiles(ddsFiles);
         const pngList = flattenRepoFiles(pngFiles);
 
-        // Index for quick lookup
         const ddsIndex = Object.fromEntries(ddsList.map(({ file, repo }) => [file.toLowerCase(), { file, repo }]));
         const pngIndex = Object.fromEntries(pngList.map(({ file, repo }) => [file.toLowerCase(), { file, repo }]));
 
-        // Merge lists by filename
         allItems = Object.keys(ddsIndex).map(key => {
           const dds = ddsIndex[key];
           const png = pngIndex[key];
           if (!png) return null;
-
           return {
-            file: `${dds.repo}/${dds.file}.dds`,
-            icon: `${png.repo}/${png.file}.png`,
+            file: `${assetBase}${dds.repo}/${dds.file}.dds`,
+            icon: `${assetBase}${png.repo}/${png.file}.png`,
             name: png.file
           };
         }).filter(Boolean);
       }
 
       filteredItems = allItems;
-
-      renderPage(1);
+      resetRender();
       attachSearch();
     } catch (e) {
-      if (e.name === 'AbortError') return; // Silently drop cancelled loads
+      if (e.name === 'AbortError') return;
       console.error('Error loading items:', e);
     } finally {
       if (preloader) preloader.style.display = 'none';
     }
   }
 
-  function renderPage(page) {
-    // Disconnect previous observer — stops queued lazy loads for old-page images
-    if (imageObserver) {
-      imageObserver.disconnect();
-      imageObserver = null;
-    }
+  function resetRender() {
+    if (imageObserver) { imageObserver.disconnect(); imageObserver = null; }
+    if (sentinelObserver) { sentinelObserver.disconnect(); sentinelObserver = null; }
 
-    // Cancel any in-flight image requests from the outgoing page
+    // Cancel any in-flight image requests from the outgoing view
     container.querySelectorAll('img').forEach(img => { img.src = ''; });
-
     container.innerHTML = '';
-    currentPage = page;
+    rendered = 0;
 
-    const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-    const start = (page - 1) * itemsPerPage;
-    const end = page * itemsPerPage;
-    const pageItems = filteredItems.slice(start, end);
-
-    const fragment = document.createDocumentFragment();
-    for (const item of pageItems) {
-      fragment.appendChild(renderItemFn(item));
-    }
-
-    // Images inside a DocumentFragment don't load until inserted into the live DOM.
-    // Move src → data-src here so the browser never starts a request for off-screen images.
-    fragment.querySelectorAll('img[src]').forEach(img => {
-      img.dataset.src = img.getAttribute('src');
-      img.removeAttribute('src');
-    });
-
-    container.appendChild(fragment);
-
-    // Lazily reveal images as they scroll into view (200px look-ahead)
     imageObserver = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
@@ -295,58 +507,50 @@ export function createItemList({
         }
         obs.unobserve(img);
       });
-    }, { rootMargin: '200px 0px' });
+    }, { root: scrollRoot, rootMargin: '200px 0px' });
 
-    container.querySelectorAll('img').forEach(img => imageObserver.observe(img));
+    renderNextBatch();
 
-    renderPaginationControls(currentPage, totalPages);
+    // Sentinel observer — wider rootMargin than the image one so we never stall
+    sentinelObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && rendered < filteredItems.length) {
+        renderNextBatch();
+      }
+    }, { root: scrollRoot, rootMargin: '400px 0px' });
+    sentinelObserver.observe(sentinel);
 
-    if (onRendered) {
-      onRendered(pageItems, filteredItems, allItems);
-      const countEl = document.getElementById('icons-count');
-      if (countEl) countEl.textContent = `${filteredItems.length} / ${allItems.length} icons`;
-    }
+    const countEl = document.getElementById('icons-count');
+    if (countEl) countEl.textContent = `${filteredItems.length} / ${allItems.length} icons`;
+
+    if (onRendered) onRendered(filteredItems, allItems);
   }
 
-  function renderPaginationControls(current, total) {
-    paginationEl.innerHTML = '';
+  function renderNextBatch() {
+    const start = rendered;
+    const step = batchSize === 'all' ? filteredItems.length : batchSize;
+    const end = Math.min(rendered + step, filteredItems.length);
+    if (start >= end) return;
 
-    const createBtn = (label, page, disabled = false, active = false) => {
-      const btn = document.createElement('button');
-      btn.textContent = label;
-      btn.disabled = disabled;
-      if (active) btn.className = 'active';
-      btn.onclick = () => renderPage(page);
-      return btn;
-    };
+    const batch = filteredItems.slice(start, end);
+    const fragment = document.createDocumentFragment();
+    for (const item of batch) fragment.appendChild(render(item));
 
-    paginationEl.appendChild(createBtn('<', current - 1, current === 1));
-
-    const pages = [];
-    if (total <= 7) {
-      for (let i = 1; i <= total; i++) pages.push(i);
-    } else {
-      if (current <= 4) {
-        pages.push(...[1,2,3,4,5,'...',total]);
-      } else if (current >= total - 3) {
-        pages.push(1,'...', total-4, total-3, total-2, total-1, total);
-      } else {
-        pages.push(1,'...', current-1, current, current+1, '...', total);
-      }
-    }
-
-    pages.forEach(p => {
-      if (p === '...') {
-        const span = document.createElement('span');
-        span.textContent = '...';
-        span.className = 'ellipsis';
-        paginationEl.appendChild(span);
-      } else {
-        paginationEl.appendChild(createBtn(p, p, false, p === current));
-      }
+    fragment.querySelectorAll('img[src]').forEach(img => {
+      img.dataset.src = img.getAttribute('src');
+      img.removeAttribute('src');
     });
 
-    paginationEl.appendChild(createBtn('>', current + 1, current === total));
+    container.appendChild(fragment);
+
+    // Observe the newly-appended images only
+    const allImgs = container.querySelectorAll('img');
+    for (let i = start; i < end; i++) imageObserver.observe(allImgs[i]);
+
+    rendered = end;
+
+    if (rendered >= filteredItems.length && sentinelObserver) {
+      sentinelObserver.unobserve(sentinel);
+    }
   }
 
   function attachSearch() {
@@ -357,7 +561,7 @@ export function createItemList({
       debounceTimer = setTimeout(() => {
         const query = searchInput.value.trim().toLowerCase();
         filteredItems = allItems.filter(item => item.name.toLowerCase().includes(query));
-        renderPage(1); // Always reset to page 1 on search
+        resetRender();
       }, debounceDelay);
     });
   }

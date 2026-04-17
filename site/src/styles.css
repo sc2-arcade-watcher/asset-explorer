@@ -147,9 +147,11 @@ filter: brightness(1000%);
 /* Icon grid */
 
 .icons-grid {
+  --tile-base: 76px;
+  --tile-scale: 1;
   flex-grow: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 76px);
+  grid-template-columns: repeat(auto-fill, calc(var(--tile-base) * var(--tile-scale)));
   gap: 15px;
   justify-content: center;
   padding: 20px;
@@ -162,14 +164,12 @@ filter: brightness(1000%);
   align-content: flex-start;
 }
 
-.portraits-grid {
-  grid-template-columns: repeat(auto-fill, 90px);
-}
+.icons-grid[data-preview-size="small"] { --tile-scale: 0.6; }
+.icons-grid[data-preview-size="medium"] { --tile-scale: 1; }
+.icons-grid[data-preview-size="large"] { --tile-scale: 1.6; }
 
-.portraits-grid img {
-  width: 90px;
-  height: 138px;
-  object-fit: cover;
+.portraits-grid {
+  --tile-base: 100px;
 }
 
 article {
@@ -209,8 +209,8 @@ article {
 }
 
 .icon-item img {
-  width: 76px;
-  height: 76px;
+  width: calc(var(--tile-base, 76px) * var(--tile-scale, 1));
+  height: calc(var(--tile-base, 76px) * var(--tile-scale, 1));
   object-fit: contain;
   padding: 4px;
   transition: transform 0.2s ease, opacity 0.3s ease-in;
@@ -426,18 +426,9 @@ header.small-header h1 {
 
 @media screen and (max-width: 600px) {
   .icons-grid {
+    --tile-base: 60px;
     gap: 8px;
     padding: 10px;
-    grid-template-columns: repeat(auto-fill, 60px);
-  }
-
-  .icon-item img {
-    width: 60px;
-    height: 60px;
-  }
-
-  .portraits-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
 
   h1 {
@@ -482,43 +473,151 @@ header.small-header h1 {
   position: relative;
 }
 
-/* Pagination */
-
-.pagination {  
-      margin: 10px auto;
-    text-align: center;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Michroma', sans-serif;
-    color: #e04a14;
+/* Infinite-scroll sentinel — 1px probe below the grid that the
+   IntersectionObserver watches to trigger the next batch. */
+.grid-sentinel {
+  width: 100%;
+  min-height: 1px;
 }
 
-.pagination button {
-  padding: 6px 12px;
-  font-size: 1em;
-  border: 1px solid #e04a14;
-  background: #0b0f14;
-  color: #e04a14;
-  border-radius: 4px;
+/* Grid toolbar — view-size + batch-size selects above the grid. */
+
+.grid-toolbar {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto 10px;
+  padding: 8px 12px;
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 0.85em;
+  color: #aaa;
+}
+
+.grid-toolbar label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   cursor: pointer;
 }
 
-.pagination button:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
-.pagination button.active {
-  background: #e04a14;
-  color: black;
-  font-weight: bold;
-}
-
-.pagination .ellipsis {
-  padding: 4px 10px;
+.grid-toolbar label span {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: #888;
+  font-size: 0.9em;
+}
+
+.grid-toolbar select {
+  background: #12181f;
+  color: #e04a14;
+  border: 1px solid rgba(224, 74, 20, 0.5);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.95em;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.grid-toolbar select:focus,
+.grid-toolbar select:hover {
+  border-color: #ff6a30;
+}
+
+/* Back-to-top floating button. */
+
+.grid-back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 60px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #e04a14;
+  background: rgba(18, 24, 31, 0.92);
+  color: #e04a14;
+  font-size: 22px;
+  line-height: 42px;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.2s ease;
+  transform: translateY(8px);
+  z-index: 500;
+  box-shadow: 0 0 12px rgba(224, 74, 20, 0.4);
+}
+
+.grid-back-to-top.visible {
+  opacity: 0.9;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.grid-back-to-top:hover {
+  background: #e04a14;
+  color: #fff;
+}
+
+/* List mode — one tile per row with inline name and copy button. */
+
+.icons-grid[data-preview-size="list"] {
+  grid-template-columns: 1fr;
+  gap: 4px;
+  max-width: 900px;
+  width: 100%;
+}
+
+.icons-grid[data-preview-size="list"] .icon-item {
+  flex-direction: row;
+  width: 100%;
+  aspect-ratio: auto;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4px 12px;
+  gap: 12px;
+  height: auto;
+}
+
+.icons-grid[data-preview-size="list"] .icon-item img {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.icons-grid[data-preview-size="list"] .icon-item .tooltip {
+  position: static;
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  background: transparent;
+  color: #ddd;
+  box-shadow: none;
+  font-size: 0.9em;
+  padding: 0;
+  white-space: normal;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.icons-grid[data-preview-size="list"] .icon-item .tooltip::after {
+  display: none;
+}
+
+.icons-grid[data-preview-size="list"] .icon-item:hover {
+  transform: none;
+  background: rgba(224, 74, 20, 0.08);
+}
+
+.icons-grid[data-preview-size="list"] .icon-item .copy-btn {
+  position: static;
+  opacity: 1;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 /* Copy to clipboard tooltip */
@@ -613,48 +712,48 @@ header.small-header h1 {
   flex-grow: 1;
 }
 
-/* Portrait grids */
+/* Portrait grids — tile drives aspect, image fills it (matches 200x300 proxy thumbs). */
 
-.portraits-grid {
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-}
-
-.portraits-grid .icon-item,
-.portraits-grid .icon-item img {
-  width: 100px;
-  height: 150px;
+.portraits-grid .icon-item {
+  width: calc(var(--tile-base) * var(--tile-scale));
+  aspect-ratio: 2 / 3;
 }
 
 .portraits-grid .icon-item img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  box-sizing: border-box;
 }
 
-/* Art grid */
+/* Art grid — tile drives aspect, image fills it (matches 300x200 proxy thumbs). */
 
 .icons-grid.art-grid {
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  --tile-base: 150px;
 }
 
-.icons-grid.art-grid .icon-item,
-.icons-grid.art-grid .icon-item img {
-  width: 150px;
-  height: 100px;
+.icons-grid.art-grid .icon-item {
+  width: calc(var(--tile-base) * var(--tile-scale));
+  aspect-ratio: 3 / 2;
 }
 
 .icons-grid.art-grid .icon-item img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  box-sizing: border-box;
 }
 
 /* Small icons grid */
 
 .icons-grid.icons-small-grid {
-  grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+  --tile-base: 30px;
 }
 
 .icons-grid.icons-small-grid .icon-item,
 .icons-grid.icons-small-grid .icon-item img {
-  width: 30px;
-  height: 30px;
+  width: calc(var(--tile-base) * var(--tile-scale));
+  height: calc(var(--tile-base) * var(--tile-scale));
 }
 
 /* Scrollbar styling for fine pointer devices */
