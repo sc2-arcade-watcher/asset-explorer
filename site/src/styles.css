@@ -38,7 +38,6 @@ html, body {
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  height: 100%;
   box-sizing: border-box;
 }
 
@@ -176,8 +175,6 @@ article {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  overflow: auto;
-  overflow-x: hidden;
   width: 100%;
   text-align: center;
   padding: 10px;
@@ -322,7 +319,7 @@ article {
 }
 
 #icon-search::placeholder {
-  color: rgba(224, 74, 20, 0.38);
+  color: rgba(224, 74, 20, 0.75);
 }
 
 #icon-search:focus {
@@ -401,25 +398,43 @@ article {
 /* Small header */
 
 header.small-header {
-  padding: 10px 20px;
-  background: rgba(0, 0, 0, 0.5);
-  border-bottom: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 6px 16px;
+  background: rgba(8, 11, 15, 0.92);
+  border-bottom: 1px solid rgba(224, 74, 20, 0.4);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   flex-shrink: 0;
+  z-index: 100;
+}
+
+/* Reserve space for the fixed header so content isn't hidden underneath. */
+body:has(header.small-header) {
+  padding-top: 64px;
+}
+
+@media screen and (max-width: 600px) {
+  body:has(header.small-header) {
+    padding-top: 56px;
+  }
 }
 
 header.small-header img {
-  max-width: 40px;
+  max-width: 32px;
 }
 
 header.small-header h1 {
-  font-size: 1.1em;
+  font-size: 1em;
   color: #e04a14;
   margin: 0 0.5em;
   cursor: pointer;
+  line-height: 1.1;
 }
 
 /* Responsive */
@@ -472,8 +487,6 @@ header.small-header h1 {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  overflow: auto;
-  overflow-x: hidden;
   width: 100%;
   position: relative;
 }
@@ -709,16 +722,24 @@ header.small-header h1 {
 /* Fullscreen button */
 
 .fullscreen-btn {
-  border: none;
-  background: #e04a14;
-  font-size: 28px;
+  border: 1px solid rgba(224, 74, 20, 0.5);
+  background: rgba(18, 24, 31, 0.7);
+  color: #e04a14;
   cursor: pointer;
   border-radius: 4px;
-  width: 30px;
-  height: 30px;
-  line-height: 28px;
-  text-align: center;
-  min-width: 30px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.fullscreen-btn:hover {
+  background: #e04a14;
+  color: #fff;
+  border-color: #ff6a30;
 }
 
 /* Logo container */

@@ -167,11 +167,9 @@ test('back-to-top button becomes visible after scrolling', async ({ page }) => {
   // Not visible at initial scroll position
   await expect(btn).not.toHaveClass(/visible/);
 
-  // Scroll the article container past the threshold and assert visibility toggles
+  // Scroll the window past the threshold and assert visibility toggles
   await page.evaluate(() => {
-    const article = document.querySelector('article');
-    article.scrollTop = 1000;
-    article.dispatchEvent(new Event('scroll'));
+    window.scrollTo(0, 1000);
   });
   await expect(btn).toHaveClass(/visible/);
 });
