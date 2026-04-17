@@ -180,6 +180,78 @@ function buildSelect(labelText, value, options, className, onChange) {
 }
 
 /**
+ * Lazily imports PhotoSwipe and injects its stylesheet on first call.
+ * Both are fetched only when the user actually opens a preview, so
+ * non-clickers pay nothing.
+ */
+let pswpModulePromise = null;
+let pswpCssInjected = false;
+function loadPhotoSwipe() {
+  if (!pswpCssInjected) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = new URL('../lib/photoswipe/photoswipe.css', import.meta.url).href;
+    document.head.appendChild(link);
+    pswpCssInjected = true;
+  }
+  if (!pswpModulePromise) {
+    pswpModulePromise = import('../lib/photoswipe/photoswipe.esm.js').then(m => m.default);
+  }
+  return pswpModulePromise;
+}
+
+/**
+ * Opens `item.icon` in a PhotoSwipe overlay. Uses the clicked thumbnail's
+ * aspect ratio for placeholder dimensions — PhotoSwipe fits to viewport,
+ * then adjusts once the full image loads. A custom "copy name" button is
+ * injected into the overlay chrome via registerElement.
+ */
+async function openLightbox(item, triggerImg) {
+  const PhotoSwipe = await loadPhotoSwipe();
+
+  // Natural dimensions of the already-loaded thumbnail give us the aspect
+  // ratio; scale to a generous placeholder so PhotoSwipe allows meaningful
+  // max-zoom. The real image replaces these dims on load.
+  const natW = triggerImg?.naturalWidth || 3;
+  const natH = triggerImg?.naturalHeight || 2;
+  const scale = 2048 / Math.max(natW, natH);
+  const width = Math.round(natW * scale);
+  const height = Math.round(natH * scale);
+
+  const pswp = new PhotoSwipe({
+    dataSource: [{
+      src: item.icon,
+      width,
+      height,
+      msrc: triggerImg?.currentSrc || triggerImg?.src || undefined,
+      alt: item.name,
+    }],
+    index: 0,
+    bgOpacity: 0.95,
+    showHideAnimationType: 'fade',
+    closeTitle: 'Close',
+    zoomTitle: 'Zoom',
+    arrowPrevTitle: '',
+    arrowNextTitle: '',
+  });
+
+  pswp.on('uiRegister', () => {
+    pswp.ui.registerElement({
+      name: 'copy-btn',
+      ariaLabel: 'Copy name',
+      order: 9,
+      isButton: true,
+      html: '<span style="font-size:20px;line-height:1">⎘</span>',
+      onClick: () => {
+        navigator.clipboard.writeText(item.name).catch(() => {});
+      },
+    });
+  });
+
+  pswp.init();
+}
+
+/**
  * Watches images in the DOM and applies fade-in class when loaded.
  */
 export function watchImages({ selector = 'img', onLoad = null, onError = null, fadeInClass = 'loaded' } = {}) {
@@ -228,9 +300,12 @@ export function watchImages({ selector = 'img', onLoad = null, onError = null, f
  *   Required unless `renderItemFn` is provided.
  * @param {(item) => string} [options.hrefBuilder] - URL for the tile's anchor. Defaults to item.file.
  * @param {(item, event) => void} [options.onItemClick] - If provided, preventDefault + call this
- *   instead of opening the anchor href in a new tab (useful for in-page lightbox wiring).
+ *   instead of opening the anchor href in a new tab. Overrides the default lightbox.
+ * @param {boolean} [options.lightbox=true] - When true (the default) and no `onItemClick` is
+ *   given, clicking a tile opens `item.icon` in a PhotoSwipe overlay. Middle-click and
+ *   ctrl/cmd-click are left to the browser so the anchor's download still works.
  * @param {Function} [options.renderItemFn] - Escape hatch: full custom renderer (item) => HTMLElement.
- *   When provided, overrides thumbnail/hrefBuilder/onItemClick.
+ *   When provided, overrides thumbnail/hrefBuilder/onItemClick/lightbox.
  * @param {number|'all'} [options.batchSize=200] - Items appended per infinite-scroll batch.
  *   'all' disables the sentinel and renders everything up front.
  * @param {Array<number|'all'>} [options.batchSizeOptions] - Items-per-batch values for the
@@ -249,6 +324,7 @@ export function createItemList({
   thumbnail,
   hrefBuilder = (item) => item.file,
   onItemClick,
+  lightbox = true,
   renderItemFn,
   onRendered,
   debounceDelay = 300,
@@ -326,22 +402,30 @@ export function createItemList({
   };
   scrollTarget.addEventListener('scroll', onScroll, { passive: true });
 
-  // Default renderer composed from thumbnail/hrefBuilder/onItemClick
+  // Default renderer composed from thumbnail/hrefBuilder/onItemClick/lightbox.
+  // Click wiring: explicit onItemClick wins, else default lightbox if enabled,
+  // else plain new-tab anchor. Modifier/middle clicks are always passed through
+  // so the anchor's download still works via ctrl/cmd/middle-click.
+  const clickHandler = onItemClick ?? (lightbox ? (item, e) => {
+    const img = e.currentTarget.querySelector('img');
+    openLightbox(item, img);
+  } : null);
   const render = renderItemFn ?? ((item) => {
     const href = hrefBuilder(item);
     const imgSrc = thumbUrl(item.icon, thumbnail.size);
     const div = document.createElement('div');
     div.className = 'icon-item';
     div.innerHTML = `
-      <a href="${href}"${onItemClick ? '' : ' target="_blank"'}>
+      <a href="${href}"${clickHandler ? '' : ' target="_blank"'}>
         <img src="${imgSrc}" alt="${item.name}" loading="lazy">
       </a>
       <span class="tooltip">${item.name}</span>
       <span class="btn copy-btn" data-copy="${item.name}">⎘</span>`;
-    if (onItemClick) {
+    if (clickHandler) {
       div.querySelector('a').addEventListener('click', (e) => {
+        if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
         e.preventDefault();
-        onItemClick(item, e);
+        clickHandler(item, e);
       });
     }
     return div;
