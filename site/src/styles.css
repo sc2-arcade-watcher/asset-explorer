@@ -580,16 +580,25 @@ header.small-header h1 {
 
 /* List layout — one tile per row with inline name and copy button.
    The whole row is clickable via an `a::after` overlay; tooltip text is
-   visual-only (pointer-events: none), copy-btn stays on top. */
+   visual-only (pointer-events: none), copy-btn stays on top.
+
+   Row geometry is driven by `--list-thumb` (thumbnail's shorter edge) so
+   every row in a given grid has the same height and the name/copy column
+   lines up cleanly across rows. Per-variant selectors override the image
+   dimensions to match each category's native proxy thumbnail aspect. */
 
 .icons-grid[data-layout="list"] {
-  grid-template-columns: 1fr;
+  --list-thumb: 56px;
+  grid-template-columns: minmax(0, 1fr);
   gap: 4px;
   max-width: 900px;
   width: 100%;
 }
 
-.icons-grid[data-layout="list"] .icon-item {
+.icons-grid[data-layout="list"] .icon-item,
+.icons-grid.art-grid[data-layout="list"] .icon-item,
+.icons-grid.portraits-grid[data-layout="list"] .icon-item,
+.icons-grid.icons-small-grid[data-layout="list"] .icon-item {
   flex-direction: row;
   width: 100%;
   aspect-ratio: auto;
@@ -597,14 +606,53 @@ header.small-header h1 {
   justify-content: flex-start;
   padding: 4px 12px;
   gap: 12px;
-  height: auto;
+  height: calc(var(--list-thumb) + 8px);
+  min-height: calc(var(--list-thumb) + 8px);
+  box-sizing: border-box;
 }
 
 .icons-grid[data-layout="list"] .icon-item img {
-  width: 48px;
-  height: 48px;
+  width: var(--list-thumb);
+  height: var(--list-thumb);
+  aspect-ratio: auto;
   flex-shrink: 0;
   object-fit: contain;
+  padding: 0;
+}
+
+/* Art / consoles / terrain-cliffs / terrain-tilesets: 3:2 proxy thumbs. */
+.icons-grid.art-grid[data-layout="list"] .icon-item img {
+  width: calc(var(--list-thumb) * 1.5);
+  height: var(--list-thumb);
+}
+
+/* Portraits: 2:3 proxy thumbs — taller than wide. Bump row height to match. */
+.icons-grid.portraits-grid[data-layout="list"] {
+  --list-thumb: 48px;
+}
+
+.icons-grid.portraits-grid[data-layout="list"] .icon-item {
+  height: calc(var(--list-thumb) * 1.5 + 8px);
+  min-height: calc(var(--list-thumb) * 1.5 + 8px);
+}
+
+.icons-grid.portraits-grid[data-layout="list"] .icon-item img {
+  width: var(--list-thumb);
+  height: calc(var(--list-thumb) * 1.5);
+}
+
+/* Small icons: native 30px thumbs — keep them petite in list mode too. */
+.icons-grid.icons-small-grid[data-layout="list"] .icon-item img {
+  width: 32px;
+  height: 32px;
+}
+
+.icons-grid[data-layout="list"] .icon-item > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: static;
 }
 
 .icons-grid[data-layout="list"] .icon-item > a::after {
@@ -626,9 +674,12 @@ header.small-header h1 {
   box-shadow: none;
   font-size: 0.9em;
   padding: 0;
-  white-space: normal;
   text-align: left;
-  flex-grow: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .icons-grid[data-layout="list"] .icon-item .tooltip::after {
@@ -1023,4 +1074,7 @@ header.small-header .subtitle {
      mobile values down here to win the cascade. */
   .icons-grid.art-grid { --tile-base: 120px; }
   .icons-grid.portraits-grid { --tile-base: 80px; }
+
+  .icons-grid[data-layout="list"] { --list-thumb: 44px; }
+  .icons-grid.portraits-grid[data-layout="list"] { --list-thumb: 36px; }
 }

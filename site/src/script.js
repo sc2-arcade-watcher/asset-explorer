@@ -498,10 +498,10 @@ export function createItemList({
     const div = document.createElement('div');
     div.className = 'icon-item';
     div.innerHTML = `
-      <a href="${href}"${clickHandler ? '' : ' target="_blank"'}>
-        <img src="${imgSrc}" alt="${item.name}" loading="lazy">
+      <a href="${href}"${clickHandler ? '' : ' target="_blank"'} title="${item.name}">
+        <img src="${imgSrc}" alt="${item.name}" title="${item.name}" loading="lazy">
       </a>
-      <span class="tooltip">${item.name}</span>
+      <span class="tooltip" title="${item.name}">${item.name}</span>
       <span class="btn copy-btn" data-copy="${item.name}">⎘</span>`;
     if (clickHandler) {
       div.querySelector('a').addEventListener('click', (e) => {

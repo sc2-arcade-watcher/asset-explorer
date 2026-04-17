@@ -136,6 +136,78 @@ test('list layout: clicking the name row opens the lightbox', async ({ page }) =
   await expect(page.locator('.pswp')).toBeVisible();
 });
 
+test('list layout: name truncates with ellipsis and carries native title', async ({ page }) => {
+  await page.goto('/buttons.html');
+  await page.waitForSelector('.icon-item');
+  await page.locator('.grid-layout-select').selectOption('list');
+
+  const tooltipStyle = await page.evaluate(() => {
+    const t = document.querySelector('.icon-item .tooltip');
+    const s = getComputedStyle(t);
+    return { ws: s.whiteSpace, overflow: s.overflow, textOverflow: s.textOverflow };
+  });
+  expect(tooltipStyle.ws).toBe('nowrap');
+  expect(tooltipStyle.textOverflow).toBe('ellipsis');
+  expect(tooltipStyle.overflow).toBe('hidden');
+
+  // Both the anchor/img and the tooltip should carry a `title` attribute matching
+  // the visible name so truncated names are readable via native hover tooltip.
+  const titles = await page.evaluate(() => {
+    const item = document.querySelector('.icon-item');
+    const name = item.querySelector('.tooltip').textContent;
+    return {
+      name,
+      imgTitle: item.querySelector('img').getAttribute('title'),
+      tooltipTitle: item.querySelector('.tooltip').getAttribute('title'),
+      anchorTitle: item.querySelector('a').getAttribute('title'),
+    };
+  });
+  expect(titles.imgTitle).toBe(titles.name);
+  expect(titles.tooltipTitle).toBe(titles.name);
+  expect(titles.anchorTitle).toBe(titles.name);
+});
+
+test('list layout: rows share a consistent height and copy-btn sits at the right edge', async ({ page }) => {
+  await page.goto('/buttons.html');
+  await page.waitForSelector('.icon-item');
+  await page.locator('.grid-layout-select').selectOption('list');
+
+  const metrics = await page.evaluate(() => {
+    const rows = Array.from(document.querySelectorAll('.icon-item')).slice(0, 10);
+    const heights = rows.map(r => r.getBoundingClientRect().height);
+    const first = rows[0].getBoundingClientRect();
+    const btn = rows[0].querySelector('.copy-btn').getBoundingClientRect();
+    return { heights, rightGap: (first.x + first.width) - (btn.x + btn.width) };
+  });
+  const min = Math.min(...metrics.heights);
+  const max = Math.max(...metrics.heights);
+  expect(max - min).toBeLessThanOrEqual(1);
+  // copy-btn should be within ~20px of the row's right edge (row padding + button margin).
+  expect(metrics.rightGap).toBeLessThan(20);
+});
+
+test('list layout: art tiles are wider than tall, portraits taller than wide', async ({ page }) => {
+  await page.goto('/art.html');
+  await page.waitForSelector('.icon-item');
+  await page.locator('.grid-layout-select').selectOption('list');
+  const artImg = await page.evaluate(() => {
+    const img = document.querySelector('.icon-item img');
+    const r = img.getBoundingClientRect();
+    return { w: r.width, h: r.height };
+  });
+  expect(artImg.w).toBeGreaterThan(artImg.h);
+
+  await page.goto('/portraits.html');
+  await page.waitForSelector('.icon-item');
+  await page.locator('.grid-layout-select').selectOption('list');
+  const portraitImg = await page.evaluate(() => {
+    const img = document.querySelector('.icon-item img');
+    const r = img.getBoundingClientRect();
+    return { w: r.width, h: r.height };
+  });
+  expect(portraitImg.h).toBeGreaterThan(portraitImg.w);
+});
+
 test('batch picker offers [100, 200, 300, 500] and no "all"', async ({ page }) => {
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
