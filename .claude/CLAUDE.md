@@ -106,6 +106,11 @@ Deployment smoke tests hitting the live site are manual only:
     └── src/           (init-page.js, script.js, player.js, styles.css, discord-widgets.js)
 ```
 
+## Agent conventions
+
+- **Screenshot output (Playwright MCP):** when calling `mcp__playwright__browser_take_screenshot`, always pass `filename` with a `.playwright-mcp/` prefix — e.g. `".playwright-mcp/phase1-art.png"`. That directory is gitignored and stays out of the working tree. Do not write screenshots to the repo root.
+- **Scratch files / verification artifacts:** `.playwright-mcp/`, `/test-results/`, and `$TMPDIR` are the legal homes. Don't commit any of them.
+
 ## Color Scheme
 
 | Role | Value |
