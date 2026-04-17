@@ -3,68 +3,33 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>SC2Mapster Asset Explorer – Portraits</title>
-
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./src/styles.css">
-
-    <!-- Optional SEO meta -->
-    <meta name="description" content="Preview of StarCraft II icon assets in the SC2 All Races Archive.">
-    <meta property="og:title" content="SC2 All Races Portraits Archive" />
-    <meta property="og:description" content="Browse and download StarCraft II portraits for modding." />
-    <meta property="og:image" content="img/arc.png" />
 </head>
 <body>
-<header class="small-header">
-    <div class="logo-container">
-        <a href="./" style="display: flex; align-items: center; text-decoration: none;">
-            <img src="img/arc.png" alt="SC2Mapster Asset Explorer Logo" />
-            <div><h1>SC2Mapster Asset Explorer</h1>
-            <p class="subtitle">Portraits</p></div>
-        </a>
-    </div>
-    <input type="search" id="icon-search" placeholder="Search portraits..." aria-label="Search portraits" />
-    <button class="fullscreen-btn" id="fullscreen-toggle" title="Toggle Fullscreen">⤢</button>
-</header>
-<article>
-        
-    <p>Preview and download StarCraft II portraits from the archive. <span id="icons-count"></span></p>
-
-
-
-    <!--<div class="search-container">-->
-    <!--    <input type="text" id="icon-search" placeholder="Search icons by name..." autocomplete="off" />-->
-    <!--</div>-->
-    <div class="icons-grid portraits-grid" id="icons-grid">
-        <div id="preloader" class="grid-preloader" aria-label="Loading portraits" role="status" aria-live="polite">
-            <div class="spinner"></div>
-        </div>
-        <!-- icons will be injected here -->
-    </div>
-</article>
-
-
-
 <script type="module">
-    import { createItemList } from "./src/script.js";
-    document.addEventListener('DOMContentLoaded', () => {
-        createItemList({
-            list: 'portraits',
-            containerSelector: '.icons-grid',
-            searchInputSelector: '#icon-search',
-            assetBase: 'https://star-assets.github.io/',
-            thumbnail: { size: '200x300,fit' },
-        }).load();
+    import { initPage } from './src/init-page.js';
+    import { createItemList } from './src/script.js';
+
+    initPage({
+        title: 'Portraits',
+        description: 'Preview of StarCraft II icon assets in the SC2 All Races Archive.',
+        ogTitle: 'SC2 All Races Portraits Archive',
+        ogDescription: 'Browse and download StarCraft II portraits for modding.',
+        searchPlaceholder: 'Search portraits...',
+        searchAriaLabel: 'Search portraits',
+        gridClass: 'portraits-grid',
+        intro: 'Preview and download StarCraft II portraits from the archive.',
+        preloaderLabel: 'Loading portraits',
     });
+
+    createItemList({
+        list: 'portraits',
+        containerSelector: '.icons-grid',
+        searchInputSelector: '#icon-search',
+        assetBase: 'https://star-assets.github.io/',
+        thumbnail: { size: '200x300,fit' },
+    }).load();
 </script>
-
-
-<footer>
-  <a href="https://github.com/sc2-arcade-watcher/asset-explorer" aria-label="GitHub repository" target="_blank" rel="noopener noreferrer">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-  </a>
-</footer>
-
 </body>
 </html>

@@ -3,51 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>SC2Mapster Asset Explorer – 3D Models</title>
-
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./src/styles.css">
 
-    <!-- Optional SEO meta -->
-    <meta name="description" content="Preview of StarCraft II 3D model assets in the Star Craft 2 All Races Archive.">
-    <meta property="og:title" content="All Races Models Archive" />
-    <meta property="og:description" content="Browse and download StarCraft II 3D model files for modding." />
-    <meta property="og:image" content="img/arc.png" />
-
     <style>
-        .models-grid {
-        grid-template-columns: repeat(auto-fill, 200px);
-        }
-
-        .model-item {
-            background: #12181f;
-            border: 1px solid #00d8ff;
-            border-radius: 6px;
-            padding: 12px 16px;
-            font-size: 1em;
-            color: #00d8ff;
-            text-align: center;
-            transition: background-color 0.2s ease;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .model-item a {
-            color: inherit;
-            text-decoration: none;
-            word-break: break-word;
-            display: block;
-        }
-
-        .model-item:hover {
-            background-color: #00d8ff;
-            color: #111;
-        }
-
-        glb-viewer{
-            min-height: 250px;
-        }
+        glb-viewer { min-height: 250px; }
 
         #model-preview {
             position: fixed;
@@ -66,111 +26,90 @@
             cursor: grab;
         }
 
-        #glb-viewer.dragging {
-            cursor: grabbing;
-        }
-        glb-viewer:fullscreen {
-            border: 0 !important;
-        }
-
+        #glb-viewer.dragging { cursor: grabbing; }
+        glb-viewer:fullscreen { border: 0 !important; }
     </style>
 </head>
-<body><header class="small-header">
-    <div class="logo-container">
-        <a href="./" style="display: flex; align-items: center; text-decoration: none;">
-            <img src="img/arc.png" alt="SC2Mapster Asset Explorer Logo" />
-            <div><h1>SC2Mapster Asset Explorer</h1>
-            <p class="subtitle">3D Models</p></div>
-        </a>
-    </div>
-    <input type="search" id="icon-search" placeholder="Search model..." aria-label="Search icons" />
-    <button class="fullscreen-btn" id="fullscreen-toggle" title="Toggle Fullscreen">⤢</button>
-</header>
-<div class="main">
-
-    <article>
-        
-        <p>Preview and download StarCraft II 3D model files from the archive. <span id="icons-count"></span></p>
-
-        <div class="icons-grid" id="icons-grid">
-            <div id="preloader" class="grid-preloader" aria-label="Loading models" role="status" aria-live="polite">
-                <div class="spinner"></div>
-            </div>
-            <!-- models will be injected here -->
-        </div>
-
-    </article>
-    <glb-viewer id="model-preview" base-url="" style="display: none;width: 400px; height: 250px; border: 1px solid #00d8ff;"></glb-viewer>
-
-</div>
-
+<body>
 <script type="module">
-    import {createItemList, thumbUrl} from "./src/script.js"
-    import "./src/player.js"
+    import { initPage } from './src/init-page.js';
+    import { createItemList, thumbUrl } from './src/script.js';
+    import './src/player.js';
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const viewer = document.getElementById('model-preview');
-
-        // Open clicked .glb links in the in-page preview viewer
-        document.body.addEventListener('click', e => {
-            const target = e.target.closest('a');
-            if (!target || !target.href.endsWith(".glb")) return;
-            e.preventDefault();
-            const modelFile = target.getAttribute('href');
-            if (modelFile && viewer) {
-                viewer.addEventListener('load', () => { viewer.style.display = "block"; });
-                viewer.setAttribute('model', modelFile);
-            }
-        });
-
-        // Drag the preview panel by its frame
-        let isDragging = false, offsetX = 0, offsetY = 0;
-        viewer.addEventListener('mousedown', (e) => {
-            if (e.target !== viewer) return;
-            isDragging = true;
-            offsetX = e.clientX - viewer.offsetLeft;
-            offsetY = e.clientY - viewer.offsetTop;
-            viewer.classList.add('dragging');
-        });
-        document.addEventListener('mouseup', () => {
-            if (!isDragging) return;
-            isDragging = false;
-            viewer.classList.remove('dragging');
-        });
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            viewer.style.left = (e.clientX - offsetX) + 'px';
-            viewer.style.top = (e.clientY - offsetY) + 'px';
-        });
-
-        createItemList({
-            list: 'models',
-            containerSelector: '.icons-grid',
-            searchInputSelector: '#icon-search',
-            assetBase: 'https://star-assets.github.io/',
-            renderItemFn: ({name, icon}) => {
-                const div = document.createElement('div');
-                div.className = 'icon-item';
-                div.innerHTML = `
-                    <a href="https://star-assets.github.io/models-glb/${name}.glb" target="_blank">
-                        <img src="${thumbUrl(icon.toLowerCase(), '152x152,fit')}" alt="${name}" loading="lazy">
-                    </a>
-                    <span class="tooltip">${name}</span>
-                    <span class="btn copy-btn" data-copy="${name}">⎘</span>
-                `;
-                return div;
-            },
-        }).load();
+    initPage({
+        title: '3D Models',
+        description: 'Preview of StarCraft II 3D model assets in the Star Craft 2 All Races Archive.',
+        ogTitle: 'All Races Models Archive',
+        ogDescription: 'Browse and download StarCraft II 3D model files for modding.',
+        searchPlaceholder: 'Search model...',
+        searchAriaLabel: 'Search icons',
+        intro: 'Preview and download StarCraft II 3D model files from the archive.',
+        preloaderLabel: 'Loading models',
+        wrapMain: true,
+        extraBody: ({ main }) => {
+            const viewer = document.createElement('glb-viewer');
+            viewer.id = 'model-preview';
+            viewer.setAttribute('base-url', '');
+            viewer.style.display = 'none';
+            viewer.style.width = '400px';
+            viewer.style.height = '250px';
+            viewer.style.border = '1px solid #00d8ff';
+            main.appendChild(viewer);
+        },
     });
 
+    const viewer = document.getElementById('model-preview');
 
+    // Open clicked .glb links in the in-page preview viewer
+    document.body.addEventListener('click', e => {
+        const target = e.target.closest('a');
+        if (!target || !target.href.endsWith('.glb')) return;
+        e.preventDefault();
+        const modelFile = target.getAttribute('href');
+        if (modelFile && viewer) {
+            viewer.addEventListener('load', () => { viewer.style.display = 'block'; });
+            viewer.setAttribute('model', modelFile);
+        }
+    });
 
+    // Drag the preview panel by its frame
+    let isDragging = false, offsetX = 0, offsetY = 0;
+    viewer.addEventListener('mousedown', (e) => {
+        if (e.target !== viewer) return;
+        isDragging = true;
+        offsetX = e.clientX - viewer.offsetLeft;
+        offsetY = e.clientY - viewer.offsetTop;
+        viewer.classList.add('dragging');
+    });
+    document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        viewer.classList.remove('dragging');
+    });
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        viewer.style.left = (e.clientX - offsetX) + 'px';
+        viewer.style.top = (e.clientY - offsetY) + 'px';
+    });
+
+    createItemList({
+        list: 'models',
+        containerSelector: '.icons-grid',
+        searchInputSelector: '#icon-search',
+        assetBase: 'https://star-assets.github.io/',
+        renderItemFn: ({ name, icon }) => {
+            const div = document.createElement('div');
+            div.className = 'icon-item';
+            div.innerHTML = `
+                <a href="https://star-assets.github.io/models-glb/${name}.glb" target="_blank">
+                    <img src="${thumbUrl(icon.toLowerCase(), '152x152,fit')}" alt="${name}" loading="lazy">
+                </a>
+                <span class="tooltip">${name}</span>
+                <span class="btn copy-btn" data-copy="${name}">⎘</span>
+            `;
+            return div;
+        },
+    }).load();
 </script>
-
-<footer>
-  <a href="https://github.com/sc2-arcade-watcher/asset-explorer" aria-label="GitHub repository" target="_blank" rel="noopener noreferrer">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-  </a>
-</footer>
 </body>
 </html>
