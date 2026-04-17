@@ -47,16 +47,14 @@
 
 
 <script type="module">
-    import { createItemList, makeRenderItem } from "./src/script.js";
+    import { createItemList } from "./src/script.js";
     document.addEventListener('DOMContentLoaded', () => {
         createItemList({
             list: 'buttons',
             containerSelector: '.icons-grid',
             searchInputSelector: '#icon-search',
-            renderItemFn: makeRenderItem({
-                thumbSize: '152x152,fit',
-                assetBase: 'https://star-assets.github.io/',
-            }),
+            assetBase: 'https://star-assets.github.io/',
+            thumbnail: { size: '152x152,fit' },
         }).load();
     });
 </script>

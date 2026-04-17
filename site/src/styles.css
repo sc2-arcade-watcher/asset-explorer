@@ -476,43 +476,11 @@ header.small-header h1 {
   position: relative;
 }
 
-/* Pagination */
-
-.pagination {  
-      margin: 10px auto;
-    text-align: center;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Michroma', sans-serif;
-    color: #e04a14;
-}
-
-.pagination button {
-  padding: 6px 12px;
-  font-size: 1em;
-  border: 1px solid #e04a14;
-  background: #0b0f14;
-  color: #e04a14;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.pagination button:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
-.pagination button.active {
-  background: #e04a14;
-  color: black;
-  font-weight: bold;
-}
-
-.pagination .ellipsis {
-  padding: 4px 10px;
-  color: #888;
+/* Infinite-scroll sentinel — 1px probe below the grid that the
+   IntersectionObserver watches to trigger the next batch. */
+.grid-sentinel {
+  width: 100%;
+  min-height: 1px;
 }
 
 /* Copy to clipboard tooltip */

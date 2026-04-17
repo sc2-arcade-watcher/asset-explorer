@@ -37,14 +37,14 @@
 </article>
 
 <script type="module">
-    import { createLocalItemList, makeRenderItem } from "./src/script.js";
+    import { createLocalItemList } from "./src/script.js";
     document.addEventListener('DOMContentLoaded', () => {
         createLocalItemList({
             list: 'terrain-tilesets',
             baseUrl: 'https://dist.sc2arcade.com/star-assets',
             containerSelector: '.icons-grid',
             searchInputSelector: '#icon-search',
-            renderItemFn: makeRenderItem({ thumbSize: '300x200,fit' }),
+            thumbnail: { size: '300x200,fit' },
         }).load();
     });
 </script>
