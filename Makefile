@@ -1,4 +1,3 @@
--include .env
 HTTP_PORT ?= 8080
 export BASE_URL ?= http://localhost:$(HTTP_PORT)
 

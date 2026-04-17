@@ -2,6 +2,9 @@
 **/.DS_Store
 .Temp
 
+# Superpowers workflow artifacts (design specs + plans — local only)
+docs/superpowers/
+
 # Environment — copy .env.example to .env and fill in values
 **.env
 
@@ -10,6 +13,10 @@ docker-compose.override.yml
 
 # Node
 /node_modules/
+
+# Playwright test artifacts
+/test-results/
+/.playwright-mcp/
 
 # Local assets (large binary tree, not tracked except terrain subdirs)
 assets
