@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./src/styles.css">
+    {{- $page := dict "title" "Art" -}}
+    {{- include "/_partials/seo.html" $page -}}
 </head>
 <body>
 <script type="module">
@@ -13,9 +15,6 @@
 
     initPage({
         title: 'Art',
-        description: 'Preview of StarCraft II icon assets in the SC2 All Races Archive.',
-        ogTitle: 'SC2 All Races Art Archive',
-        ogDescription: 'Browse and download StarCraft II Art for modding.',
         searchPlaceholder: 'Search Art...',
         searchAriaLabel: 'Search Art',
         gridClass: 'art-grid',

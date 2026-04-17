@@ -77,3 +77,43 @@ test('player.js defines glb-viewer element', async ({ request }) => {
   const body = await (await request.get('/src/player.js')).text();
   expect(body).toContain('glb-viewer');
 });
+
+// Loose SEO/OG checks — assert that the server-rendered HTML includes the
+// tags crawlers and link unfurlers care about. We verify presence and
+// non-emptiness only; copy can be edited freely without breaking tests.
+test.describe('SEO meta tags (server-rendered via Caddy templates)', () => {
+  for (const path of pages) {
+    test(path, async ({ request }) => {
+      const body = await (await request.get(path)).text();
+
+      const title = body.match(/<title>([^<]+)<\/title>/);
+      expect(title, '<title> present').not.toBeNull();
+      expect(title[1].trim().length).toBeGreaterThan(0);
+
+      // For each meta tag we assert the attribute is present with a non-empty
+      // content. The regex tolerates attribute order and quote style.
+      const metas = [
+        ['name', 'description'],
+        ['property', 'og:title'],
+        ['property', 'og:description'],
+        ['property', 'og:image'],
+        ['property', 'og:type'],
+      ];
+      for (const [attr, key] of metas) {
+        const re = new RegExp(
+          `<meta[^>]*${attr}=["']${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["'][^>]*content=["']([^"']+)["']`,
+          'i'
+        );
+        const m = body.match(re);
+        expect(m, `${attr}="${key}" present in ${path}`).not.toBeNull();
+        expect(m[1].length).toBeGreaterThan(0);
+      }
+
+      // og:image should point at arc.png per the project convention.
+      const ogImage = body.match(
+        /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i
+      );
+      expect(ogImage[1]).toMatch(/arc\.png$/);
+    });
+  }
+});

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./src/styles.css">
+    {{- $page := dict "title" "Portraits" -}}
+    {{- include "/_partials/seo.html" $page -}}
 </head>
 <body>
 <script type="module">
@@ -13,9 +15,6 @@
 
     initPage({
         title: 'Portraits',
-        description: 'Preview of StarCraft II icon assets in the SC2 All Races Archive.',
-        ogTitle: 'SC2 All Races Portraits Archive',
-        ogDescription: 'Browse and download StarCraft II portraits for modding.',
         searchPlaceholder: 'Search portraits...',
         searchAriaLabel: 'Search portraits',
         gridClass: 'portraits-grid',

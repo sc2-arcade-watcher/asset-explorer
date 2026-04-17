@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./src/styles.css">
+    {{- $page := dict "title" "Terrain Cliffs" -}}
+    {{- include "/_partials/seo.html" $page -}}
 </head>
 <body>
 <script type="module">
@@ -13,9 +15,6 @@
 
     initPage({
         title: 'Terrain Cliffs',
-        description: 'Preview of StarCraft II terrain cliff assets in the SC2 All Races Archive.',
-        ogTitle: 'SC2 All Races Terrain Cliffs Archive',
-        ogDescription: 'Browse StarCraft II terrain cliff styles for modding.',
         searchPlaceholder: 'Search cliffs...',
         searchAriaLabel: 'Search cliffs',
         gridClass: 'art-grid',

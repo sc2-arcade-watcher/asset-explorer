@@ -1,7 +1,12 @@
 /**
  * Renders the shared HTML shell for every category page (header, search,
- * grid container, footer) and sets SEO meta tags. Keeps the 13 category
- * HTML files down to a minimal stub that only supplies per-page data.
+ * grid container, footer). Keeps the 13 category HTML files down to a
+ * minimal stub that only supplies per-page data.
+ *
+ * SEO/OpenGraph meta tags are rendered server-side via Caddy templates
+ * (see site/_partials/seo.html) so crawlers and link-preview unfurlers
+ * see them without executing JS. This function only handles the visible
+ * DOM shell.
  *
  * Called synchronously at module-evaluation time from the page's inline
  * <script type="module">. Because ES modules execute after the DOM is
@@ -16,31 +21,11 @@ const GITHUB_FOOTER_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="20" he
 const FULLSCREEN_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/></svg>`;
 
 /**
- * Ensures a <meta> tag exists with the given key/value and returns it.
- * Matches either name="..." or property="..." (for OpenGraph).
- */
-function ensureMeta(attr, key, value) {
-  if (value == null) return null;
-  let el = document.head.querySelector(`meta[${attr}="${key}"]`);
-  if (!el) {
-    el = document.createElement('meta');
-    el.setAttribute(attr, key);
-    document.head.appendChild(el);
-  }
-  el.setAttribute('content', value);
-  return el;
-}
-
-/**
  * Render the page shell. See module docstring for behaviour.
  *
  * @param {object} cfg
  * @param {string} cfg.title               Short page name, e.g. "Buttons".
  * @param {string} [cfg.subtitle]          Visible subtitle; defaults to title.
- * @param {string} [cfg.description]       SEO description meta.
- * @param {string} [cfg.ogTitle]           OpenGraph title override.
- * @param {string} [cfg.ogDescription]     OpenGraph description override.
- * @param {string} [cfg.ogImage='img/arc.png']  OpenGraph image.
  * @param {string} [cfg.searchPlaceholder='Search...']
  * @param {string} [cfg.searchAriaLabel]   Defaults to searchPlaceholder.
  * @param {string} cfg.gridClass           Extra grid classes, e.g. "art-grid" or "icons-small-grid".
@@ -68,10 +53,6 @@ export function initPage(cfg) {
   const {
     title,
     subtitle = title,
-    description,
-    ogTitle,
-    ogDescription,
-    ogImage = 'img/arc.png',
     searchPlaceholder = 'Search...',
     searchAriaLabel,
     gridClass = '',
@@ -81,16 +62,6 @@ export function initPage(cfg) {
     extraBody,
   } = cfg;
 
-  // --- <head> ---------------------------------------------------------------
-  const fullTitle = `SC2Mapster Asset Explorer \u2013 ${title}`;
-  document.title = fullTitle;
-
-  ensureMeta('name',     'description',    description);
-  ensureMeta('property', 'og:title',       ogTitle ?? fullTitle);
-  ensureMeta('property', 'og:description', ogDescription ?? description);
-  ensureMeta('property', 'og:image',       ogImage);
-
-  // --- <body> ---------------------------------------------------------------
   const header = document.createElement('header');
   header.className = 'small-header';
   const ariaLbl = searchAriaLabel ?? searchPlaceholder;

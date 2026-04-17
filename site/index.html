@@ -4,18 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>SC2Mapster Asset Explorer – StarCraft II Community Modding Resources</title>
-
-  <!-- Favicon -->
   <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-
-  <!-- SEO Meta -->
-  <meta name="description" content="SC2Mapster Asset Explorer: Browse StarCraft II modding assets — buttons, icons, portraits, art, 3D models, UI elements, and more. A community resource for SC2 mapmakers." />
-  <meta name="keywords" content="StarCraft II, SC2, modding, assets, models, icons, art, portraits, SC2Mapster, sc2arcade, community" />
-  <meta property="og:title" content="SC2Mapster Asset Explorer" />
-  <meta property="og:description" content="Browse StarCraft II modding assets. A community resource for SC2 mapmakers." />
-  <meta property="og:image" content="img/arc.png" />
-  <meta property="og:type" content="website" />
+  {{- $page := dict
+      "fullTitle" "SC2Mapster Asset Explorer – StarCraft II Community Modding Resources"
+      "description" "SC2Mapster Asset Explorer: Browse StarCraft II modding assets — buttons, icons, portraits, art, 3D models, UI elements, and more. A community resource for SC2 mapmakers."
+      "keywords" "StarCraft II, SC2, modding, assets, models, icons, art, portraits, SC2Mapster, sc2arcade, community"
+      "ogTitle" "SC2Mapster Asset Explorer"
+      "ogDescription" "Browse StarCraft II modding assets. A community resource for SC2 mapmakers."
+  -}}
+  {{- include "/_partials/seo.html" $page -}}
   <!-- Fonts -->
   <link rel="stylesheet" href="src/styles.css">
   <script>

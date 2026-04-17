@@ -29,6 +29,13 @@
 	root * /srv
 
 	import thumbs
+
+	# Render Go templates inside HTML files only — JS/INI/CSS may legitimately
+	# contain `{{ }}` (template literals etc.) and must be served verbatim.
+	templates {
+		mime text/html
+	}
+
 	file_server
 	encode zstd gzip
 	import static_headers

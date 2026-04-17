@@ -1,0 +1,53 @@
+{{- /*
+  Shared SEO / OpenGraph head block.
+
+  Pass a single dict as the include argument:
+    {{include "/_partials/seo.html" (dict "title" "Buttons")}}
+
+  Recognised keys:
+    title          - Short page name (e.g. "Buttons"). Required for category
+                     pages; omit for the landing page (where fullTitle is
+                     supplied directly).
+    fullTitle      - Override for the <title> element.
+                     Defaults to "SC2Mapster Asset Explorer – {title}".
+    description    - Override for <meta name="description">.
+                     Defaults to "Browse StarCraft II {title} — modding
+                     resources for SC2 mapmakers."
+    keywords       - Optional <meta name="keywords"> content.
+    ogTitle        - og:title override; defaults to fullTitle.
+    ogDescription  - og:description override; defaults to description.
+    ogImage        - og:image; defaults to "img/arc.png".
+    ogType         - og:type; defaults to "website".
+*/ -}}
+{{- $p := index .Args 0 -}}
+{{- $title := index $p "title" -}}
+{{- $fullTitle := index $p "fullTitle" -}}
+{{- if not $fullTitle -}}
+  {{- if $title -}}
+    {{- $fullTitle = printf "SC2Mapster Asset Explorer – %s" $title -}}
+  {{- else -}}
+    {{- $fullTitle = "SC2Mapster Asset Explorer" -}}
+  {{- end -}}
+{{- end -}}
+{{- $desc := index $p "description" -}}
+{{- if and (not $desc) $title -}}
+  {{- $desc = printf "Browse StarCraft II %s — modding resources for SC2 mapmakers." $title -}}
+{{- end -}}
+{{- $ogTitle := index $p "ogTitle" -}}{{- if not $ogTitle -}}{{- $ogTitle = $fullTitle -}}{{- end -}}
+{{- $ogDescription := index $p "ogDescription" -}}{{- if not $ogDescription -}}{{- $ogDescription = $desc -}}{{- end -}}
+{{- $ogImage := index $p "ogImage" -}}{{- if not $ogImage -}}{{- $ogImage = "img/arc.png" -}}{{- end -}}
+{{- $ogType := index $p "ogType" -}}{{- if not $ogType -}}{{- $ogType = "website" -}}{{- end -}}
+{{- $keywords := index $p "keywords" -}}
+<title>{{ $fullTitle }}</title>
+{{- if $desc }}
+<meta name="description" content="{{ $desc }}">
+{{- end }}
+{{- if $keywords }}
+<meta name="keywords" content="{{ $keywords }}">
+{{- end }}
+<meta property="og:title" content="{{ $ogTitle }}">
+{{- if $ogDescription }}
+<meta property="og:description" content="{{ $ogDescription }}">
+{{- end }}
+<meta property="og:image" content="{{ $ogImage }}">
+<meta property="og:type" content="{{ $ogType }}">

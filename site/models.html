@@ -29,6 +29,8 @@
         #glb-viewer.dragging { cursor: grabbing; }
         glb-viewer:fullscreen { border: 0 !important; }
     </style>
+    {{- $page := dict "title" "3D Models" -}}
+    {{- include "/_partials/seo.html" $page -}}
 </head>
 <body>
 <script type="module">
@@ -38,9 +40,6 @@
 
     initPage({
         title: '3D Models',
-        description: 'Preview of StarCraft II 3D model assets in the Star Craft 2 All Races Archive.',
-        ogTitle: 'All Races Models Archive',
-        ogDescription: 'Browse and download StarCraft II 3D model files for modding.',
         searchPlaceholder: 'Search model...',
         searchAriaLabel: 'Search icons',
         intro: 'Preview and download StarCraft II 3D model files from the archive.',
