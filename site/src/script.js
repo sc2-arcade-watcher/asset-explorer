@@ -157,20 +157,29 @@ function getScrollParent(el) {
 }
 
 /**
- * Builds a labelled `<select>` for the grid toolbar.
+ * Builds a labelled `<select>` for the grid toolbar. Each option is either a
+ * scalar (auto-stringified) or `{value, label}` for human-friendly labels.
  */
+let selectIdCounter = 0;
 function buildSelect(labelText, value, options, className, onChange) {
+  const id = `${className}-${++selectIdCounter}`;
   const label = document.createElement('label');
   label.className = className + '-label';
+  label.setAttribute('for', id);
   const span = document.createElement('span');
   span.textContent = labelText;
   const select = document.createElement('select');
+  select.id = id;
   select.className = className;
+  select.setAttribute('aria-label', labelText);
   for (const opt of options) {
+    const { value: v, label: l } = (opt && typeof opt === 'object')
+      ? opt
+      : { value: opt, label: String(opt).charAt(0).toUpperCase() + String(opt).slice(1) };
     const o = document.createElement('option');
-    o.value = String(opt);
-    o.textContent = String(opt).charAt(0).toUpperCase() + String(opt).slice(1);
-    if (String(opt) === String(value)) o.selected = true;
+    o.value = String(v);
+    o.textContent = l;
+    if (String(v) === String(value)) o.selected = true;
     select.appendChild(o);
   }
   select.addEventListener('change', (e) => onChange(e.target.value));
@@ -306,14 +315,17 @@ export function watchImages({ selector = 'img', onLoad = null, onError = null, f
  *   ctrl/cmd-click are left to the browser so the anchor's download still works.
  * @param {Function} [options.renderItemFn] - Escape hatch: full custom renderer (item) => HTMLElement.
  *   When provided, overrides thumbnail/hrefBuilder/onItemClick/lightbox.
- * @param {number|'all'} [options.batchSize=200] - Items appended per infinite-scroll batch.
- *   'all' disables the sentinel and renders everything up front.
- * @param {Array<number|'all'>} [options.batchSizeOptions] - Items-per-batch values for the
- *   toolbar picker. Pass `null` to suppress the batch picker. Default [100, 200, 500, 'all'].
- * @param {string} [options.previewSize='medium'] - Initial CSS size. One of
- *   'small' | 'medium' | 'large' | 'list'. Stored in localStorage per list.
+ * @param {number} [options.batchSize=200] - Items appended per infinite-scroll batch.
+ * @param {Array<number|{value,label}>} [options.batchSizeOptions] - Items-per-batch values for the
+ *   toolbar picker. Pass `null` to suppress the batch picker. Default [100, 200, 300, 500].
+ * @param {string} [options.previewSize='medium'] - Initial tile scale. One of
+ *   'small' | 'medium' | 'large'. Stored in localStorage per list.
  * @param {string[]} [options.previewSizeOptions] - Size values for the toolbar picker.
- *   Pass `null` to suppress the size picker. Default ['small','medium','large','list'].
+ *   Pass `null` to suppress the size picker. Default ['small','medium','large'].
+ * @param {string} [options.layout='grid'] - Structural layout. One of 'grid' | 'list'.
+ *   Stored in localStorage per list.
+ * @param {string[]} [options.layoutOptions] - Layout values for the toolbar picker.
+ *   Pass `null` to suppress the layout picker. Default ['grid','list'].
  */
 export function createItemList({
   list,
@@ -329,9 +341,11 @@ export function createItemList({
   onRendered,
   debounceDelay = 300,
   batchSize = 200,
-  batchSizeOptions = [100, 200, 500, 'all'],
+  batchSizeOptions = [100, 200, 300, 500],
   previewSize = 'medium',
-  previewSizeOptions = ['small', 'medium', 'large', 'list'],
+  previewSizeOptions = ['small', 'medium', 'large'],
+  layout = 'grid',
+  layoutOptions = ['grid', 'list'],
 }) {
   const container = document.querySelector(containerSelector);
   const searchInput = document.querySelector(searchInputSelector);
@@ -350,10 +364,15 @@ export function createItemList({
   if (previewSizeOptions?.includes(storedSize)) previewSize = storedSize;
   container.dataset.previewSize = previewSize;
 
+  const storedLayout = readPref('layout', null);
+  if (layoutOptions?.includes(storedLayout)) layout = storedLayout;
+  container.dataset.layout = layout;
+
+  const batchValues = (batchSizeOptions ?? []).map(o => (o && typeof o === 'object') ? o.value : o);
   const storedBatch = readPref('batch', null);
   if (storedBatch !== null) {
-    const parsed = storedBatch === 'all' ? 'all' : Number(storedBatch);
-    if (batchSizeOptions?.includes(parsed)) batchSize = parsed;
+    const parsed = Number(storedBatch);
+    if (Number.isFinite(parsed) && batchValues.includes(parsed)) batchSize = parsed;
   }
 
   // Scroll container — `<article>` has overflow:auto on category pages, so both
@@ -362,9 +381,9 @@ export function createItemList({
   const scrollRoot = getScrollParent(container);
   const scrollTarget = scrollRoot ?? window;
 
-  // Toolbar with view-size + batch-size selects, injected above the grid.
+  // Toolbar with view-size, layout, and batch-size selects injected above the grid.
   let toolbar = null;
-  if (previewSizeOptions || batchSizeOptions) {
+  if (previewSizeOptions || layoutOptions || batchSizeOptions) {
     toolbar = document.createElement('div');
     toolbar.className = 'grid-toolbar';
     if (previewSizeOptions) toolbar.appendChild(buildSelect('View', previewSize, previewSizeOptions, 'grid-size-select', (v) => {
@@ -372,8 +391,13 @@ export function createItemList({
       container.dataset.previewSize = v;
       writePref('preview', v);
     }));
+    if (layoutOptions) toolbar.appendChild(buildSelect('Layout', layout, layoutOptions, 'grid-layout-select', (v) => {
+      layout = v;
+      container.dataset.layout = v;
+      writePref('layout', v);
+    }));
     if (batchSizeOptions) toolbar.appendChild(buildSelect('Per batch', batchSize, batchSizeOptions, 'grid-batch-select', (v) => {
-      batchSize = v === 'all' ? 'all' : Number(v);
+      batchSize = Number(v);
       writePref('batch', batchSize);
       // If scrolled past the sentinel already, render more now; otherwise next
       // scroll trigger will use the new size.
@@ -388,14 +412,19 @@ export function createItemList({
   container.after(sentinel);
 
   // Back-to-top floating button — visible after user scrolls past 800px.
-  const backToTop = document.createElement('button');
-  backToTop.className = 'grid-back-to-top';
-  backToTop.setAttribute('aria-label', 'Back to top');
-  backToTop.textContent = '↑';
-  backToTop.addEventListener('click', () => {
+  // Reuse an existing button if a previous createItemList call already added one
+  // (category pages only have one grid, but this keeps multi-grid futures safe).
+  let backToTop = document.body.querySelector('.grid-back-to-top');
+  if (!backToTop) {
+    backToTop = document.createElement('button');
+    backToTop.className = 'grid-back-to-top';
+    backToTop.setAttribute('aria-label', 'Back to top');
+    backToTop.textContent = '↑';
+    document.body.appendChild(backToTop);
+  }
+  backToTop.onclick = () => {
     scrollTarget.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-  document.body.appendChild(backToTop);
+  };
   const onScroll = () => {
     const y = scrollRoot ? scrollRoot.scrollTop : window.scrollY;
     backToTop.classList.toggle('visible', y > 800);
@@ -527,8 +556,7 @@ export function createItemList({
 
   function renderNextBatch() {
     const start = rendered;
-    const step = batchSize === 'all' ? filteredItems.length : batchSize;
-    const end = Math.min(rendered + step, filteredItems.length);
+    const end = Math.min(rendered + batchSize, filteredItems.length);
     if (start >= end) return;
 
     const batch = filteredItems.slice(start, end);

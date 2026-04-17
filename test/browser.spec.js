@@ -92,18 +92,70 @@ test('grid toolbar renders size + batch selects and persists prefs', async ({ pa
   await expect(page.locator('.icons-grid')).toHaveAttribute('data-preview-size', 'large');
 });
 
-test('list preview mode switches grid to single-column layout', async ({ page }) => {
+test('list layout switches grid to single-column and persists independently of size', async ({ page }) => {
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
-  await page.locator('.grid-size-select').selectOption('list');
+  await page.locator('.grid-layout-select').selectOption('list');
+  await page.locator('.grid-size-select').selectOption('large');
 
-  const columns = await page.evaluate(() => {
-    const grid = document.querySelector('.icons-grid');
-    return getComputedStyle(grid).gridTemplateColumns;
-  });
-  // In list mode we set grid-template-columns: 1fr — only one column token.
+  await expect(page.locator('.icons-grid')).toHaveAttribute('data-layout', 'list');
+  await expect(page.locator('.icons-grid')).toHaveAttribute('data-preview-size', 'large');
+
+  const columns = await page.evaluate(() =>
+    getComputedStyle(document.querySelector('.icons-grid')).gridTemplateColumns);
+  // In list layout we set grid-template-columns: 1fr — only one column token.
   expect(columns.split(' ').length).toBe(1);
+
+  const stored = await page.evaluate(() => ({
+    layout: localStorage.getItem('grid:buttons:layout'),
+    preview: localStorage.getItem('grid:buttons:preview'),
+  }));
+  expect(stored).toEqual({ layout: 'list', preview: 'large' });
+
+  // Reload — both prefs restored independently.
+  await page.reload();
+  await page.waitForSelector('.icon-item');
+  await expect(page.locator('.icons-grid')).toHaveAttribute('data-layout', 'list');
+  await expect(page.locator('.icons-grid')).toHaveAttribute('data-preview-size', 'large');
+});
+
+test('list layout: clicking the name row opens the lightbox', async ({ page }) => {
+  await page.route('**/star-assets.github.io/**', route => route.abort());
+  await page.goto('/buttons.html');
+  await page.waitForSelector('.icon-item');
+
+  await page.locator('.grid-layout-select').selectOption('list');
+
+  // Click where the name text sits. tooltip has pointer-events:none so a real
+  // mouse click at that coordinate lands on a::after (which covers the row),
+  // bubbling to the anchor. This is exactly the row-wide click behavior we want.
+  const tooltip = await page.locator('.icon-item .tooltip').first().boundingBox();
+  await page.mouse.click(tooltip.x + tooltip.width / 2, tooltip.y + tooltip.height / 2);
+
+  await expect(page.locator('.pswp')).toBeVisible();
+});
+
+test('batch picker offers [100, 200, 300, 500] and no "all"', async ({ page }) => {
+  await page.goto('/buttons.html');
+  await page.waitForSelector('.icon-item');
+
+  const values = await page.locator('.grid-batch-select option').evaluateAll(
+    opts => opts.map(o => o.value));
+  expect(values).toEqual(['100', '200', '300', '500']);
+});
+
+test('mobile viewport: art tiles shrink below the desktop 150px base', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.goto('/art.html');
+  await page.waitForSelector('.icon-item');
+
+  const tileWidth = await page.evaluate(() => {
+    const item = document.querySelector('.art-grid .icon-item');
+    return item.getBoundingClientRect().width;
+  });
+  // Desktop art tile is 150px; mobile --tile-base is 120px. Allow a small margin.
+  expect(tileWidth).toBeLessThan(140);
 });
 
 test('back-to-top button becomes visible after scrolling', async ({ page }) => {
@@ -160,20 +212,3 @@ test('ctrl+click bypasses the lightbox and lets the anchor behave normally', asy
   await expect(page.locator('.pswp')).toHaveCount(0);
 });
 
-test('batch-size picker "all" renders every item up front', async ({ page }) => {
-  await page.goto('/terrain-cliffs.html');
-  await page.waitForSelector('.icon-item');
-
-  const initial = await page.locator('.icon-item').count();
-  // terrain-cliffs has 108 entries; default batchSize 200 already covers it — pick
-  // terrain-doodads (2353 entries) to see the delta between batched and "all".
-  await page.goto('/terrain-doodads.html');
-  await page.waitForSelector('.icon-item');
-  const batched = await page.locator('.icon-item').count();
-  expect(batched).toBeLessThanOrEqual(200);
-
-  await page.locator('.grid-batch-select').selectOption('all');
-  // "all" triggers renderNextBatch with step = filteredItems.length
-  await expect.poll(() => page.locator('.icon-item').count(), { timeout: 5000 })
-    .toBeGreaterThan(batched);
-});

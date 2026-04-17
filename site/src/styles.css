@@ -431,6 +431,11 @@ header.small-header h1 {
     padding: 10px;
   }
 
+  .grid-back-to-top {
+    right: 12px;
+    bottom: max(20px, env(safe-area-inset-bottom));
+  }
+
   h1 {
     font-size: 2em;
   }
@@ -498,7 +503,6 @@ header.small-header h1 {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  cursor: pointer;
 }
 
 .grid-toolbar label span {
@@ -561,16 +565,18 @@ header.small-header h1 {
   color: #fff;
 }
 
-/* List mode — one tile per row with inline name and copy button. */
+/* List layout — one tile per row with inline name and copy button.
+   The whole row is clickable via an `a::after` overlay; tooltip text is
+   visual-only (pointer-events: none), copy-btn stays on top. */
 
-.icons-grid[data-preview-size="list"] {
+.icons-grid[data-layout="list"] {
   grid-template-columns: 1fr;
   gap: 4px;
   max-width: 900px;
   width: 100%;
 }
 
-.icons-grid[data-preview-size="list"] .icon-item {
+.icons-grid[data-layout="list"] .icon-item {
   flex-direction: row;
   width: 100%;
   aspect-ratio: auto;
@@ -581,19 +587,27 @@ header.small-header h1 {
   height: auto;
 }
 
-.icons-grid[data-preview-size="list"] .icon-item img {
+.icons-grid[data-layout="list"] .icon-item img {
   width: 48px;
   height: 48px;
   flex-shrink: 0;
   object-fit: contain;
 }
 
-.icons-grid[data-preview-size="list"] .icon-item .tooltip {
+.icons-grid[data-layout="list"] .icon-item > a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 4px;
+}
+
+.icons-grid[data-layout="list"] .icon-item .tooltip {
   position: static;
   transform: none;
   opacity: 1;
   visibility: visible;
-  pointer-events: auto;
+  pointer-events: none;
   background: transparent;
   color: #ddd;
   box-shadow: none;
@@ -604,17 +618,18 @@ header.small-header h1 {
   flex-grow: 1;
 }
 
-.icons-grid[data-preview-size="list"] .icon-item .tooltip::after {
+.icons-grid[data-layout="list"] .icon-item .tooltip::after {
   display: none;
 }
 
-.icons-grid[data-preview-size="list"] .icon-item:hover {
+.icons-grid[data-layout="list"] .icon-item:hover {
   transform: none;
   background: rgba(224, 74, 20, 0.08);
 }
 
-.icons-grid[data-preview-size="list"] .icon-item .copy-btn {
-  position: static;
+.icons-grid[data-layout="list"] .icon-item .copy-btn {
+  position: relative;
+  z-index: 3;
   opacity: 1;
   margin-left: auto;
   flex-shrink: 0;
@@ -958,4 +973,10 @@ header.small-header .subtitle {
   header.small-header .subtitle {
     display: none;
   }
+
+  /* Variant grids override base --tile-base via selector specificity; their
+     default rules appear above this MQ in source order, so repeat the narrower
+     mobile values down here to win the cascade. */
+  .icons-grid.art-grid { --tile-base: 120px; }
+  .icons-grid.portraits-grid { --tile-base: 80px; }
 }
