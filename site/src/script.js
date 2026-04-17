@@ -138,6 +138,48 @@ export async function loadIniFile(list, signal) {
 }
 
 /**
+ * Walks up from `el` and returns the nearest ancestor whose overflow establishes
+ * a scrolling context. Returns null if there isn't one (i.e. the viewport scrolls).
+ *
+ * The category pages make `<article>` the scroll container (overflow: auto),
+ * which breaks IntersectionObservers that default to the viewport root —
+ * thresholds never fire when the window itself doesn't scroll.
+ */
+function getScrollParent(el) {
+  let node = el?.parentElement;
+  while (node && node !== document.body && node !== document.documentElement) {
+    const s = getComputedStyle(node);
+    const overflowY = s.overflowY;
+    if (overflowY === 'auto' || overflowY === 'scroll') return node;
+    node = node.parentElement;
+  }
+  return null;
+}
+
+/**
+ * Builds a labelled `<select>` for the grid toolbar.
+ */
+function buildSelect(labelText, value, options, className, onChange) {
+  const label = document.createElement('label');
+  label.className = className + '-label';
+  const span = document.createElement('span');
+  span.textContent = labelText;
+  const select = document.createElement('select');
+  select.className = className;
+  for (const opt of options) {
+    const o = document.createElement('option');
+    o.value = String(opt);
+    o.textContent = String(opt).charAt(0).toUpperCase() + String(opt).slice(1);
+    if (String(opt) === String(value)) o.selected = true;
+    select.appendChild(o);
+  }
+  select.addEventListener('change', (e) => onChange(e.target.value));
+  label.appendChild(span);
+  label.appendChild(select);
+  return label;
+}
+
+/**
  * Watches images in the DOM and applies fade-in class when loaded.
  */
 export function watchImages({ selector = 'img', onLoad = null, onError = null, fadeInClass = 'loaded' } = {}) {
@@ -189,9 +231,14 @@ export function watchImages({ selector = 'img', onLoad = null, onError = null, f
  *   instead of opening the anchor href in a new tab (useful for in-page lightbox wiring).
  * @param {Function} [options.renderItemFn] - Escape hatch: full custom renderer (item) => HTMLElement.
  *   When provided, overrides thumbnail/hrefBuilder/onItemClick.
- * @param {number} [options.batchSize=200] - Items appended per infinite-scroll batch.
- * @param {string} [options.previewSize] - Sets container `data-preview-size` for CSS to consume
- *   (Phase 3 size picker hooks into this).
+ * @param {number|'all'} [options.batchSize=200] - Items appended per infinite-scroll batch.
+ *   'all' disables the sentinel and renders everything up front.
+ * @param {Array<number|'all'>} [options.batchSizeOptions] - Items-per-batch values for the
+ *   toolbar picker. Pass `null` to suppress the batch picker. Default [100, 200, 500, 'all'].
+ * @param {string} [options.previewSize='medium'] - Initial CSS size. One of
+ *   'small' | 'medium' | 'large' | 'list'. Stored in localStorage per list.
+ * @param {string[]} [options.previewSizeOptions] - Size values for the toolbar picker.
+ *   Pass `null` to suppress the size picker. Default ['small','medium','large','list'].
  */
 export function createItemList({
   list,
@@ -206,17 +253,78 @@ export function createItemList({
   onRendered,
   debounceDelay = 300,
   batchSize = 200,
-  previewSize,
+  batchSizeOptions = [100, 200, 500, 'all'],
+  previewSize = 'medium',
+  previewSizeOptions = ['small', 'medium', 'large', 'list'],
 }) {
   const container = document.querySelector(containerSelector);
   const searchInput = document.querySelector(searchInputSelector);
 
-  if (previewSize) container.dataset.previewSize = previewSize;
+  const prefsKey = `grid:${list}`;
+  const readPref = (key, fallback) => {
+    try { return localStorage.getItem(`${prefsKey}:${key}`) ?? fallback; }
+    catch { return fallback; }
+  };
+  const writePref = (key, val) => {
+    try { localStorage.setItem(`${prefsKey}:${key}`, String(val)); } catch { /* ignore */ }
+  };
+
+  // Resolve initial prefs: stored value wins if valid, else the caller's default.
+  const storedSize = readPref('preview', null);
+  if (previewSizeOptions?.includes(storedSize)) previewSize = storedSize;
+  container.dataset.previewSize = previewSize;
+
+  const storedBatch = readPref('batch', null);
+  if (storedBatch !== null) {
+    const parsed = storedBatch === 'all' ? 'all' : Number(storedBatch);
+    if (batchSizeOptions?.includes(parsed)) batchSize = parsed;
+  }
+
+  // Scroll container — `<article>` has overflow:auto on category pages, so both
+  // IntersectionObservers must use it as root (viewport root never fires when
+  // window itself doesn't scroll). Null means viewport, which is the correct fallback.
+  const scrollRoot = getScrollParent(container);
+  const scrollTarget = scrollRoot ?? window;
+
+  // Toolbar with view-size + batch-size selects, injected above the grid.
+  let toolbar = null;
+  if (previewSizeOptions || batchSizeOptions) {
+    toolbar = document.createElement('div');
+    toolbar.className = 'grid-toolbar';
+    if (previewSizeOptions) toolbar.appendChild(buildSelect('View', previewSize, previewSizeOptions, 'grid-size-select', (v) => {
+      previewSize = v;
+      container.dataset.previewSize = v;
+      writePref('preview', v);
+    }));
+    if (batchSizeOptions) toolbar.appendChild(buildSelect('Per batch', batchSize, batchSizeOptions, 'grid-batch-select', (v) => {
+      batchSize = v === 'all' ? 'all' : Number(v);
+      writePref('batch', batchSize);
+      // If scrolled past the sentinel already, render more now; otherwise next
+      // scroll trigger will use the new size.
+      if (rendered < filteredItems.length) renderNextBatch();
+    }));
+    container.before(toolbar);
+  }
 
   // Sentinel below the grid drives infinite-scroll batch appends
   const sentinel = document.createElement('div');
   sentinel.className = 'grid-sentinel';
   container.after(sentinel);
+
+  // Back-to-top floating button — visible after user scrolls past 800px.
+  const backToTop = document.createElement('button');
+  backToTop.className = 'grid-back-to-top';
+  backToTop.setAttribute('aria-label', 'Back to top');
+  backToTop.textContent = '↑';
+  backToTop.addEventListener('click', () => {
+    scrollTarget.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  document.body.appendChild(backToTop);
+  const onScroll = () => {
+    const y = scrollRoot ? scrollRoot.scrollTop : window.scrollY;
+    backToTop.classList.toggle('visible', y > 800);
+  };
+  scrollTarget.addEventListener('scroll', onScroll, { passive: true });
 
   // Default renderer composed from thumbnail/hrefBuilder/onItemClick
   const render = renderItemFn ?? ((item) => {
@@ -315,7 +423,7 @@ export function createItemList({
         }
         obs.unobserve(img);
       });
-    }, { rootMargin: '200px 0px' });
+    }, { root: scrollRoot, rootMargin: '200px 0px' });
 
     renderNextBatch();
 
@@ -324,7 +432,7 @@ export function createItemList({
       if (entries[0].isIntersecting && rendered < filteredItems.length) {
         renderNextBatch();
       }
-    }, { rootMargin: '400px 0px' });
+    }, { root: scrollRoot, rootMargin: '400px 0px' });
     sentinelObserver.observe(sentinel);
 
     const countEl = document.getElementById('icons-count');
@@ -335,7 +443,8 @@ export function createItemList({
 
   function renderNextBatch() {
     const start = rendered;
-    const end = Math.min(rendered + batchSize, filteredItems.length);
+    const step = batchSize === 'all' ? filteredItems.length : batchSize;
+    const end = Math.min(rendered + step, filteredItems.length);
     if (start >= end) return;
 
     const batch = filteredItems.slice(start, end);
