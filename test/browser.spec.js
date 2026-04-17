@@ -174,7 +174,7 @@ test('back-to-top button becomes visible after scrolling', async ({ page }) => {
   await expect(btn).toHaveClass(/visible/);
 });
 
-test('clicking a tile opens the PhotoSwipe lightbox with a copy button', async ({ page }) => {
+test('clicking a tile opens the PhotoSwipe lightbox with a visible copy button', async ({ page }) => {
   // Block the external asset host so thumbnail loads don't flake tests.
   // PhotoSwipe still renders its chrome and attempts to fetch item.icon; we
   // only assert the overlay is present and the custom copy button is wired.
@@ -182,19 +182,124 @@ test('clicking a tile opens the PhotoSwipe lightbox with a copy button', async (
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
-  // No overlay before clicking
   await expect(page.locator('.pswp')).toHaveCount(0);
 
   await page.locator('.icon-item a').first().click();
 
   const overlay = page.locator('.pswp');
   await expect(overlay).toBeVisible();
-  await expect(overlay.locator('.pswp__button--copy-btn')).toBeVisible();
 
-  // Wait for the opening animation to finish — close() is a no-op while isOpening
+  const copyBtn = overlay.locator('.pswp__button--custom-copy-btn');
+  await expect(copyBtn).toBeVisible();
+
+  // The SVG icon must render on the dark chrome — no black-on-black regression.
+  const iconBox = await copyBtn.locator('svg').boundingBox();
+  expect(iconBox.width).toBeGreaterThan(0);
+  expect(iconBox.height).toBeGreaterThan(0);
+  const iconFill = await copyBtn.locator('svg').evaluate(
+    (el) => getComputedStyle(el).fill);
+  expect(iconFill).not.toBe('rgb(0, 0, 0)');
+  expect(iconFill).not.toBe('rgba(0, 0, 0, 0)');
+
+  await expect(copyBtn).toHaveAttribute('title', 'Copy name');
+
   await page.waitForTimeout(400);
   await overlay.locator('.pswp__button--close').click();
   await expect(overlay).toHaveCount(0);
+});
+
+test('lightbox renders a caption with the clicked item name', async ({ page }) => {
+  await page.route('**/star-assets.github.io/**', route => route.abort());
+  await page.goto('/buttons.html');
+  await page.waitForSelector('.icon-item');
+
+  const firstTile = page.locator('.icon-item').first();
+  const expectedName = await firstTile.locator('[data-copy]').getAttribute('data-copy');
+
+  await firstTile.locator('a').click();
+  const caption = page.locator('.pswp__custom-caption');
+  await expect(caption).toBeVisible();
+  await expect(caption).toHaveText(expectedName);
+});
+
+test('lightbox shows prev/next arrows and advances on click', async ({ page }) => {
+  await page.route('**/star-assets.github.io/**', route => route.abort());
+  await page.goto('/buttons.html');
+  await page.waitForSelector('.icon-item');
+
+  await page.locator('.icon-item a').first().click();
+  const overlay = page.locator('.pswp');
+  await expect(overlay).toBeVisible();
+
+  const nextBtn = overlay.locator('.pswp__button--arrow--next');
+  await expect(nextBtn).toBeVisible();
+  await expect(overlay.locator('.pswp__button--arrow--prev')).toBeVisible();
+
+  const firstCaption = await page.locator('.pswp__custom-caption').textContent();
+  await nextBtn.click();
+  // Caption updates on the `change` event — wait for it to differ.
+  await expect(page.locator('.pswp__custom-caption')).not.toHaveText(firstCaption);
+});
+
+test('lightbox contains the image instead of stretching it to the viewport', async ({ page }) => {
+  // Buttons are 76px icons. Before the fix the overlay upscaled them to 2048px —
+  // lock that out by asserting the rendered slide width stays sensible even when
+  // the real image never arrives (the placeholder dims drive layout).
+  await page.route('**/star-assets.github.io/**', route => route.abort());
+  await page.goto('/buttons.html');
+  await page.waitForSelector('.icon-item');
+
+  await page.locator('.icon-item a').first().click();
+  const overlay = page.locator('.pswp');
+  await expect(overlay).toBeVisible();
+  await page.waitForTimeout(400);
+
+  const { slideW, natW } = await page.evaluate(() => {
+    const img = document.querySelector('.pswp__img');
+    return {
+      slideW: img ? img.getBoundingClientRect().width : 0,
+      natW: img ? img.naturalWidth : 0,
+    };
+  });
+  // The lightbox must not upscale past the image's natural size. Allow a tiny
+  // sub-pixel tolerance for rendering rounding.
+  expect(slideW).toBeLessThanOrEqual(natW + 1);
+});
+
+test('terrain-tilesets: lightbox centers the slide after real-image load', async ({ page }) => {
+  // Terrain tilesets are served from a separate host and are larger than their
+  // thumbnails — the dataSource dims (guessed from the thumbnail) won't match
+  // the natural size. PhotoSwipe's `refreshSlideContent` (called from our
+  // `contentLoad` handler) must recompute the slide so the image stays
+  // centered inside the scroll wrap instead of overflowing.
+  await page.goto('/terrain-tilesets.html');
+  await page.waitForSelector('.icon-item');
+
+  await page.locator('.icon-item a').first().click();
+  const overlay = page.locator('.pswp');
+  await expect(overlay).toBeVisible();
+  // Wait for the real image to load + refreshSlideContent to re-render.
+  await expect.poll(async () => {
+    return await page.evaluate(() => {
+      const img = document.querySelector('.pswp__img');
+      return img && img.naturalWidth > 0 && img.complete ? img.naturalWidth : 0;
+    });
+  }, { timeout: 10_000 }).toBeGreaterThan(0);
+  await page.waitForTimeout(200);  // let refresh settle
+
+  const geom = await page.evaluate(() => {
+    const img = document.querySelector('.pswp__img');
+    const wrap = document.querySelector('.pswp__scroll-wrap');
+    return { ib: img.getBoundingClientRect(), wb: wrap.getBoundingClientRect() };
+  });
+  // Slide must sit inside the scroll wrap and be horizontally centered —
+  // the screenshot bug was a large tileset shifted right off-screen because
+  // PhotoSwipe laid it out against a mismatched dataSource dim.
+  expect(geom.ib.left).toBeGreaterThanOrEqual(geom.wb.left - 1);
+  expect(geom.ib.right).toBeLessThanOrEqual(geom.wb.right + 1);
+  const imgCenter = (geom.ib.left + geom.ib.right) / 2;
+  const wrapCenter = (geom.wb.left + geom.wb.right) / 2;
+  expect(Math.abs(imgCenter - wrapCenter)).toBeLessThan(2);
 });
 
 test('ctrl+click bypasses the lightbox and lets the anchor behave normally', async ({ page }) => {

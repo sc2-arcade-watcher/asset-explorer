@@ -982,6 +982,29 @@ header.small-header .subtitle {
   letter-spacing: 0.05em;
 }
 
+/* PhotoSwipe custom-caption (per https://photoswipe.com/caption/) */
+.pswp__custom-caption {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  max-width: 90%;
+  padding: 4px 10px;
+  font-family: 'Michroma', sans-serif;
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Copy-name button tints green for ~1s after click */
+.pswp__button--custom-copy-btn.copied .pswp__icn {
+  fill: #4cff7a;
+}
+
 @media screen and (max-width: 600px) {
   .discord-widgets-grid {
     grid-template-columns: 1fr;

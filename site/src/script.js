@@ -209,50 +209,102 @@ function loadPhotoSwipe() {
   return pswpModulePromise;
 }
 
-/**
- * Opens `item.icon` in a PhotoSwipe overlay. Uses the clicked thumbnail's
- * aspect ratio for placeholder dimensions — PhotoSwipe fits to viewport,
- * then adjusts once the full image loads. A custom "copy name" button is
- * injected into the overlay chrome via registerElement.
- */
-async function openLightbox(item, triggerImg) {
+// Asset dimensions aren't known until the image loads (thumbnails are served
+// through imageproxy at a different size than the source). The documented
+// pattern for this is:
+//   1. Seed dataSource with a best-effort guess for each slide.
+//   2. Preload the clicked image synchronously so the opening animation has
+//      the right aspect ratio.
+//   3. As each slide's real image loads, mutate dataSource + call
+//      pswp.refreshSlideContent(index) so PhotoSwipe recomputes fit/zoom
+//      against the true natural dims.
+// See https://photoswipe.com/methods/#refreshslidecontentslideindex
+function measureImage(src) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload  = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
+    img.onerror = () => resolve(null);
+    img.src = src;
+  });
+}
+
+async function openLightbox(items, index, triggerImg) {
   const PhotoSwipe = await loadPhotoSwipe();
 
-  // Natural dimensions of the already-loaded thumbnail give us the aspect
-  // ratio; scale to a generous placeholder so PhotoSwipe allows meaningful
-  // max-zoom. The real image replaces these dims on load.
-  const natW = triggerImg?.naturalWidth || 3;
-  const natH = triggerImg?.naturalHeight || 2;
-  const scale = 2048 / Math.max(natW, natH);
-  const width = Math.round(natW * scale);
-  const height = Math.round(natH * scale);
+  const clickedDims = await measureImage(items[index].icon);
+  const fallbackW = clickedDims?.width  || triggerImg?.naturalWidth  || 1024;
+  const fallbackH = clickedDims?.height || triggerImg?.naturalHeight || 1024;
+
+  const dataSource = items.map((it, i) => ({
+    src: it.icon,
+    width:  i === index && clickedDims ? clickedDims.width  : fallbackW,
+    height: i === index && clickedDims ? clickedDims.height : fallbackH,
+    alt: it.name,
+    name: it.name,
+    ...(i === index && triggerImg?.currentSrc
+      ? { msrc: triggerImg.currentSrc }
+      : {}),
+  }));
 
   const pswp = new PhotoSwipe({
-    dataSource: [{
-      src: item.icon,
-      width,
-      height,
-      msrc: triggerImg?.currentSrc || triggerImg?.src || undefined,
-      alt: item.name,
-    }],
-    index: 0,
+    dataSource,
+    index,
     bgOpacity: 0.95,
     showHideAnimationType: 'fade',
     closeTitle: 'Close',
     zoomTitle: 'Zoom',
-    arrowPrevTitle: '',
-    arrowNextTitle: '',
+    arrowPrevTitle: 'Previous',
+    arrowNextTitle: 'Next',
+  });
+
+  // As each slide's image loads, correct its dataSource dims and refresh the
+  // slide so PhotoSwipe recomputes zoom/pan against the true natural size.
+  pswp.on('contentLoad', ({ content }) => {
+    const img = content.element;
+    if (!img || img.tagName !== 'IMG') return;
+    const apply = () => {
+      const nw = img.naturalWidth;
+      const nh = img.naturalHeight;
+      if (!nw || !nh) return;
+      const d = pswp.options.dataSource[content.index];
+      if (!d || (d.width === nw && d.height === nh)) return;
+      d.width = nw;
+      d.height = nh;
+      pswp.refreshSlideContent(content.index);
+    };
+    if (img.complete) apply();
+    else img.addEventListener('load', apply, { once: true });
   });
 
   pswp.on('uiRegister', () => {
     pswp.ui.registerElement({
-      name: 'copy-btn',
+      name: 'custom-copy-btn',
+      title: 'Copy name',
       ariaLabel: 'Copy name',
       order: 9,
       isButton: true,
-      html: '<span style="font-size:20px;line-height:1">⎘</span>',
-      onClick: () => {
-        navigator.clipboard.writeText(item.name).catch(() => {});
+      html: '<svg class="pswp__icn" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>',
+      onClick: (_e, btn) => {
+        const name = pswp.currSlide?.data?.name;
+        if (!name) return;
+        navigator.clipboard.writeText(name).catch(() => {});
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 1000);
+      },
+    });
+
+    pswp.ui.registerElement({
+      name: 'custom-caption',
+      order: 10,
+      isButton: false,
+      appendTo: 'root',
+      html: '',
+      onInit: (el) => {
+        const update = () => {
+          el.textContent = pswp.currSlide?.data?.name ?? '';
+        };
+        update();
+        pswp.on('change', update);
       },
     });
   });
@@ -437,7 +489,8 @@ export function createItemList({
   // so the anchor's download still works via ctrl/cmd/middle-click.
   const clickHandler = onItemClick ?? (lightbox ? (item, e) => {
     const img = e.currentTarget.querySelector('img');
-    openLightbox(item, img);
+    const idx = filteredItems.indexOf(item);
+    openLightbox(filteredItems, idx >= 0 ? idx : 0, img);
   } : null);
   const render = renderItemFn ?? ((item) => {
     const href = hrefBuilder(item);
