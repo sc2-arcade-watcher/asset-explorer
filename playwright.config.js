@@ -1,20 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// Tests run against a live Caddy+imageproxy stack. Start it with `make up`
+// (or `make dev`), or let `make test` do it for you. BASE_URL defaults to
+// http://localhost:8080 — override via the HTTP_PORT / BASE_URL env vars.
 export default defineConfig({
   testDir: './test',
   use: {
-    baseURL: process.env.BASE_URL ?? 'http://localhost:8080',
+    baseURL: process.env.BASE_URL || 'http://localhost:8080',
   },
   reporter: 'list',
-
-  // When BASE_URL is not set (CI or local without a running stack),
-  // spin up a plain static file server against site/.
-  // Set reuseExistingServer so local iterating doesn't restart the server each run.
-  webServer: process.env.BASE_URL ? undefined : {
-    command: 'python3 -m http.server 8080 --directory site',
-    port: 8080,
-    reuseExistingServer: !process.env.CI,
-  },
 
   projects: [
     // HTTP-only tests — no browser required

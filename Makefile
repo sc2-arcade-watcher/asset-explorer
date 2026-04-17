@@ -1,30 +1,50 @@
+# The tests talk to the real Caddy+imageproxy stack over HTTP. HTTP_PORT picks
+# the host port; BASE_URL is derived from it and exported so playwright sees it.
+# For parallel workers (e.g. worktrees or multiple agents) pick a distinct port:
+#   HTTP_PORT=8091 make test
+# docker compose project names default to the basename of CWD, which isolates
+# worktrees from each other automatically.
 HTTP_PORT ?= 8080
-export BASE_URL ?= http://localhost:$(HTTP_PORT)
+BASE_URL ?= http://localhost:$(HTTP_PORT)
+export HTTP_PORT BASE_URL
 
-.PHONY: up dev down logs ps test test-ini test-smoke help
+COMPOSE := HTTP_PORT=$(HTTP_PORT) docker compose
 
-up: ## Start stack (production config from .env)
-	docker compose up -d
+.PHONY: up dev down logs ps wait-ready test test-ini test-smoke test-browser help
+
+up: ## Start stack (production caching from .env / defaults)
+	$(COMPOSE) up -d
 
 dev: ## Start stack with cache disabled (dev mode)
-	CACHE_CONTROL=no-store docker compose up -d
+	CACHE_CONTROL=no-store $(COMPOSE) up -d
 
 down: ## Stop and remove containers
-	docker compose down
+	$(COMPOSE) down --remove-orphans
 
 logs: ## Tail logs
-	docker compose logs -f
+	$(COMPOSE) logs -f
 
 ps: ## Show running services
-	docker compose ps
+	$(COMPOSE) ps
 
-test: test-ini test-smoke ## Run all tests
+wait-ready: ## Block until the stack responds on BASE_URL (up to 30s)
+	@for i in $$(seq 1 30); do \
+		curl -sf $(BASE_URL)/ >/dev/null 2>&1 && exit 0; \
+		sleep 1; \
+	done; \
+	echo "stack not ready at $(BASE_URL) after 30s" >&2; exit 1
+
+test: test-ini up wait-ready ## Run all tests (starts the stack, runs INI + api + browser)
+	@pnpm test
 
 test-ini: ## Validate INI file pairing and structure (no stack needed)
 	@bash test/ini-integrity.sh
 
-test-smoke: ## HTTP smoke tests against BASE_URL (stack must be running)
-	@pnpm test
+test-smoke: up wait-ready ## API smoke tests (starts stack if needed)
+	@pnpm run test:smoke
+
+test-browser: up wait-ready ## Browser tests (starts stack if needed)
+	@pnpm run test:browser
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
