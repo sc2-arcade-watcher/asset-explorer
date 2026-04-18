@@ -21,18 +21,18 @@ Pure static site — no build step. Vanilla HTML/CSS/ES modules served by Caddy 
 
 ```bash
 cp .env.example .env
-make dev          # cache disabled (no-store), http://localhost:8080
-make up           # same stack with production caching
+make up           # start stack (no-store cache by default), http://localhost:8080
 make down         # stop
 ```
 
-Pick a different port with `HTTP_PORT=8091 make dev` — useful when running several worktrees or agents in parallel (docker-compose project names default to the worktree directory, so stacks don't clash).
+Pick a different port with `HTTP_PORT=8091 make up` — useful when running several worktrees or agents in parallel (docker-compose project names default to the worktree directory, so stacks don't clash).
 
 ## Testing
 
 ```bash
 pnpm install                       # first time only
 make test                          # INI + API smoke + browser (auto-starts docker stack)
+make test-fast                     # same, but stack must already be up
 make test-ini                      # INI pairing check, no stack needed
 make test-smoke                    # API smoke, auto-starts stack
 make test-browser                  # browser tests, auto-starts stack

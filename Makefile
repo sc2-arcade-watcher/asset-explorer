@@ -6,17 +6,15 @@
 # worktrees from each other automatically.
 HTTP_PORT ?= 8080
 BASE_URL ?= http://localhost:$(HTTP_PORT)
-export HTTP_PORT BASE_URL
+CACHE_CONTROL ?= no-store
+export HTTP_PORT BASE_URL CACHE_CONTROL
 
 COMPOSE := HTTP_PORT=$(HTTP_PORT) docker compose
 
-.PHONY: up dev down logs ps wait-ready test test-ini test-smoke test-browser help
+.PHONY: up down logs ps wait-ready test test-fast test-ini test-smoke test-browser help
 
-up: ## Start stack (production caching from .env / defaults)
+up: ## Start stack
 	$(COMPOSE) up -d
-
-dev: ## Start stack with cache disabled (dev mode)
-	CACHE_CONTROL=no-store $(COMPOSE) up -d
 
 down: ## Stop and remove containers
 	$(COMPOSE) down --remove-orphans
@@ -35,6 +33,9 @@ wait-ready: ## Block until the stack responds on BASE_URL (up to 30s)
 	echo "stack not ready at $(BASE_URL) after 30s" >&2; exit 1
 
 test: test-ini up wait-ready ## Run all tests (starts the stack, runs INI + api + browser)
+	@pnpm test
+
+test-fast: test-ini wait-ready ## Run all tests assuming stack is already up
 	@pnpm test
 
 test-ini: ## Validate INI file pairing and structure (no stack needed)

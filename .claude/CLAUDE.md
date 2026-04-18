@@ -58,12 +58,15 @@ Each asset type has `{type}.ini` (DDS originals) + `{type}-png.ini` (PNG preview
 
 Tests go through the real Caddy+imageproxy stack. `make` targets auto-start it via `docker compose` — there's no longer a python3 fallback.
 
+The stack defaults to `CACHE_CONTROL=no-store` locally; production overrides via `docker-compose.override.yml`.
+
 ```bash
-cp .env.example .env && make dev           # start stack (no-store cache)
+cp .env.example .env && make up            # start stack
 make test                                  # INI + api + browser; auto-starts stack
 make test-ini                              # INI integrity only (no stack needed)
 make test-smoke                            # api project; auto-starts stack
 make test-browser                          # chromium project; auto-starts stack
+make test-fast                             # INI + api + browser; stack must already be up
 BASE_URL=https://... make test-smoke       # target an external stack instead
 HTTP_PORT=8091 make test                   # parallel stack on a different port
 ```
@@ -71,6 +74,19 @@ HTTP_PORT=8091 make test                   # parallel stack on a different port
 **Package manager:** pnpm. Run `pnpm install` once before tests.
 
 **Parallel agents / worktrees:** each worktree has a distinct directory name, which docker-compose uses as the project name — so stacks don't collide. Give each agent a unique `HTTP_PORT` so host port bindings don't fight.
+
+Parallel workflow — main session owns Docker, subagents run INI only:
+```bash
+# main session (dangerouslyDisableSandbox): start stacks, run smoke+browser, teardown
+make -C .worktrees/feat-a up HTTP_PORT=8091 && make -C .worktrees/feat-b up HTTP_PORT=8092
+BASE_URL=http://localhost:8091 pnpm run test:smoke && BASE_URL=http://localhost:8091 pnpm run test:browser
+make -C .worktrees/feat-a down && make -C .worktrees/feat-b down
+
+# subagents: INI only (no stack needed)
+make -C .worktrees/feat-a test-ini
+```
+
+Use `make test-fast BASE_URL=http://localhost:PORT` to skip `make up` when the stack is already running.
 
 **CI** (`.github/workflows/test.yml`) runs three jobs on push/PR, all via the Makefile:
 - `ini` — `make test-ini`, no server
