@@ -121,7 +121,7 @@ test('list layout switches grid to single-column and persists independently of s
 });
 
 test('list layout: clicking the name row opens the lightbox', async ({ page }) => {
-  await page.route('**/star-assets.github.io/**', route => route.abort());
+  await page.route('**/dist.sc2arcade.com/star-assets/**', route => route.abort());
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
@@ -250,7 +250,7 @@ test('clicking a tile opens the PhotoSwipe lightbox with a visible copy button',
   // Block the external asset host so thumbnail loads don't flake tests.
   // PhotoSwipe still renders its chrome and attempts to fetch item.icon; we
   // only assert the overlay is present and the custom copy button is wired.
-  await page.route('**/star-assets.github.io/**', route => route.abort());
+  await page.route('**/dist.sc2arcade.com/star-assets/**', route => route.abort());
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
@@ -281,7 +281,7 @@ test('clicking a tile opens the PhotoSwipe lightbox with a visible copy button',
 });
 
 test('lightbox renders a caption with the clicked item name', async ({ page }) => {
-  await page.route('**/star-assets.github.io/**', route => route.abort());
+  await page.route('**/dist.sc2arcade.com/star-assets/**', route => route.abort());
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
@@ -295,7 +295,7 @@ test('lightbox renders a caption with the clicked item name', async ({ page }) =
 });
 
 test('lightbox shows prev/next arrows and advances on click', async ({ page }) => {
-  await page.route('**/star-assets.github.io/**', route => route.abort());
+  await page.route('**/dist.sc2arcade.com/star-assets/**', route => route.abort());
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
@@ -317,7 +317,7 @@ test('lightbox contains the image instead of stretching it to the viewport', asy
   // Buttons are 76px icons. Before the fix the overlay upscaled them to 2048px —
   // lock that out by asserting the rendered slide width stays sensible even when
   // the real image never arrives (the placeholder dims drive layout).
-  await page.route('**/star-assets.github.io/**', route => route.abort());
+  await page.route('**/dist.sc2arcade.com/star-assets/**', route => route.abort());
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
@@ -375,7 +375,7 @@ test('terrain-tilesets: lightbox centers the slide after real-image load', async
 });
 
 test('ctrl+click bypasses the lightbox and lets the anchor behave normally', async ({ page }) => {
-  await page.route('**/star-assets.github.io/**', route => route.abort());
+  await page.route('**/dist.sc2arcade.com/star-assets/**', route => route.abort());
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 

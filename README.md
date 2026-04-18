@@ -15,7 +15,7 @@ Served at `https://asset-explorer.sc2arcade.com`.
 
 ## Architecture
 
-Pure static site — no build step. Vanilla HTML/CSS/ES modules served by Caddy with an imageproxy sidecar for thumbnail resizing. The whole stack runs via `docker compose`. Assets themselves live at `https://star-assets.github.io/` and are indexed by INI files in `site/list/`.
+Pure static site — no build step. Vanilla HTML/CSS/ES modules served by Caddy with an imageproxy sidecar for thumbnail resizing. The whole stack runs via `docker compose`. Assets themselves live at `https://dist.sc2arcade.com/star-assets/` (a [dufs](https://github.com/sigoden/dufs) instance) and are indexed by INI files in `site/list/`.
 
 ## Running locally
 

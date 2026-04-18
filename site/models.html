@@ -95,12 +95,12 @@
         list: 'models',
         containerSelector: '.icons-grid',
         searchInputSelector: '#icon-search',
-        assetBase: 'https://star-assets.github.io/',
+        assetBase: 'https://dist.sc2arcade.com/star-assets/',
         renderItemFn: ({ name, icon }) => {
             const div = document.createElement('div');
             div.className = 'icon-item';
             div.innerHTML = `
-                <a href="https://star-assets.github.io/models-glb/${name}.glb" target="_blank">
+                <a href="https://dist.sc2arcade.com/star-assets/models-glb/${name}.glb" target="_blank">
                     <img src="${thumbUrl(icon.toLowerCase(), '152x152,fit')}" alt="${name}" loading="lazy">
                 </a>
                 <span class="tooltip">${name}</span>

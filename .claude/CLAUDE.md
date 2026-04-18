@@ -7,7 +7,7 @@ Served at `https://asset-explorer.sc2arcade.com`
 
 - **Pure static site** — no build system, vanilla HTML/CSS/JS with ES modules
 - **Web content lives in `site/`** — Caddy mounts `./site:/srv:ro`; `Caddyfile` and `docker-compose.yml` stay at repo root (not web-accessible)
-- **Assets hosted externally** at `https://star-assets.github.io/` (separate repos per asset type)
+- **Assets hosted externally** at `https://dist.sc2arcade.com/star-assets/` (mirrored from star-assets GitHub repos; served by [dufs](https://github.com/sigoden/dufs)); use `scripts/mirror-to-dufs.mjs` to sync
 - **Vendored deps:** Three.js (`site/lib/three/`), JSZip (`site/lib/jszip.js`), PhotoSwipe 5 (`site/lib/photoswipe/`, lazy-loaded on first lightbox open)
 - **No build step** — site is pure static files; `package.json` exists only for test tooling (`@playwright/test`)
 
@@ -39,7 +39,7 @@ Every category page is a thin stub: import `initPage` + `createItemList` (or `cr
   - `thumbnail: { size }` + `hrefBuilder(item)` — default renderer; skip by passing custom `renderItemFn`
   - `onItemClick(item, e)` or `lightbox: true` (default) — click behavior; modifier/middle click always passes through to the anchor
   - `batchSize` (default 200, picker: 100/200/500/all), `previewSize` (small/medium/large/list, persisted in `localStorage`)
-  - `createLocalItemList` — variant for single-file lists (terrain-doodads, terrain-tilesets, terrain-cliffs) hitting `baseUrl` directly instead of star-assets.github.io
+  - `createLocalItemList` — variant for single-file lists (terrain-doodads, terrain-tilesets, terrain-cliffs) hitting `baseUrl` directly instead of the dual-INI `assetBase` path
 - **`site/src/player.js`** — `<glb-viewer>` custom web component (Shadow DOM, Three.js). Auto-rotates GLB models, draggable panel on models.html.
 - **`site/src/styles.css`** — Dark sci-fi theme (`#0b0f14` bg, `#e04a14` SC2Mapster orange accent), "Starcraft" custom font for h1, "Michroma" for body. `[data-preview-size]` on `.icons-grid` drives tile sizing via `--tile-scale`; `.icon-item::before` carries the hover border. Responsive at 600px.
 - **`site/src/discord-widgets.js`** — Vanilla ES module. Fetches Discord widget API per server (name, online count, banner), caches in `localStorage` with 2-hour TTL, falls back to a static invite card. Used by `index.html`.

@@ -16,7 +16,7 @@ services:
   imageproxy:
     image: ghcr.io/willnorris/imageproxy
     restart: unless-stopped
-    command: -addr 0.0.0.0:8222 -cache /cache -allowHosts ${IMAGEPROXY_ALLOW_HOSTS:-star-assets.github.io,dist.sc2arcade.com}
+    command: -addr 0.0.0.0:8222 -cache /cache -allowHosts ${IMAGEPROXY_ALLOW_HOSTS:-dist.sc2arcade.com}
     volumes:
       - imageproxy-cache:/cache
     healthcheck:

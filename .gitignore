@@ -18,3 +18,6 @@ docker-compose.override.yml
 # Playwright test artifacts
 /test-results/
 /.playwright-mcp/
+
+# mirror-to-dufs clone cache
+/.mirror-cache/
