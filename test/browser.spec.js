@@ -69,14 +69,13 @@ test('icon-item border uses ::before overlay, not element border', async ({ page
   expect(pseudoBorder).toBe('1px');
 });
 
-test('grid toolbar renders size + batch selects and persists prefs', async ({ page }) => {
+test('grid toolbar renders size select (no batch select) and persists prefs', async ({ page }) => {
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
   const sizeSelect = page.locator('.grid-size-select');
-  const batchSelect = page.locator('.grid-batch-select');
   await expect(sizeSelect).toBeVisible();
-  await expect(batchSelect).toBeVisible();
+  await expect(page.locator('.grid-batch-select')).toHaveCount(0);
 
   // Default preview size is medium; changing to large should update the grid
   // dataset, bump the --tile-scale, and persist to localStorage.
@@ -167,23 +166,19 @@ test('list layout: name truncates with ellipsis and carries native title', async
   expect(titles.anchorTitle).toBe(titles.name);
 });
 
-test('list layout: rows share a consistent height and copy-btn sits at the right edge', async ({ page }) => {
+test('list layout: rows share a consistent height and have no copy-btn', async ({ page }) => {
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
   await page.locator('.grid-layout-select').selectOption('list');
 
-  const metrics = await page.evaluate(() => {
+  const heights = await page.evaluate(() => {
     const rows = Array.from(document.querySelectorAll('.icon-item')).slice(0, 10);
-    const heights = rows.map(r => r.getBoundingClientRect().height);
-    const first = rows[0].getBoundingClientRect();
-    const btn = rows[0].querySelector('.copy-btn').getBoundingClientRect();
-    return { heights, rightGap: (first.x + first.width) - (btn.x + btn.width) };
+    return rows.map(r => r.getBoundingClientRect().height);
   });
-  const min = Math.min(...metrics.heights);
-  const max = Math.max(...metrics.heights);
+  const min = Math.min(...heights);
+  const max = Math.max(...heights);
   expect(max - min).toBeLessThanOrEqual(1);
-  // copy-btn should be within ~20px of the row's right edge (row padding + button margin).
-  expect(metrics.rightGap).toBeLessThan(20);
+  await expect(page.locator('.icon-item .copy-btn')).toHaveCount(0);
 });
 
 test('list layout: art tiles are wider than tall, portraits taller than wide', async ({ page }) => {
@@ -208,13 +203,12 @@ test('list layout: art tiles are wider than tall, portraits taller than wide', a
   expect(portraitImg.h).toBeGreaterThan(portraitImg.w);
 });
 
-test('batch picker offers [100, 200, 300, 500] and no "all"', async ({ page }) => {
+test('viewport-inferred batch size renders at least 10 items initially', async ({ page }) => {
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
-  const values = await page.locator('.grid-batch-select option').evaluateAll(
-    opts => opts.map(o => o.value));
-  expect(values).toEqual(['100', '200', '300', '500']);
+  const count = await page.locator('.icon-item').count();
+  expect(count).toBeGreaterThanOrEqual(10);
 });
 
 test('mobile viewport: art tiles shrink below the desktop 150px base', async ({ page }) => {
@@ -286,7 +280,7 @@ test('lightbox renders a caption with the clicked item name', async ({ page }) =
   await page.waitForSelector('.icon-item');
 
   const firstTile = page.locator('.icon-item').first();
-  const expectedName = await firstTile.locator('[data-copy]').getAttribute('data-copy');
+  const expectedName = await firstTile.locator('.tooltip').textContent();
 
   await firstTile.locator('a').click();
   const caption = page.locator('.pswp__custom-caption');
@@ -385,5 +379,96 @@ test('ctrl+click bypasses the lightbox and lets the anchor behave normally', asy
   // Give the async dynamic-import a chance; overlay must still not appear
   await page.waitForTimeout(200);
   await expect(page.locator('.pswp')).toHaveCount(0);
+});
+
+// --- Tile geometry & image containment ---
+
+test('grid tiles have consistent dimensions (buttons and overlays)', async ({ page }) => {
+  for (const url of ['/buttons.html', '/overlays.html']) {
+    await page.goto(url);
+    await page.waitForSelector('.icon-item');
+    const dims = await page.evaluate(() =>
+      Array.from(document.querySelectorAll('.icon-item')).slice(0, 20).map(el => {
+        const r = el.getBoundingClientRect();
+        return { w: Math.round(r.width), h: Math.round(r.height) };
+      })
+    );
+    const { w, h } = dims[0];
+    for (const d of dims) {
+      expect(d.w).toBe(w);
+      expect(d.h).toBe(h);
+    }
+    expect(w).toBe(h); // base grid is square
+  }
+});
+
+test('images stay within tile bounds (overlays has the most varied aspect ratios)', async ({ page }) => {
+  await page.route('**/dist.sc2arcade.com/star-assets/**', route => route.abort());
+  await page.goto('/overlays.html');
+  await page.waitForSelector('.icon-item');
+
+  const overflows = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('.icon-item')).slice(0, 20).map(el => {
+      const tile = el.getBoundingClientRect();
+      const img = el.querySelector('img').getBoundingClientRect();
+      return {
+        left:   img.left   >= tile.left   - 1,
+        right:  img.right  <= tile.right  + 1,
+        top:    img.top    >= tile.top    - 1,
+        bottom: img.bottom <= tile.bottom + 1,
+      };
+    })
+  );
+  for (const o of overflows) {
+    expect(o.left).toBe(true);
+    expect(o.right).toBe(true);
+    expect(o.top).toBe(true);
+    expect(o.bottom).toBe(true);
+  }
+});
+
+test('anchor fills tile in grid mode (same bounding box as .icon-item)', async ({ page }) => {
+  await page.route('**/dist.sc2arcade.com/star-assets/**', route => route.abort());
+  await page.goto('/buttons.html');
+  await page.waitForSelector('.icon-item');
+
+  const match = await page.evaluate(() => {
+    const item = document.querySelector('.icon-item');
+    const a    = item.querySelector('a');
+    const ir   = item.getBoundingClientRect();
+    const ar   = a.getBoundingClientRect();
+    return {
+      w: Math.abs(ar.width  - ir.width)  < 2,
+      h: Math.abs(ar.height - ir.height) < 2,
+    };
+  });
+  expect(match.w).toBe(true);
+  expect(match.h).toBe(true);
+});
+
+test('art tiles have 3:2 aspect ratio and use object-fit: contain', async ({ page }) => {
+  await page.goto('/art.html');
+  await page.waitForSelector('.icon-item');
+  const result = await page.evaluate(() => {
+    const item = document.querySelector('.icon-item');
+    const img  = item.querySelector('img');
+    const r    = item.getBoundingClientRect();
+    return { objectFit: getComputedStyle(img).objectFit, ratio: r.width / r.height };
+  });
+  expect(result.objectFit).toBe('contain');
+  expect(result.ratio).toBeCloseTo(3 / 2, 1);
+});
+
+test('portrait tiles have 2:3 aspect ratio and use object-fit: contain', async ({ page }) => {
+  await page.goto('/portraits.html');
+  await page.waitForSelector('.icon-item');
+  const result = await page.evaluate(() => {
+    const item = document.querySelector('.icon-item');
+    const img  = item.querySelector('img');
+    const r    = item.getBoundingClientRect();
+    return { objectFit: getComputedStyle(img).objectFit, ratio: r.width / r.height };
+  });
+  expect(result.objectFit).toBe('contain');
+  expect(result.ratio).toBeCloseTo(2 / 3, 1);
 });
 

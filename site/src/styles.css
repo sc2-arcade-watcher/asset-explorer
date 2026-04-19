@@ -183,7 +183,7 @@ article {
 /* Icon items */
 
 .icon-item {
-  transition: all 0.3s;
+  transition: background-color 0.2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -191,8 +191,10 @@ article {
   border-radius: 4px;
   background: #12181f;
   margin-bottom: 0;
-  position: relative; /* Ensure positioning context */
+  position: relative;
   z-index: 1;
+  width: calc(var(--tile-base, 76px) * var(--tile-scale, 1));
+  height: calc(var(--tile-base, 76px) * var(--tile-scale, 1));
 }
 
 .icon-item::before {
@@ -206,11 +208,11 @@ article {
 }
 
 .icon-item img {
-  width: calc(var(--tile-base, 76px) * var(--tile-scale, 1));
-  height: calc(var(--tile-base, 76px) * var(--tile-scale, 1));
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   padding: 4px;
-  transition: transform 0.2s ease, opacity 0.3s ease-in;
+  transition: opacity 0.3s ease-in;
   cursor: pointer;
   opacity: 0;
   display: block;
@@ -224,19 +226,15 @@ article {
   opacity: 1;
 }
 
-.icon-item:hover {
-  transform: scale(1.1);
-}
 
-.icon-item a {
-  color: #e04a14;
+.icon-item > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
   text-decoration: none;
-  font-size: 0.8em;
-  word-break: break-word;
-}
-
-.icon-item a:hover {
-  color: #fff;
+  overflow: hidden;
 }
 
 /* Tooltip */
@@ -588,7 +586,8 @@ header.small-header h1 {
    dimensions to match each category's native proxy thumbnail aspect. */
 
 .icons-grid[data-layout="list"] {
-  --list-thumb: 56px;
+  --list-thumb-base: 56px;
+  --list-thumb: calc(var(--list-thumb-base) * var(--tile-scale, 1));
   grid-template-columns: minmax(0, 1fr);
   gap: 4px;
   max-width: 900px;
@@ -628,7 +627,7 @@ header.small-header h1 {
 
 /* Portraits: 2:3 proxy thumbs — taller than wide. Bump row height to match. */
 .icons-grid.portraits-grid[data-layout="list"] {
-  --list-thumb: 48px;
+  --list-thumb-base: 48px;
 }
 
 .icons-grid.portraits-grid[data-layout="list"] .icon-item {
@@ -648,9 +647,9 @@ header.small-header h1 {
 }
 
 .icons-grid[data-layout="list"] .icon-item > a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: auto;
+  height: auto;
+  overflow: visible;
   flex-shrink: 0;
   position: static;
 }
@@ -687,16 +686,7 @@ header.small-header h1 {
 }
 
 .icons-grid[data-layout="list"] .icon-item:hover {
-  transform: none;
   background: rgba(224, 74, 20, 0.08);
-}
-
-.icons-grid[data-layout="list"] .icon-item .copy-btn {
-  position: relative;
-  z-index: 3;
-  opacity: 1;
-  margin-left: auto;
-  flex-shrink: 0;
 }
 
 /* Copy to clipboard tooltip */
@@ -749,27 +739,6 @@ header.small-header h1 {
   text-align: center;
 }
 
-.icon-item:hover .copy-btn {
-  opacity: 1;
-}
-
-.copy-btn {
-  z-index: 10;
-  transition: opacity 0.3s;
-  opacity: 0;
-  right: 0;
-  bottom: 0;
-  width: 24px;
-  height: 24px;
-  font-size: 24px;
-  line-height: 19px;
-  background-color: #000000;
-  border-top: 1px solid;
-  border-left: 1px solid;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
 /* Fullscreen button */
 
 .fullscreen-btn {
@@ -803,13 +772,13 @@ header.small-header h1 {
 
 .portraits-grid .icon-item {
   width: calc(var(--tile-base) * var(--tile-scale));
-  aspect-ratio: 2 / 3;
+  height: calc(var(--tile-base) * var(--tile-scale) * 3 / 2);
 }
 
 .portraits-grid .icon-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   box-sizing: border-box;
 }
 
@@ -821,13 +790,13 @@ header.small-header h1 {
 
 .icons-grid.art-grid .icon-item {
   width: calc(var(--tile-base) * var(--tile-scale));
-  aspect-ratio: 3 / 2;
+  height: calc(var(--tile-base) * var(--tile-scale) * 2 / 3);
 }
 
 .icons-grid.art-grid .icon-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   box-sizing: border-box;
 }
 
@@ -1075,6 +1044,6 @@ header.small-header .subtitle {
   .icons-grid.art-grid { --tile-base: 120px; }
   .icons-grid.portraits-grid { --tile-base: 80px; }
 
-  .icons-grid[data-layout="list"] { --list-thumb: 44px; }
-  .icons-grid.portraits-grid[data-layout="list"] { --list-thumb: 36px; }
+  .icons-grid[data-layout="list"] { --list-thumb-base: 44px; }
+  .icons-grid.portraits-grid[data-layout="list"] { --list-thumb-base: 36px; }
 }

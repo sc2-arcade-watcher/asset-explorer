@@ -123,7 +123,7 @@ function measureImage(src) {
   });
 }
 
-async function openLightbox(items, index, triggerImg) {
+async function openLightbox(items, index, triggerImg, { showDownload = true } = {}) {
   const PhotoSwipe = await loadPhotoSwipe();
 
   const clickedDims = await measureImage(items[index].image);
@@ -136,6 +136,7 @@ async function openLightbox(items, index, triggerImg) {
     height: i === index && clickedDims ? clickedDims.height : fallbackH,
     alt: it.name,
     name: it.name,
+    download: it.download || '',
     ...(i === index && triggerImg?.currentSrc
       ? { msrc: triggerImg.currentSrc }
       : {}),
@@ -172,6 +173,32 @@ async function openLightbox(items, index, triggerImg) {
   });
 
   pswp.on('uiRegister', () => {
+    if (showDownload) {
+      pswp.ui.registerElement({
+        name: 'custom-download-btn',
+        title: 'Download',
+        ariaLabel: 'Download',
+        order: 8,
+        isButton: true,
+        html: '<svg class="pswp__icn" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5z"/></svg>',
+        onInit: (el) => {
+          const update = () => { el.hidden = !pswp.currSlide?.data?.download; };
+          update();
+          pswp.on('change', update);
+        },
+        onClick: () => {
+          const slide = pswp.currSlide?.data;
+          if (!slide?.download) return;
+          const a = document.createElement('a');
+          a.href = slide.download;
+          a.download = slide.name || '';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        },
+      });
+    }
+
     pswp.ui.registerElement({
       name: 'custom-copy-btn',
       title: 'Copy name',
@@ -257,12 +284,11 @@ export function watchImages({ selector = 'img', onLoad = null, onError = null, f
  *   instead of opening the anchor href in a new tab. Overrides the default lightbox.
  * @param {boolean} [options.lightbox=true] - When true (the default) and no `onItemClick` is
  *   given, clicking a tile opens `item.image` in a PhotoSwipe overlay. Middle-click and
- *   ctrl/cmd-click are left to the browser so the anchor's download still works.
+ *   ctrl/cmd-click open the anchor href (item.image) in a new tab.
+ * @param {boolean} [options.lightboxDownload=true] - When true, a download button appears in
+ *   the lightbox for slides whose item has a non-empty `download` field.
  * @param {Function} [options.renderItemFn] - Escape hatch: full custom renderer (item) => HTMLElement.
  *   When provided, overrides thumbnail/hrefBuilder/onItemClick/lightbox.
- * @param {number} [options.batchSize=200] - Items appended per infinite-scroll batch.
- * @param {Array<number|{value,label}>} [options.batchSizeOptions] - Items-per-batch values for the
- *   toolbar picker. Pass `null` to suppress the batch picker. Default [100, 200, 300, 500].
  * @param {string} [options.previewSize='medium'] - Initial tile scale. One of
  *   'small' | 'medium' | 'large'. Stored in localStorage per list.
  * @param {string[]} [options.previewSizeOptions] - Size values for the toolbar picker.
@@ -278,14 +304,13 @@ export function createItemList({
   containerSelector,
   searchInputSelector,
   thumbnail,
-  hrefBuilder = (item) => item.download,
+  hrefBuilder = (item) => item.image || item.download || '#',
   onItemClick,
   lightbox = true,
+  lightboxDownload = true,
   renderItemFn,
   onRendered,
   debounceDelay = 300,
-  batchSize = 200,
-  batchSizeOptions = [100, 200, 300, 500],
   previewSize = 'medium',
   previewSizeOptions = ['small', 'medium', 'large'],
   layout = 'grid',
@@ -312,22 +337,30 @@ export function createItemList({
   if (layoutOptions?.includes(storedLayout)) layout = storedLayout;
   container.dataset.layout = layout;
 
-  const batchValues = (batchSizeOptions ?? []).map(o => (o && typeof o === 'object') ? o.value : o);
-  const storedBatch = readPref('batch', null);
-  if (storedBatch !== null) {
-    const parsed = Number(storedBatch);
-    if (Number.isFinite(parsed) && batchValues.includes(parsed)) batchSize = parsed;
-  }
-
   // Scroll container — `<article>` has overflow:auto on category pages, so both
   // IntersectionObservers must use it as root (viewport root never fires when
   // window itself doesn't scroll). Null means viewport, which is the correct fallback.
   const scrollRoot = getScrollParent(container);
   const scrollTarget = scrollRoot ?? window;
 
-  // Toolbar with view-size, layout, and batch-size selects injected above the grid.
+  // Batch size is inferred from the viewport each time a batch is rendered,
+  // targeting ~2 viewport-heights worth of tiles so the sentinel stays off-screen.
+  function computeBatchSize() {
+    const style = getComputedStyle(container);
+    const scale = parseFloat(style.getPropertyValue('--tile-scale')) || 1;
+    if (container.dataset.layout === 'list') {
+      const rowH = (56 * scale) + 8;
+      return Math.max(50, Math.ceil(window.innerHeight / rowH) * 2);
+    }
+    const tileBase = parseFloat(style.getPropertyValue('--tile-base')) || 76;
+    const tileSize = tileBase * scale + 15;
+    const tilesPerRow = Math.max(1, Math.floor((container.offsetWidth || window.innerWidth) / tileSize));
+    return Math.max(50, Math.ceil(window.innerHeight / tileSize) * tilesPerRow * 2);
+  }
+
+  // Toolbar with view-size and layout selects injected above the grid.
   let toolbar = null;
-  if (previewSizeOptions || layoutOptions || batchSizeOptions) {
+  if (previewSizeOptions || layoutOptions) {
     toolbar = document.createElement('div');
     toolbar.className = 'grid-toolbar';
     if (previewSizeOptions) toolbar.appendChild(buildSelect('View', previewSize, previewSizeOptions, 'grid-size-select', (v) => {
@@ -339,13 +372,6 @@ export function createItemList({
       layout = v;
       container.dataset.layout = v;
       writePref('layout', v);
-    }));
-    if (batchSizeOptions) toolbar.appendChild(buildSelect('Per batch', batchSize, batchSizeOptions, 'grid-batch-select', (v) => {
-      batchSize = Number(v);
-      writePref('batch', batchSize);
-      // If scrolled past the sentinel already, render more now; otherwise next
-      // scroll trigger will use the new size.
-      if (rendered < filteredItems.length) renderNextBatch();
     }));
     container.before(toolbar);
   }
@@ -377,12 +403,12 @@ export function createItemList({
 
   // Default renderer composed from thumbnail/hrefBuilder/onItemClick/lightbox.
   // Click wiring: explicit onItemClick wins, else default lightbox if enabled,
-  // else plain new-tab anchor. Modifier/middle clicks are always passed through
-  // so the anchor's download still works via ctrl/cmd/middle-click.
+  // else plain new-tab anchor. Modifier/middle clicks pass through to the anchor
+  // (which points to item.image) so the user can open the full image in a new tab.
   const clickHandler = onItemClick ?? (lightbox ? (item, e) => {
     const img = e.currentTarget.querySelector('img');
     const idx = filteredItems.indexOf(item);
-    openLightbox(filteredItems, idx >= 0 ? idx : 0, img);
+    openLightbox(filteredItems, idx >= 0 ? idx : 0, img, { showDownload: lightboxDownload });
   } : null);
   const render = renderItemFn ?? ((item) => {
     const href = hrefBuilder(item);
@@ -393,8 +419,7 @@ export function createItemList({
       <a href="${href}"${clickHandler ? '' : ' target="_blank"'} title="${item.name}">
         <img src="${imgSrc}" alt="${item.name}" title="${item.name}" loading="lazy">
       </a>
-      <span class="tooltip" title="${item.name}">${item.name}</span>
-      <span class="btn copy-btn" data-copy="${item.name}">⎘</span>`;
+      <span class="tooltip" title="${item.name}">${item.name}</span>`;
     if (clickHandler) {
       div.querySelector('a').addEventListener('click', (e) => {
         if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
@@ -489,7 +514,7 @@ export function createItemList({
 
   function renderNextBatch() {
     const start = rendered;
-    const end = Math.min(rendered + batchSize, filteredItems.length);
+    const end = Math.min(rendered + computeBatchSize(), filteredItems.length);
     if (start >= end) return;
 
     const batch = filteredItems.slice(start, end);
