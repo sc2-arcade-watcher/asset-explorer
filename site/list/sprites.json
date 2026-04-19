@@ -1,0 +1,971 @@
+{
+  "category": "sprites",
+  "name": "Sprites",
+  "items": [
+    {
+      "name": "storm_lootspray_animated_carbots_alarak_dark",
+      "download": "sprites/storm_lootspray_animated_carbots_alarak_dark.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_alarak_dark.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_ana_hanzo",
+      "download": "sprites/storm_lootspray_animated_carbots_ana_hanzo.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_ana_hanzo.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_arthas",
+      "download": "sprites/storm_lootspray_animated_carbots_arthas.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_arthas.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_blaze",
+      "download": "sprites/storm_lootspray_animated_carbots_blaze.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_blaze.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_dehaka",
+      "download": "sprites/storm_lootspray_animated_carbots_dehaka.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_dehaka.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_diablo",
+      "download": "sprites/storm_lootspray_animated_carbots_diablo.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_diablo.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_genji",
+      "download": "sprites/storm_lootspray_animated_carbots_genji.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_genji.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_guldan_dark",
+      "download": "sprites/storm_lootspray_animated_carbots_guldan_dark.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_guldan_dark.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_illidan",
+      "download": "sprites/storm_lootspray_animated_carbots_illidan.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_illidan.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_kerrigan_raynor",
+      "download": "sprites/storm_lootspray_animated_carbots_kerrigan_raynor.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_kerrigan_raynor.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_lostvikings",
+      "download": "sprites/storm_lootspray_animated_carbots_lostvikings.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_lostvikings.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_lunara",
+      "download": "sprites/storm_lootspray_animated_carbots_lunara.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_lunara.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_malthael",
+      "download": "sprites/storm_lootspray_animated_carbots_malthael.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_malthael.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_morales",
+      "download": "sprites/storm_lootspray_animated_carbots_morales.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_morales.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_moshpit",
+      "download": "sprites/storm_lootspray_animated_carbots_moshpit.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_moshpit.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_nazeebo",
+      "download": "sprites/storm_lootspray_animated_carbots_nazeebo.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_nazeebo.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_tassadar",
+      "download": "sprites/storm_lootspray_animated_carbots_tassadar.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_tassadar.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_uther",
+      "download": "sprites/storm_lootspray_animated_carbots_uther.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_uther.png"
+    },
+    {
+      "name": "storm_lootspray_animated_carbots_varian",
+      "download": "sprites/storm_lootspray_animated_carbots_varian.dds",
+      "image": "sprites-png/storm_lootspray_animated_carbots_varian.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cartoon_alarak",
+      "download": "sprites/storm_lootspray_animated_cartoon_alarak.dds",
+      "image": "sprites-png/storm_lootspray_animated_cartoon_alarak.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cartoon_butcher",
+      "download": "sprites/storm_lootspray_animated_cartoon_butcher.dds",
+      "image": "sprites-png/storm_lootspray_animated_cartoon_butcher.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cartoon_dehaka",
+      "download": "sprites/storm_lootspray_animated_cartoon_dehaka.dds",
+      "image": "sprites-png/storm_lootspray_animated_cartoon_dehaka.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cartoon_falstad",
+      "download": "sprites/storm_lootspray_animated_cartoon_falstad.dds",
+      "image": "sprites-png/storm_lootspray_animated_cartoon_falstad.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cartoon_ltmorales",
+      "download": "sprites/storm_lootspray_animated_cartoon_ltmorales.dds",
+      "image": "sprites-png/storm_lootspray_animated_cartoon_ltmorales.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cartoon_lunara",
+      "download": "sprites/storm_lootspray_animated_cartoon_lunara.dds",
+      "image": "sprites-png/storm_lootspray_animated_cartoon_lunara.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cartoon_malthael",
+      "download": "sprites/storm_lootspray_animated_cartoon_malthael.dds",
+      "image": "sprites-png/storm_lootspray_animated_cartoon_malthael.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cartoon_probius",
+      "download": "sprites/storm_lootspray_animated_cartoon_probius.dds",
+      "image": "sprites-png/storm_lootspray_animated_cartoon_probius.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cartoon_raynor",
+      "download": "sprites/storm_lootspray_animated_cartoon_raynor.dds",
+      "image": "sprites-png/storm_lootspray_animated_cartoon_raynor.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cartoon_stukov",
+      "download": "sprites/storm_lootspray_animated_cartoon_stukov.dds",
+      "image": "sprites-png/storm_lootspray_animated_cartoon_stukov.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cookie_abathur",
+      "download": "sprites/storm_lootspray_animated_cookie_abathur.dds",
+      "image": "sprites-png/storm_lootspray_animated_cookie_abathur.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cookie_butcher",
+      "download": "sprites/storm_lootspray_animated_cookie_butcher.dds",
+      "image": "sprites-png/storm_lootspray_animated_cookie_butcher.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cookie_chogall",
+      "download": "sprites/storm_lootspray_animated_cookie_chogall.dds",
+      "image": "sprites-png/storm_lootspray_animated_cookie_chogall.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cookie_garrosh",
+      "download": "sprites/storm_lootspray_animated_cookie_garrosh.dds",
+      "image": "sprites-png/storm_lootspray_animated_cookie_garrosh.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cookie_genji",
+      "download": "sprites/storm_lootspray_animated_cookie_genji.dds",
+      "image": "sprites-png/storm_lootspray_animated_cookie_genji.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cookie_johanna",
+      "download": "sprites/storm_lootspray_animated_cookie_johanna.dds",
+      "image": "sprites-png/storm_lootspray_animated_cookie_johanna.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cookie_murky",
+      "download": "sprites/storm_lootspray_animated_cookie_murky.dds",
+      "image": "sprites-png/storm_lootspray_animated_cookie_murky.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cookie_probius",
+      "download": "sprites/storm_lootspray_animated_cookie_probius.dds",
+      "image": "sprites-png/storm_lootspray_animated_cookie_probius.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cookie_samuro",
+      "download": "sprites/storm_lootspray_animated_cookie_samuro.dds",
+      "image": "sprites-png/storm_lootspray_animated_cookie_samuro.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cookie_stukov",
+      "download": "sprites/storm_lootspray_animated_cookie_stukov.dds",
+      "image": "sprites-png/storm_lootspray_animated_cookie_stukov.png"
+    },
+    {
+      "name": "storm_lootspray_animated_cookie_zuljin",
+      "download": "sprites/storm_lootspray_animated_cookie_zuljin.dds",
+      "image": "sprites-png/storm_lootspray_animated_cookie_zuljin.png"
+    },
+    {
+      "name": "storm_lootspray_animated_craft20_frostmourne",
+      "download": "sprites/storm_lootspray_animated_craft20_frostmourne.dds",
+      "image": "sprites-png/storm_lootspray_animated_craft20_frostmourne.png"
+    },
+    {
+      "name": "storm_lootspray_animated_craft20_lowbattery",
+      "download": "sprites/storm_lootspray_animated_craft20_lowbattery.dds",
+      "image": "sprites-png/storm_lootspray_animated_craft20_lowbattery.png"
+    },
+    {
+      "name": "storm_lootspray_animated_craft20_nosepick",
+      "download": "sprites/storm_lootspray_animated_craft20_nosepick.dds",
+      "image": "sprites-png/storm_lootspray_animated_craft20_nosepick.png"
+    },
+    {
+      "name": "storm_lootspray_animated_craft20_shalamayne",
+      "download": "sprites/storm_lootspray_animated_craft20_shalamayne.dds",
+      "image": "sprites-png/storm_lootspray_animated_craft20_shalamayne.png"
+    },
+    {
+      "name": "storm_lootspray_animated_craft20_stealth",
+      "download": "sprites/storm_lootspray_animated_craft20_stealth.dds",
+      "image": "sprites-png/storm_lootspray_animated_craft20_stealth.png"
+    },
+    {
+      "name": "storm_lootspray_animated_default",
+      "download": "sprites/storm_lootspray_animated_default.dds",
+      "image": "sprites-png/storm_lootspray_animated_default.png"
+    },
+    {
+      "name": "storm_lootspray_animated_dorm_2018",
+      "download": "sprites/storm_lootspray_animated_dorm_2018.dds",
+      "image": "sprites-png/storm_lootspray_animated_dorm_2018.png"
+    },
+    {
+      "name": "storm_lootspray_animated_emoji_arthas",
+      "download": "sprites/storm_lootspray_animated_emoji_arthas.dds",
+      "image": "sprites-png/storm_lootspray_animated_emoji_arthas.png"
+    },
+    {
+      "name": "storm_lootspray_animated_emoji_butcher",
+      "download": "sprites/storm_lootspray_animated_emoji_butcher.dds",
+      "image": "sprites-png/storm_lootspray_animated_emoji_butcher.png"
+    },
+    {
+      "name": "storm_lootspray_animated_emoji_lunara",
+      "download": "sprites/storm_lootspray_animated_emoji_lunara.dds",
+      "image": "sprites-png/storm_lootspray_animated_emoji_lunara.png"
+    },
+    {
+      "name": "storm_lootspray_animated_emoji_morales",
+      "download": "sprites/storm_lootspray_animated_emoji_morales.dds",
+      "image": "sprites-png/storm_lootspray_animated_emoji_morales.png"
+    },
+    {
+      "name": "storm_lootspray_animated_emoji_sylvanas",
+      "download": "sprites/storm_lootspray_animated_emoji_sylvanas.dds",
+      "image": "sprites-png/storm_lootspray_animated_emoji_sylvanas.png"
+    },
+    {
+      "name": "storm_lootspray_animated_emoji_tracer",
+      "download": "sprites/storm_lootspray_animated_emoji_tracer.dds",
+      "image": "sprites-png/storm_lootspray_animated_emoji_tracer.png"
+    },
+    {
+      "name": "storm_lootspray_animated_emoji_tyrande",
+      "download": "sprites/storm_lootspray_animated_emoji_tyrande.dds",
+      "image": "sprites-png/storm_lootspray_animated_emoji_tyrande.png"
+    },
+    {
+      "name": "storm_lootspray_animated_emoji_xul",
+      "download": "sprites/storm_lootspray_animated_emoji_xul.dds",
+      "image": "sprites-png/storm_lootspray_animated_emoji_xul.png"
+    },
+    {
+      "name": "storm_lootspray_animated_emoji_zarya",
+      "download": "sprites/storm_lootspray_animated_emoji_zarya.dds",
+      "image": "sprites-png/storm_lootspray_animated_emoji_zarya.png"
+    },
+    {
+      "name": "storm_lootspray_animated_emoji_zeratul",
+      "download": "sprites/storm_lootspray_animated_emoji_zeratul.dds",
+      "image": "sprites-png/storm_lootspray_animated_emoji_zeratul.png"
+    },
+    {
+      "name": "storm_lootspray_animated_hallowsend_bat",
+      "download": "sprites/storm_lootspray_animated_hallowsend_bat.dds",
+      "image": "sprites-png/storm_lootspray_animated_hallowsend_bat.png"
+    },
+    {
+      "name": "storm_lootspray_animated_hallowsend_candy",
+      "download": "sprites/storm_lootspray_animated_hallowsend_candy.dds",
+      "image": "sprites-png/storm_lootspray_animated_hallowsend_candy.png"
+    },
+    {
+      "name": "storm_lootspray_animated_hallowsend_cat",
+      "download": "sprites/storm_lootspray_animated_hallowsend_cat.dds",
+      "image": "sprites-png/storm_lootspray_animated_hallowsend_cat.png"
+    },
+    {
+      "name": "storm_lootspray_animated_hallowsend_gazlowerobot",
+      "download": "sprites/storm_lootspray_animated_hallowsend_gazlowerobot.dds",
+      "image": "sprites-png/storm_lootspray_animated_hallowsend_gazlowerobot.png"
+    },
+    {
+      "name": "storm_lootspray_animated_hallowsend_gg",
+      "download": "sprites/storm_lootspray_animated_hallowsend_gg.dds",
+      "image": "sprites-png/storm_lootspray_animated_hallowsend_gg.png"
+    },
+    {
+      "name": "storm_lootspray_animated_hallowsend_probiusghost",
+      "download": "sprites/storm_lootspray_animated_hallowsend_probiusghost.dds",
+      "image": "sprites-png/storm_lootspray_animated_hallowsend_probiusghost.png"
+    },
+    {
+      "name": "storm_lootspray_animated_hallowsend_pumpkin",
+      "download": "sprites/storm_lootspray_animated_hallowsend_pumpkin.dds",
+      "image": "sprites-png/storm_lootspray_animated_hallowsend_pumpkin.png"
+    },
+    {
+      "name": "storm_lootspray_animated_hallowsend_rip",
+      "download": "sprites/storm_lootspray_animated_hallowsend_rip.dds",
+      "image": "sprites-png/storm_lootspray_animated_hallowsend_rip.png"
+    },
+    {
+      "name": "storm_lootspray_animated_hallowsend_skelethur",
+      "download": "sprites/storm_lootspray_animated_hallowsend_skelethur.dds",
+      "image": "sprites-png/storm_lootspray_animated_hallowsend_skelethur.png"
+    },
+    {
+      "name": "storm_lootspray_animated_hallowsend_teeth",
+      "download": "sprites/storm_lootspray_animated_hallowsend_teeth.dds",
+      "image": "sprites-png/storm_lootspray_animated_hallowsend_teeth.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_azmodan",
+      "download": "sprites/storm_lootspray_animated_lunar_food_azmodan.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_azmodan.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_cassia",
+      "download": "sprites/storm_lootspray_animated_lunar_food_cassia.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_cassia.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_chen",
+      "download": "sprites/storm_lootspray_animated_lunar_food_chen.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_chen.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_genji",
+      "download": "sprites/storm_lootspray_animated_lunar_food_genji.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_genji.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_illidan",
+      "download": "sprites/storm_lootspray_animated_lunar_food_illidan.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_illidan.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_jaina",
+      "download": "sprites/storm_lootspray_animated_lunar_food_jaina.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_jaina.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_kaelthas",
+      "download": "sprites/storm_lootspray_animated_lunar_food_kaelthas.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_kaelthas.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_lili",
+      "download": "sprites/storm_lootspray_animated_lunar_food_lili.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_lili.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_liming",
+      "download": "sprites/storm_lootspray_animated_lunar_food_liming.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_liming.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_samuro",
+      "download": "sprites/storm_lootspray_animated_lunar_food_samuro.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_samuro.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_sylvanas",
+      "download": "sprites/storm_lootspray_animated_lunar_food_sylvanas.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_sylvanas.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_food_zuljin",
+      "download": "sprites/storm_lootspray_animated_lunar_food_zuljin.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_food_zuljin.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_lantern_arthas",
+      "download": "sprites/storm_lootspray_animated_lunar_lantern_arthas.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_lantern_arthas.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_lantern_chen",
+      "download": "sprites/storm_lootspray_animated_lunar_lantern_chen.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_lantern_chen.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_lantern_foodog",
+      "download": "sprites/storm_lootspray_animated_lunar_lantern_foodog.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_lantern_foodog.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_lantern_illidan",
+      "download": "sprites/storm_lootspray_animated_lunar_lantern_illidan.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_lantern_illidan.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_lantern_jaina",
+      "download": "sprites/storm_lootspray_animated_lunar_lantern_jaina.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_lantern_jaina.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_lantern_kaelthas",
+      "download": "sprites/storm_lootspray_animated_lunar_lantern_kaelthas.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_lantern_kaelthas.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_lantern_lili",
+      "download": "sprites/storm_lootspray_animated_lunar_lantern_lili.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_lantern_lili.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_lantern_liming",
+      "download": "sprites/storm_lootspray_animated_lunar_lantern_liming.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_lantern_liming.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_lantern_samuro",
+      "download": "sprites/storm_lootspray_animated_lunar_lantern_samuro.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_lantern_samuro.png"
+    },
+    {
+      "name": "storm_lootspray_animated_lunar_lantern_sylvanas",
+      "download": "sprites/storm_lootspray_animated_lunar_lantern_sylvanas.dds",
+      "image": "sprites-png/storm_lootspray_animated_lunar_lantern_sylvanas.png"
+    },
+    {
+      "name": "storm_lootspray_animated_mecha19_malthael",
+      "download": "sprites/storm_lootspray_animated_mecha19_malthael.dds",
+      "image": "sprites-png/storm_lootspray_animated_mecha19_malthael.png"
+    },
+    {
+      "name": "storm_lootspray_animated_mecha19_vallaangry",
+      "download": "sprites/storm_lootspray_animated_mecha19_vallaangry.dds",
+      "image": "sprites-png/storm_lootspray_animated_mecha19_vallaangry.png"
+    },
+    {
+      "name": "storm_lootspray_animated_mecha19_vallawink",
+      "download": "sprites/storm_lootspray_animated_mecha19_vallawink.dds",
+      "image": "sprites-png/storm_lootspray_animated_mecha19_vallawink.png"
+    },
+    {
+      "name": "storm_lootspray_animated_mecha19_yrelshy",
+      "download": "sprites/storm_lootspray_animated_mecha19_yrelshy.dds",
+      "image": "sprites-png/storm_lootspray_animated_mecha19_yrelshy.png"
+    },
+    {
+      "name": "storm_lootspray_animated_mobster19_coinraccoon",
+      "download": "sprites/storm_lootspray_animated_mobster19_coinraccoon.dds",
+      "image": "sprites-png/storm_lootspray_animated_mobster19_coinraccoon.png"
+    },
+    {
+      "name": "storm_lootspray_animated_mobster19_dicesnakeeyes",
+      "download": "sprites/storm_lootspray_animated_mobster19_dicesnakeeyes.dds",
+      "image": "sprites-png/storm_lootspray_animated_mobster19_dicesnakeeyes.png"
+    },
+    {
+      "name": "storm_lootspray_animated_mobster19_hammereyes",
+      "download": "sprites/storm_lootspray_animated_mobster19_hammereyes.dds",
+      "image": "sprites-png/storm_lootspray_animated_mobster19_hammereyes.png"
+    },
+    {
+      "name": "storm_lootspray_animated_mobster19_junkrat",
+      "download": "sprites/storm_lootspray_animated_mobster19_junkrat.dds",
+      "image": "sprites-png/storm_lootspray_animated_mobster19_junkrat.png"
+    },
+    {
+      "name": "storm_lootspray_animated_mobster19_junkratroulette",
+      "download": "sprites/storm_lootspray_animated_mobster19_junkratroulette.dds",
+      "image": "sprites-png/storm_lootspray_animated_mobster19_junkratroulette.png"
+    },
+    {
+      "name": "storm_lootspray_animated_mobster19_slotmachine",
+      "download": "sprites/storm_lootspray_animated_mobster19_slotmachine.dds",
+      "image": "sprites-png/storm_lootspray_animated_mobster19_slotmachine.png"
+    },
+    {
+      "name": "storm_lootspray_animated_mobster19_tychus",
+      "download": "sprites/storm_lootspray_animated_mobster19_tychus.dds",
+      "image": "sprites-png/storm_lootspray_animated_mobster19_tychus.png"
+    },
+    {
+      "name": "storm_lootspray_animated_myth20_tracer_dance",
+      "download": "sprites/storm_lootspray_animated_myth20_tracer_dance.dds",
+      "image": "sprites-png/storm_lootspray_animated_myth20_tracer_dance.png"
+    },
+    {
+      "name": "storm_lootspray_animated_ow_raynor2076",
+      "download": "sprites/storm_lootspray_animated_ow_raynor2076.dds",
+      "image": "sprites-png/storm_lootspray_animated_ow_raynor2076.png"
+    },
+    {
+      "name": "storm_lootspray_animated_ow_stitchhog",
+      "download": "sprites/storm_lootspray_animated_ow_stitchhog.dds",
+      "image": "sprites-png/storm_lootspray_animated_ow_stitchhog.png"
+    },
+    {
+      "name": "storm_lootspray_animated_pirate_bootycoffer",
+      "download": "sprites/storm_lootspray_animated_pirate_bootycoffer.dds",
+      "image": "sprites-png/storm_lootspray_animated_pirate_bootycoffer.png"
+    },
+    {
+      "name": "storm_lootspray_animated_pixel_cheese",
+      "download": "sprites/storm_lootspray_animated_pixel_cheese.dds",
+      "image": "sprites-png/storm_lootspray_animated_pixel_cheese.png"
+    },
+    {
+      "name": "storm_lootspray_animated_pixel_ganymede",
+      "download": "sprites/storm_lootspray_animated_pixel_ganymede.dds",
+      "image": "sprites-png/storm_lootspray_animated_pixel_ganymede.png"
+    },
+    {
+      "name": "storm_lootspray_animated_pixel_hearts",
+      "download": "sprites/storm_lootspray_animated_pixel_hearts.dds",
+      "image": "sprites-png/storm_lootspray_animated_pixel_hearts.png"
+    },
+    {
+      "name": "storm_lootspray_animated_pixel_murky",
+      "download": "sprites/storm_lootspray_animated_pixel_murky.dds",
+      "image": "sprites-png/storm_lootspray_animated_pixel_murky.png"
+    },
+    {
+      "name": "storm_lootspray_animated_pixel_pepe",
+      "download": "sprites/storm_lootspray_animated_pixel_pepe.dds",
+      "image": "sprites-png/storm_lootspray_animated_pixel_pepe.png"
+    },
+    {
+      "name": "storm_lootspray_animated_pixel_rainbowunicorn",
+      "download": "sprites/storm_lootspray_animated_pixel_rainbowunicorn.dds",
+      "image": "sprites-png/storm_lootspray_animated_pixel_rainbowunicorn.png"
+    },
+    {
+      "name": "storm_lootspray_animated_pixel_skull",
+      "download": "sprites/storm_lootspray_animated_pixel_skull.dds",
+      "image": "sprites-png/storm_lootspray_animated_pixel_skull.png"
+    },
+    {
+      "name": "storm_lootspray_animated_pixel_thumbsup",
+      "download": "sprites/storm_lootspray_animated_pixel_thumbsup.dds",
+      "image": "sprites-png/storm_lootspray_animated_pixel_thumbsup.png"
+    },
+    {
+      "name": "storm_lootspray_animated_pixel_treasuregoblin",
+      "download": "sprites/storm_lootspray_animated_pixel_treasuregoblin.dds",
+      "image": "sprites-png/storm_lootspray_animated_pixel_treasuregoblin.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_battlefield",
+      "download": "sprites/storm_lootspray_animated_snowglobe_battlefield.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_battlefield.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_blackheart",
+      "download": "sprites/storm_lootspray_animated_snowglobe_blackheart.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_blackheart.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_braxxis",
+      "download": "sprites/storm_lootspray_animated_snowglobe_braxxis.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_braxxis.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_cursed",
+      "download": "sprites/storm_lootspray_animated_snowglobe_cursed.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_cursed.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_dragonshire",
+      "download": "sprites/storm_lootspray_animated_snowglobe_dragonshire.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_dragonshire.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_garden",
+      "download": "sprites/storm_lootspray_animated_snowglobe_garden.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_garden.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_hanamura",
+      "download": "sprites/storm_lootspray_animated_snowglobe_hanamura.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_hanamura.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_mines",
+      "download": "sprites/storm_lootspray_animated_snowglobe_mines.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_mines.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_shrines",
+      "download": "sprites/storm_lootspray_animated_snowglobe_shrines.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_shrines.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_temple",
+      "download": "sprites/storm_lootspray_animated_snowglobe_temple.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_temple.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_tomb",
+      "download": "sprites/storm_lootspray_animated_snowglobe_tomb.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_tomb.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_towers",
+      "download": "sprites/storm_lootspray_animated_snowglobe_towers.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_towers.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_volskaya",
+      "download": "sprites/storm_lootspray_animated_snowglobe_volskaya.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_volskaya.png"
+    },
+    {
+      "name": "storm_lootspray_animated_snowglobe_warhead",
+      "download": "sprites/storm_lootspray_animated_snowglobe_warhead.dds",
+      "image": "sprites-png/storm_lootspray_animated_snowglobe_warhead.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_alliance",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_alliance.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_alliance.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_birds",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_birds.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_birds.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_cyber",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_cyber.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_cyber.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_diablo",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_diablo.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_diablo.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_dragons",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_dragons.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_dragons.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_horde",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_horde.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_horde.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_kharazim",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_kharazim.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_kharazim.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_nexus",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_nexus.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_nexus.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_protoss",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_protoss.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_protoss.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_terran",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_terran.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_terran.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_tigers",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_tigers.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_tigers.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_turtles",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_turtles.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_turtles.png"
+    },
+    {
+      "name": "storm_lootspray_animated_spring19_neon_zerg",
+      "download": "sprites/storm_lootspray_animated_spring19_neon_zerg.dds",
+      "image": "sprites-png/storm_lootspray_animated_spring19_neon_zerg.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer20_imperius",
+      "download": "sprites/storm_lootspray_animated_summer20_imperius.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer20_imperius.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer20_imperiusmask",
+      "download": "sprites/storm_lootspray_animated_summer20_imperiusmask.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer20_imperiusmask.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer20_lili",
+      "download": "sprites/storm_lootspray_animated_summer20_lili.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer20_lili.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer20_lilikick",
+      "download": "sprites/storm_lootspray_animated_summer20_lilikick.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer20_lilikick.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer20_malganismask",
+      "download": "sprites/storm_lootspray_animated_summer20_malganismask.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer20_malganismask.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer20_malganiswinpose",
+      "download": "sprites/storm_lootspray_animated_summer20_malganiswinpose.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer20_malganiswinpose.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_blaze",
+      "download": "sprites/storm_lootspray_animated_summer_2018_blaze.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_blaze.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_brightwing",
+      "download": "sprites/storm_lootspray_animated_summer_2018_brightwing.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_brightwing.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_dehaka",
+      "download": "sprites/storm_lootspray_animated_summer_2018_dehaka.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_dehaka.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_diablo",
+      "download": "sprites/storm_lootspray_animated_summer_2018_diablo.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_diablo.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_dva",
+      "download": "sprites/storm_lootspray_animated_summer_2018_dva.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_dva.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_etc",
+      "download": "sprites/storm_lootspray_animated_summer_2018_etc.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_etc.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_garrosh",
+      "download": "sprites/storm_lootspray_animated_summer_2018_garrosh.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_garrosh.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_gazlowe",
+      "download": "sprites/storm_lootspray_animated_summer_2018_gazlowe.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_gazlowe.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_illidan",
+      "download": "sprites/storm_lootspray_animated_summer_2018_illidan.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_illidan.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_kelthuzad",
+      "download": "sprites/storm_lootspray_animated_summer_2018_kelthuzad.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_kelthuzad.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_leoric",
+      "download": "sprites/storm_lootspray_animated_summer_2018_leoric.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_leoric.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_lili",
+      "download": "sprites/storm_lootspray_animated_summer_2018_lili.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_lili.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_lunara",
+      "download": "sprites/storm_lootspray_animated_summer_2018_lunara.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_lunara.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_murky",
+      "download": "sprites/storm_lootspray_animated_summer_2018_murky.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_murky.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_quest_calavera",
+      "download": "sprites/storm_lootspray_animated_summer_2018_quest_calavera.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_quest_calavera.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_quest_pantera",
+      "download": "sprites/storm_lootspray_animated_summer_2018_quest_pantera.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_quest_pantera.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_ragnaros",
+      "download": "sprites/storm_lootspray_animated_summer_2018_ragnaros.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_ragnaros.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_sonya",
+      "download": "sprites/storm_lootspray_animated_summer_2018_sonya.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_sonya.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_stitches",
+      "download": "sprites/storm_lootspray_animated_summer_2018_stitches.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_stitches.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_tassadar",
+      "download": "sprites/storm_lootspray_animated_summer_2018_tassadar.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_tassadar.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_tracer",
+      "download": "sprites/storm_lootspray_animated_summer_2018_tracer.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_tracer.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_2018_zarya",
+      "download": "sprites/storm_lootspray_animated_summer_2018_zarya.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_2018_zarya.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_nova",
+      "download": "sprites/storm_lootspray_animated_summer_nova.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_nova.png"
+    },
+    {
+      "name": "storm_lootspray_animated_summer_tychus_watergun",
+      "download": "sprites/storm_lootspray_animated_summer_tychus_watergun.dds",
+      "image": "sprites-png/storm_lootspray_animated_summer_tychus_watergun.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_age",
+      "download": "sprites/storm_lootspray_animated_toys18_age.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_age.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_auriel",
+      "download": "sprites/storm_lootspray_animated_toys18_auriel.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_auriel.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_deckard",
+      "download": "sprites/storm_lootspray_animated_toys18_deckard.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_deckard.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_etc",
+      "download": "sprites/storm_lootspray_animated_toys18_etc.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_etc.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_junkrat",
+      "download": "sprites/storm_lootspray_animated_toys18_junkrat.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_junkrat.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_kelthuzad",
+      "download": "sprites/storm_lootspray_animated_toys18_kelthuzad.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_kelthuzad.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_leoric",
+      "download": "sprites/storm_lootspray_animated_toys18_leoric.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_leoric.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_lucio",
+      "download": "sprites/storm_lootspray_animated_toys18_lucio.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_lucio.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_nova",
+      "download": "sprites/storm_lootspray_animated_toys18_nova.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_nova.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_raynor",
+      "download": "sprites/storm_lootspray_animated_toys18_raynor.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_raynor.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_rexxar",
+      "download": "sprites/storm_lootspray_animated_toys18_rexxar.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_rexxar.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_sonya",
+      "download": "sprites/storm_lootspray_animated_toys18_sonya.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_sonya.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_stukov",
+      "download": "sprites/storm_lootspray_animated_toys18_stukov.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_stukov.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_xul",
+      "download": "sprites/storm_lootspray_animated_toys18_xul.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_xul.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys18_zagara",
+      "download": "sprites/storm_lootspray_animated_toys18_zagara.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys18_zagara.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys19_ancientbeast",
+      "download": "sprites/storm_lootspray_animated_toys19_ancientbeast.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys19_ancientbeast.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys19_bravecompanion",
+      "download": "sprites/storm_lootspray_animated_toys19_bravecompanion.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys19_bravecompanion.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys19_eldestoftheplushevil",
+      "download": "sprites/storm_lootspray_animated_toys19_eldestoftheplushevil.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys19_eldestoftheplushevil.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys19_happyhooves",
+      "download": "sprites/storm_lootspray_animated_toys19_happyhooves.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys19_happyhooves.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys19_rewardchoochootime",
+      "download": "sprites/storm_lootspray_animated_toys19_rewardchoochootime.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys19_rewardchoochootime.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys19_spaceknight",
+      "download": "sprites/storm_lootspray_animated_toys19_spaceknight.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys19_spaceknight.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys19_stalwarthero",
+      "download": "sprites/storm_lootspray_animated_toys19_stalwarthero.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys19_stalwarthero.png"
+    },
+    {
+      "name": "storm_lootspray_animated_toys19_whoopsiebear",
+      "download": "sprites/storm_lootspray_animated_toys19_whoopsiebear.dds",
+      "image": "sprites-png/storm_lootspray_animated_toys19_whoopsiebear.png"
+    }
+  ]
+}

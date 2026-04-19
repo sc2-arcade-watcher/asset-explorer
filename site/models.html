@@ -95,14 +95,15 @@
         list: 'models',
         containerSelector: '.icons-grid',
         searchInputSelector: '#icon-search',
-        assetBase: 'https://dist.sc2arcade.com/star-assets/',
-        renderItemFn: ({ name, icon }) => {
+        renderItemFn: ({ name, download, image }) => {
             const div = document.createElement('div');
             div.className = 'icon-item';
+            const img = `<img src="${thumbUrl(image, '152x152,fit')}" alt="${name}" loading="lazy">`;
+            const tile = download
+                ? `<a href="${download}" target="_blank">${img}</a>`
+                : img;
             div.innerHTML = `
-                <a href="https://dist.sc2arcade.com/star-assets/models-glb/${name}.glb" target="_blank">
-                    <img src="${thumbUrl(icon.toLowerCase(), '152x152,fit')}" alt="${name}" loading="lazy">
-                </a>
+                ${tile}
                 <span class="tooltip">${name}</span>
                 <span class="btn copy-btn" data-copy="${name}">⎘</span>
             `;

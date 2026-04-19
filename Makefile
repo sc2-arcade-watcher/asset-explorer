@@ -11,7 +11,7 @@ export HTTP_PORT BASE_URL CACHE_CONTROL
 
 COMPOSE := HTTP_PORT=$(HTTP_PORT) docker compose
 
-.PHONY: up down logs ps wait-ready test test-fast test-ini test-smoke test-browser help
+.PHONY: up down logs ps wait-ready test test-fast test-lists test-smoke test-browser help
 
 up: ## Start stack
 	$(COMPOSE) up -d
@@ -32,14 +32,14 @@ wait-ready: ## Block until the stack responds on BASE_URL (up to 30s)
 	done; \
 	echo "stack not ready at $(BASE_URL) after 30s" >&2; exit 1
 
-test: test-ini up wait-ready ## Run all tests (starts the stack, runs INI + api + browser)
+test: test-lists up wait-ready ## Run all tests (starts the stack, runs list schema + api + browser)
 	@pnpm test
 
-test-fast: test-ini wait-ready ## Run all tests assuming stack is already up
+test-fast: test-lists wait-ready ## Run all tests assuming stack is already up
 	@pnpm test
 
-test-ini: ## Validate INI file pairing and structure (no stack needed)
-	@bash test/ini-integrity.sh
+test-lists: ## Validate site/list/*.json against the asset list schema (no stack needed)
+	@node test/list-integrity.js
 
 test-smoke: up wait-ready ## API smoke tests (starts stack if needed)
 	@pnpm run test:smoke

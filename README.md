@@ -15,7 +15,7 @@ Served at `https://asset-explorer.sc2arcade.com`.
 
 ## Architecture
 
-Pure static site — no build step. Vanilla HTML/CSS/ES modules served by Caddy with an imageproxy sidecar for thumbnail resizing. The whole stack runs via `docker compose`. Assets themselves live at `https://dist.sc2arcade.com/star-assets/` (a [dufs](https://github.com/sigoden/dufs) instance) and are indexed by INI files in `site/list/`.
+Pure static site — no build step. Vanilla HTML/CSS/ES modules served by Caddy with an imageproxy sidecar for thumbnail resizing. The whole stack runs via `docker compose`. Assets themselves live at `https://dist.sc2arcade.com/star-assets/` (a [dufs](https://github.com/sigoden/dufs) instance) and are indexed by JSON files in `site/list/` (one per category, validated by a Zod schema).
 
 ## Running locally
 
@@ -31,9 +31,9 @@ Pick a different port with `HTTP_PORT=8091 make up` — useful when running seve
 
 ```bash
 pnpm install                       # first time only
-make test                          # INI + API smoke + browser (auto-starts docker stack)
+make test                          # list schema + API smoke + browser (auto-starts docker stack)
 make test-fast                     # same, but stack must already be up
-make test-ini                      # INI pairing check, no stack needed
+make test-lists                    # validate site/list/*.json against schema, no stack needed
 make test-smoke                    # API smoke, auto-starts stack
 make test-browser                  # browser tests, auto-starts stack
 BASE_URL=https://... make test-smoke   # target a remote stack instead

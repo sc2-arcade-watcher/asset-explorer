@@ -1,0 +1,2161 @@
+{
+  "category": "models",
+  "name": "3D Models",
+  "items": [
+    {
+      "name": "a6",
+      "download": "models-glb/a6.glb",
+      "image": "models-png/a6.png"
+    },
+    {
+      "name": "acr",
+      "download": "models-glb/acr.glb",
+      "image": "models-png/acr.png"
+    },
+    {
+      "name": "ares",
+      "download": "models-glb/ares.glb",
+      "image": "models-png/ares.png"
+    },
+    {
+      "name": "academy",
+      "download": "models-glb/academy.glb",
+      "image": "models-png/academy.png"
+    },
+    {
+      "name": "adept",
+      "download": "models-glb/adept.glb",
+      "image": "models-png/adept.png"
+    },
+    {
+      "name": "adeptspirit",
+      "download": "models-glb/adeptspirit.glb",
+      "image": "models-png/adeptspirit.png"
+    },
+    {
+      "name": "aegis",
+      "download": "models-glb/aegis.glb",
+      "image": "models-png/aegis.png"
+    },
+    {
+      "name": "alien_eviscerator (blight)",
+      "download": "models-glb/alien_eviscerator (blight).glb",
+      "image": "models-png/alien_eviscerator (blight).png"
+    },
+    {
+      "name": "analysisterminal",
+      "download": "models-glb/analysisterminal.glb",
+      "image": "models-png/analysisterminal.png"
+    },
+    {
+      "name": "aperture",
+      "download": "models-glb/aperture.glb",
+      "image": "models-png/aperture.png"
+    },
+    {
+      "name": "aquila",
+      "download": "models-glb/aquila.glb",
+      "image": "models-png/aquila.png"
+    },
+    {
+      "name": "archon",
+      "download": "models-glb/archon.glb",
+      "image": "models-png/archon.png"
+    },
+    {
+      "name": "armoryex1",
+      "download": "models-glb/armoryex1.glb",
+      "image": "models-png/armoryex1.png"
+    },
+    {
+      "name": "armory_umojan",
+      "download": "models-glb/armory_umojan.glb",
+      "image": "models-png/armory_umojan.png"
+    },
+    {
+      "name": "assailant",
+      "download": "models-glb/assailant.glb",
+      "image": "models-png/assailant.png"
+    },
+    {
+      "name": "assemblyarray",
+      "download": "models-glb/assemblyarray.glb",
+      "image": "models-png/assemblyarray.png"
+    },
+    {
+      "name": "assimilatorex1",
+      "download": "models-glb/assimilatorex1.glb",
+      "image": "models-png/assimilatorex1.png"
+    },
+    {
+      "name": "assimilator_ihanrii",
+      "download": "models-glb/assimilator_ihanrii.glb",
+      "image": "models-png/assimilator_ihanrii.png"
+    },
+    {
+      "name": "atrium",
+      "download": "models-glb/atrium.glb",
+      "image": "models-png/atrium.png"
+    },
+    {
+      "name": "aurora",
+      "download": "models-glb/aurora.glb",
+      "image": "models-png/aurora.png"
+    },
+    {
+      "name": "autoturret",
+      "download": "models-glb/autoturret.glb",
+      "image": "models-png/autoturret.png"
+    },
+    {
+      "name": "avengerjet",
+      "download": "models-glb/avengerjet.glb",
+      "image": "models-png/avengerjet.png"
+    },
+    {
+      "name": "aviannest",
+      "download": "models-glb/aviannest.glb",
+      "image": "models-png/aviannest.png"
+    },
+    {
+      "name": "badger",
+      "download": "models-glb/badger.glb",
+      "image": "models-png/badger.png"
+    },
+    {
+      "name": "banelingegg",
+      "download": "models-glb/banelingegg.glb",
+      "image": "models-png/banelingegg.png"
+    },
+    {
+      "name": "banelingex1",
+      "download": "models-glb/banelingex1.glb",
+      "image": "models-png/banelingex1.png"
+    },
+    {
+      "name": "banelingnestex1",
+      "download": "models-glb/banelingnestex1.glb",
+      "image": "models-png/banelingnestex1.png"
+    },
+    {
+      "name": "banshee",
+      "download": "models-glb/banshee.glb",
+      "image": "models-png/banshee.png"
+    },
+    {
+      "name": "banshee_umojan",
+      "download": "models-glb/banshee_umojan.glb",
+      "image": "models-png/banshee_umojan.png"
+    },
+    {
+      "name": "barracks",
+      "download": "models-glb/barracks.glb",
+      "image": "models-png/barracks.png"
+    },
+    {
+      "name": "barracks_umojan",
+      "download": "models-glb/barracks_umojan.glb",
+      "image": "models-png/barracks_umojan.png"
+    },
+    {
+      "name": "battlecruiserex2",
+      "download": "models-glb/battlecruiserex2.glb",
+      "image": "models-png/battlecruiserex2.png"
+    },
+    {
+      "name": "battlecruiser_umojan",
+      "download": "models-glb/battlecruiser_umojan.glb",
+      "image": "models-png/battlecruiser_umojan.png"
+    },
+    {
+      "name": "bilepit",
+      "download": "models-glb/bilepit.glb",
+      "image": "models-png/bilepit.png"
+    },
+    {
+      "name": "biomasscavern",
+      "download": "models-glb/biomasscavern.glb",
+      "image": "models-png/biomasscavern.png"
+    },
+    {
+      "name": "biomasshatchery",
+      "download": "models-glb/biomasshatchery.glb",
+      "image": "models-png/biomasshatchery.png"
+    },
+    {
+      "name": "blightbringer",
+      "download": "models-glb/blightbringer.glb",
+      "image": "models-png/blightbringer.png"
+    },
+    {
+      "name": "blimp",
+      "download": "models-glb/blimp.glb",
+      "image": "models-png/blimp.png"
+    },
+    {
+      "name": "blitzer",
+      "download": "models-glb/blitzer.glb",
+      "image": "models-png/blitzer.png"
+    },
+    {
+      "name": "boar",
+      "download": "models-glb/boar.glb",
+      "image": "models-png/boar.png"
+    },
+    {
+      "name": "broodlord",
+      "download": "models-glb/broodlord.glb",
+      "image": "models-png/broodlord.png"
+    },
+    {
+      "name": "broodlordegg",
+      "download": "models-glb/broodlordegg.glb",
+      "image": "models-png/broodlordegg.png"
+    },
+    {
+      "name": "building_terran_hailstormtower",
+      "download": "models-glb/building_terran_hailstormtower.glb",
+      "image": "models-png/building_terran_hailstormtower.png"
+    },
+    {
+      "name": "bunkerex1",
+      "download": "models-glb/bunkerex1.glb",
+      "image": "models-png/bunkerex1.png"
+    },
+    {
+      "name": "bunker_umojan",
+      "download": "models-glb/bunker_umojan.glb",
+      "image": "models-png/bunker_umojan.png"
+    },
+    {
+      "name": "carr",
+      "download": "models-glb/carr.glb",
+      "image": "models-png/carr.png"
+    },
+    {
+      "name": "csv",
+      "download": "models-glb/csv.glb",
+      "image": "models-png/csv.png"
+    },
+    {
+      "name": "csvdeployed",
+      "download": "models-glb/csvdeployed.glb",
+      "image": "models-png/csvdeployed.png"
+    },
+    {
+      "name": "carrier",
+      "download": "models-glb/carrier.glb",
+      "image": "models-png/carrier.png"
+    },
+    {
+      "name": "casnoliskden",
+      "download": "models-glb/casnoliskden.glb",
+      "image": "models-png/casnoliskden.png"
+    },
+    {
+      "name": "catalystpit",
+      "download": "models-glb/catalystpit.glb",
+      "image": "models-png/catalystpit.png"
+    },
+    {
+      "name": "cataract",
+      "download": "models-glb/cataract.glb",
+      "image": "models-png/cataract.png"
+    },
+    {
+      "name": "changeling",
+      "download": "models-glb/changeling.glb",
+      "image": "models-png/changeling.png"
+    },
+    {
+      "name": "chemicalfirm",
+      "download": "models-glb/chemicalfirm.glb",
+      "image": "models-png/chemicalfirm.png"
+    },
+    {
+      "name": "citadel",
+      "download": "models-glb/citadel.glb",
+      "image": "models-png/citadel.png"
+    },
+    {
+      "name": "colossusex1",
+      "download": "models-glb/colossusex1.glb",
+      "image": "models-png/colossusex1.png"
+    },
+    {
+      "name": "commandcenterex1",
+      "download": "models-glb/commandcenterex1.glb",
+      "image": "models-png/commandcenterex1.png"
+    },
+    {
+      "name": "commandcenter_umojan",
+      "download": "models-glb/commandcenter_umojan.glb",
+      "image": "models-png/commandcenter_umojan.png"
+    },
+    {
+      "name": "condor",
+      "download": "models-glb/condor.glb",
+      "image": "models-png/condor.png"
+    },
+    {
+      "name": "conduit",
+      "download": "models-glb/conduit.glb",
+      "image": "models-png/conduit.png"
+    },
+    {
+      "name": "converter",
+      "download": "models-glb/converter.glb",
+      "image": "models-png/converter.png"
+    },
+    {
+      "name": "corruptor",
+      "download": "models-glb/corruptor.glb",
+      "image": "models-png/corruptor.png"
+    },
+    {
+      "name": "courier",
+      "download": "models-glb/courier.glb",
+      "image": "models-png/courier.png"
+    },
+    {
+      "name": "crabeetle",
+      "download": "models-glb/crabeetle.glb",
+      "image": "models-png/crabeetle.png"
+    },
+    {
+      "name": "cyberneticscoreex1",
+      "download": "models-glb/cyberneticscoreex1.glb",
+      "image": "models-png/cyberneticscoreex1.png"
+    },
+    {
+      "name": "cyclone",
+      "download": "models-glb/cyclone.glb",
+      "image": "models-png/cyclone.png"
+    },
+    {
+      "name": "cyclone_umojan",
+      "download": "models-glb/cyclone_umojan.glb",
+      "image": "models-png/cyclone_umojan.png"
+    },
+    {
+      "name": "darkshrineex1",
+      "download": "models-glb/darkshrineex1.glb",
+      "image": "models-png/darkshrineex1.png"
+    },
+    {
+      "name": "darktemplar",
+      "download": "models-glb/darktemplar.glb",
+      "image": "models-png/darktemplar.png"
+    },
+    {
+      "name": "defiler_ex3",
+      "download": "models-glb/defiler_ex3.glb",
+      "image": "models-png/defiler_ex3.png"
+    },
+    {
+      "name": "demonic_engine_yellow",
+      "download": "models-glb/demonic_engine_yellow.glb",
+      "image": "models-png/demonic_engine_yellow.png"
+    },
+    {
+      "name": "disruptor",
+      "download": "models-glb/disruptor.glb",
+      "image": "models-png/disruptor.png"
+    },
+    {
+      "name": "disruptor_phasemode",
+      "download": "models-glb/disruptor_phasemode.glb",
+      "image": "models-png/disruptor_phasemode.png"
+    },
+    {
+      "name": "drone",
+      "download": "models-glb/drone.glb",
+      "image": "models-png/drone.png"
+    },
+    {
+      "name": "drone_remastered",
+      "download": "models-glb/drone_remastered.glb",
+      "image": "models-png/drone_remastered.png"
+    },
+    {
+      "name": "echo",
+      "download": "models-glb/echo.glb",
+      "image": "models-png/echo.png"
+    },
+    {
+      "name": "edifice",
+      "download": "models-glb/edifice.glb",
+      "image": "models-png/edifice.png"
+    },
+    {
+      "name": "eggex1",
+      "download": "models-glb/eggex1.glb",
+      "image": "models-png/eggex1.png"
+    },
+    {
+      "name": "elysium",
+      "download": "models-glb/elysium.glb",
+      "image": "models-png/elysium.png"
+    },
+    {
+      "name": "elytron",
+      "download": "models-glb/elytron.glb",
+      "image": "models-png/elytron.png"
+    },
+    {
+      "name": "emanator",
+      "download": "models-glb/emanator.glb",
+      "image": "models-png/emanator.png"
+    },
+    {
+      "name": "empyrean",
+      "download": "models-glb/empyrean.glb",
+      "image": "models-png/empyrean.png"
+    },
+    {
+      "name": "engineeringbayex1",
+      "download": "models-glb/engineeringbayex1.glb",
+      "image": "models-png/engineeringbayex1.png"
+    },
+    {
+      "name": "engineeringbay_umojan",
+      "download": "models-glb/engineeringbay_umojan.glb",
+      "image": "models-png/engineeringbay_umojan.png"
+    },
+    {
+      "name": "equalizer_v2",
+      "download": "models-glb/equalizer_v2.glb",
+      "image": "models-png/equalizer_v2.png"
+    },
+    {
+      "name": "eroder",
+      "download": "models-glb/eroder.glb",
+      "image": "models-png/eroder.png"
+    },
+    {
+      "name": "evolutionchamberex1",
+      "download": "models-glb/evolutionchamberex1.glb",
+      "image": "models-png/evolutionchamberex1.png"
+    },
+    {
+      "name": "evolutionegg",
+      "download": "models-glb/evolutionegg.glb",
+      "image": "models-png/evolutionegg.png"
+    },
+    {
+      "name": "exogruntradiopack_bycerberus",
+      "download": "models-glb/exogruntradiopack_bycerberus.glb",
+      "image": "models-png/exogruntradiopack_bycerberus.png"
+    },
+    {
+      "name": "exterminator",
+      "download": "models-glb/exterminator.glb",
+      "image": "models-png/exterminator.png"
+    },
+    {
+      "name": "extractorex1",
+      "download": "models-glb/extractorex1.glb",
+      "image": "models-png/extractorex1.png"
+    },
+    {
+      "name": "fabricator",
+      "download": "models-glb/fabricator.glb",
+      "image": "models-png/fabricator.png"
+    },
+    {
+      "name": "factoryex1",
+      "download": "models-glb/factoryex1.glb",
+      "image": "models-png/factoryex1.png"
+    },
+    {
+      "name": "factory_umojan",
+      "download": "models-glb/factory_umojan.glb",
+      "image": "models-png/factory_umojan.png"
+    },
+    {
+      "name": "feederling",
+      "download": "models-glb/feederling.glb",
+      "image": "models-png/feederling.png"
+    },
+    {
+      "name": "feedingpool",
+      "download": "models-glb/feedingpool.glb",
+      "image": "models-png/feedingpool.png"
+    },
+    {
+      "name": "ferrion",
+      "download": "models-glb/ferrion.glb",
+      "image": "models-png/ferrion.png"
+    },
+    {
+      "name": "filteringplant",
+      "download": "models-glb/filteringplant.glb",
+      "image": "models-png/filteringplant.png"
+    },
+    {
+      "name": "firebat_umojan",
+      "download": "models-glb/firebat_umojan.glb",
+      "image": "models-png/firebat_umojan.png"
+    },
+    {
+      "name": "fixer",
+      "download": "models-glb/fixer.glb",
+      "image": "models-png/fixer.png"
+    },
+    {
+      "name": "flametank",
+      "download": "models-glb/flametank.glb",
+      "image": "models-png/flametank.png"
+    },
+    {
+      "name": "fleetbeaconex1",
+      "download": "models-glb/fleetbeaconex1.glb",
+      "image": "models-png/fleetbeaconex1.png"
+    },
+    {
+      "name": "forge_ex2",
+      "download": "models-glb/forge_ex2.glb",
+      "image": "models-png/forge_ex2.png"
+    },
+    {
+      "name": "formulator",
+      "download": "models-glb/formulator.glb",
+      "image": "models-png/formulator.png"
+    },
+    {
+      "name": "foundry",
+      "download": "models-glb/foundry.glb",
+      "image": "models-png/foundry.png"
+    },
+    {
+      "name": "fuse",
+      "download": "models-glb/fuse.glb",
+      "image": "models-png/fuse.png"
+    },
+    {
+      "name": "fusioncore",
+      "download": "models-glb/fusioncore.glb",
+      "image": "models-png/fusioncore.png"
+    },
+    {
+      "name": "gatewayex1",
+      "download": "models-glb/gatewayex1.glb",
+      "image": "models-png/gatewayex1.png"
+    },
+    {
+      "name": "generator",
+      "download": "models-glb/generator.glb",
+      "image": "models-png/generator.png"
+    },
+    {
+      "name": "ghostacademy",
+      "download": "models-glb/ghostacademy.glb",
+      "image": "models-png/ghostacademy.png"
+    },
+    {
+      "name": "ghostacademy_umojan",
+      "download": "models-glb/ghostacademy_umojan.glb",
+      "image": "models-png/ghostacademy_umojan.png"
+    },
+    {
+      "name": "ghostex3",
+      "download": "models-glb/ghostex3.glb",
+      "image": "models-png/ghostex3.png"
+    },
+    {
+      "name": "ghost_mengsk_coop",
+      "download": "models-glb/ghost_mengsk_coop.glb",
+      "image": "models-png/ghost_mengsk_coop.png"
+    },
+    {
+      "name": "ghost_umojan",
+      "download": "models-glb/ghost_umojan.glb",
+      "image": "models-png/ghost_umojan.png"
+    },
+    {
+      "name": "goliath_umojan",
+      "download": "models-glb/goliath_umojan.glb",
+      "image": "models-png/goliath_umojan.png"
+    },
+    {
+      "name": "greaterspireex1",
+      "download": "models-glb/greaterspireex1.glb",
+      "image": "models-png/greaterspireex1.png"
+    },
+    {
+      "name": "harbinger",
+      "download": "models-glb/harbinger.glb",
+      "image": "models-png/harbinger.png"
+    },
+    {
+      "name": "hatcheryex1mp",
+      "download": "models-glb/hatcheryex1mp.glb",
+      "image": "models-png/hatcheryex1mp.png"
+    },
+    {
+      "name": "hellionex1",
+      "download": "models-glb/hellionex1.glb",
+      "image": "models-png/hellionex1.png"
+    },
+    {
+      "name": "hellionex1tank",
+      "download": "models-glb/hellionex1tank.glb",
+      "image": "models-png/hellionex1tank.png"
+    },
+    {
+      "name": "hightemplar",
+      "download": "models-glb/hightemplar.glb",
+      "image": "models-png/hightemplar.png"
+    },
+    {
+      "name": "hittestsphere",
+      "download": "models-glb/hittestsphere.glb",
+      "image": "models-png/hittestsphere.png"
+    },
+    {
+      "name": "hivemindemulator_umojan",
+      "download": "models-glb/hivemindemulator_umojan.glb",
+      "image": "models-png/hivemindemulator_umojan.png"
+    },
+    {
+      "name": "hornet",
+      "download": "models-glb/hornet.glb",
+      "image": "models-png/hornet.png"
+    },
+    {
+      "name": "hybrid_artifactcontainmentfieldvoid",
+      "download": "models-glb/hybrid_artifactcontainmentfieldvoid.glb",
+      "image": "models-png/hybrid_artifactcontainmentfieldvoid.png"
+    },
+    {
+      "name": "hybrid_construct_minion",
+      "download": "models-glb/hybrid_construct_minion.glb",
+      "image": "models-png/hybrid_construct_minion.png"
+    },
+    {
+      "name": "hybrid_construct_sentinel",
+      "download": "models-glb/hybrid_construct_sentinel.glb",
+      "image": "models-png/hybrid_construct_sentinel.png"
+    },
+    {
+      "name": "hybrid_destroyer",
+      "download": "models-glb/hybrid_destroyer.glb",
+      "image": "models-png/hybrid_destroyer.png"
+    },
+    {
+      "name": "hybrid_dreadnok",
+      "download": "models-glb/hybrid_dreadnok.glb",
+      "image": "models-png/hybrid_dreadnok.png"
+    },
+    {
+      "name": "hybrid_fleshbender",
+      "download": "models-glb/hybrid_fleshbender.glb",
+      "image": "models-png/hybrid_fleshbender.png"
+    },
+    {
+      "name": "hybrid_harvester",
+      "download": "models-glb/hybrid_harvester.glb",
+      "image": "models-png/hybrid_harvester.png"
+    },
+    {
+      "name": "hybrid_horror",
+      "download": "models-glb/hybrid_horror.glb",
+      "image": "models-png/hybrid_horror.png"
+    },
+    {
+      "name": "hybrid_nemesis",
+      "download": "models-glb/hybrid_nemesis.glb",
+      "image": "models-png/hybrid_nemesis.png"
+    },
+    {
+      "name": "hybrid_pollinator",
+      "download": "models-glb/hybrid_pollinator.glb",
+      "image": "models-png/hybrid_pollinator.png"
+    },
+    {
+      "name": "hybrid_reaver",
+      "download": "models-glb/hybrid_reaver.glb",
+      "image": "models-png/hybrid_reaver.png"
+    },
+    {
+      "name": "hybrid_rift_2",
+      "download": "models-glb/hybrid_rift_2.glb",
+      "image": "models-png/hybrid_rift_2.png"
+    },
+    {
+      "name": "hybrid_screamer",
+      "download": "models-glb/hybrid_screamer.glb",
+      "image": "models-png/hybrid_screamer.png"
+    },
+    {
+      "name": "hybrid_sentinel",
+      "download": "models-glb/hybrid_sentinel.glb",
+      "image": "models-png/hybrid_sentinel.png"
+    },
+    {
+      "name": "hybrid_shield_generator",
+      "download": "models-glb/hybrid_shield_generator.glb",
+      "image": "models-png/hybrid_shield_generator.png"
+    },
+    {
+      "name": "hybrid_shifter",
+      "download": "models-glb/hybrid_shifter.glb",
+      "image": "models-png/hybrid_shifter.png"
+    },
+    {
+      "name": "hybrid_silent",
+      "download": "models-glb/hybrid_silent.glb",
+      "image": "models-png/hybrid_silent.png"
+    },
+    {
+      "name": "hybrid_temple",
+      "download": "models-glb/hybrid_temple.glb",
+      "image": "models-png/hybrid_temple.png"
+    },
+    {
+      "name": "hybrid_transport",
+      "download": "models-glb/hybrid_transport.glb",
+      "image": "models-png/hybrid_transport.png"
+    },
+    {
+      "name": "hybrid_warrior",
+      "download": "models-glb/hybrid_warrior.glb",
+      "image": "models-png/hybrid_warrior.png"
+    },
+    {
+      "name": "hydralisk",
+      "download": "models-glb/hydralisk.glb",
+      "image": "models-png/hydralisk.png"
+    },
+    {
+      "name": "hydraliskdenex1",
+      "download": "models-glb/hydraliskdenex1.glb",
+      "image": "models-png/hydraliskdenex1.png"
+    },
+    {
+      "name": "hydralisk_remastered",
+      "download": "models-glb/hydralisk_remastered.glb",
+      "image": "models-png/hydralisk_remastered.png"
+    },
+    {
+      "name": "immortal_ex2",
+      "download": "models-glb/immortal_ex2.glb",
+      "image": "models-png/immortal_ex2.png"
+    },
+    {
+      "name": "inciter",
+      "download": "models-glb/inciter.glb",
+      "image": "models-png/inciter.png"
+    },
+    {
+      "name": "inducer",
+      "download": "models-glb/inducer.glb",
+      "image": "models-png/inducer.png"
+    },
+    {
+      "name": "infantryflamethrower",
+      "download": "models-glb/infantryflamethrower.glb",
+      "image": "models-png/infantryflamethrower.png"
+    },
+    {
+      "name": "infantryheavy",
+      "download": "models-glb/infantryheavy.glb",
+      "image": "models-png/infantryheavy.png"
+    },
+    {
+      "name": "infantrymortar",
+      "download": "models-glb/infantrymortar.glb",
+      "image": "models-png/infantrymortar.png"
+    },
+    {
+      "name": "infantryofficer",
+      "download": "models-glb/infantryofficer.glb",
+      "image": "models-png/infantryofficer.png"
+    },
+    {
+      "name": "infestationpitex1",
+      "download": "models-glb/infestationpitex1.glb",
+      "image": "models-png/infestationpitex1.png"
+    },
+    {
+      "name": "infesteddominionhousing_00",
+      "download": "models-glb/infesteddominionhousing_00.glb",
+      "image": "models-png/infesteddominionhousing_00.png"
+    },
+    {
+      "name": "infesteddominionhousing_01",
+      "download": "models-glb/infesteddominionhousing_01.glb",
+      "image": "models-png/infesteddominionhousing_01.png"
+    },
+    {
+      "name": "infesteddominionhousing_02",
+      "download": "models-glb/infesteddominionhousing_02.glb",
+      "image": "models-png/infesteddominionhousing_02.png"
+    },
+    {
+      "name": "infestedmarine_ex3",
+      "download": "models-glb/infestedmarine_ex3.glb",
+      "image": "models-png/infestedmarine_ex3.png"
+    },
+    {
+      "name": "infestor_ex3",
+      "download": "models-glb/infestor_ex3.glb",
+      "image": "models-png/infestor_ex3.png"
+    },
+    {
+      "name": "interdictor",
+      "download": "models-glb/interdictor.glb",
+      "image": "models-png/interdictor.png"
+    },
+    {
+      "name": "juggernaut_gunship",
+      "download": "models-glb/juggernaut_gunship.glb",
+      "image": "models-png/juggernaut_gunship.png"
+    },
+    {
+      "name": "jupiter",
+      "download": "models-glb/jupiter.glb",
+      "image": "models-png/jupiter.png"
+    },
+    {
+      "name": "kelmorian_skylancer",
+      "download": "models-glb/kelmorian_skylancer.glb",
+      "image": "models-png/kelmorian_skylancer.png"
+    },
+    {
+      "name": "korhalgatecontrol_mp",
+      "download": "models-glb/korhalgatecontrol_mp.glb",
+      "image": "models-png/korhalgatecontrol_mp.png"
+    },
+    {
+      "name": "korhal_artifactcontainmentfield",
+      "download": "models-glb/korhal_artifactcontainmentfield.glb",
+      "image": "models-png/korhal_artifactcontainmentfield.png"
+    },
+    {
+      "name": "kraken",
+      "download": "models-glb/kraken.glb",
+      "image": "models-png/kraken.png"
+    },
+    {
+      "name": "labbot_mp",
+      "download": "models-glb/labbot_mp.glb",
+      "image": "models-png/labbot_mp.png"
+    },
+    {
+      "name": "larva",
+      "download": "models-glb/larva.glb",
+      "image": "models-png/larva.png"
+    },
+    {
+      "name": "larvalqueen",
+      "download": "models-glb/larvalqueen.glb",
+      "image": "models-png/larvalqueen.png"
+    },
+    {
+      "name": "leviathan",
+      "download": "models-glb/leviathan.glb",
+      "image": "models-png/leviathan.png"
+    },
+    {
+      "name": "liberator",
+      "download": "models-glb/liberator.glb",
+      "image": "models-png/liberator.png"
+    },
+    {
+      "name": "liberator_umojan",
+      "download": "models-glb/liberator_umojan.glb",
+      "image": "models-png/liberator_umojan.png"
+    },
+    {
+      "name": "lurkerden",
+      "download": "models-glb/lurkerden.glb",
+      "image": "models-png/lurkerden.png"
+    },
+    {
+      "name": "lurkerden_ex2",
+      "download": "models-glb/lurkerden_ex2.glb",
+      "image": "models-png/lurkerden_ex2.png"
+    },
+    {
+      "name": "lurkeregg",
+      "download": "models-glb/lurkeregg.glb",
+      "image": "models-png/lurkeregg.png"
+    },
+    {
+      "name": "lurkerex1a",
+      "download": "models-glb/lurkerex1a.glb",
+      "image": "models-png/lurkerex1a.png"
+    },
+    {
+      "name": "lurker_ex2",
+      "download": "models-glb/lurker_ex2.glb",
+      "image": "models-png/lurker_ex2.png"
+    },
+    {
+      "name": "mule",
+      "download": "models-glb/mule.glb",
+      "image": "models-png/mule.png"
+    },
+    {
+      "name": "manufacturer",
+      "download": "models-glb/manufacturer.glb",
+      "image": "models-png/manufacturer.png"
+    },
+    {
+      "name": "marauder",
+      "download": "models-glb/marauder.glb",
+      "image": "models-png/marauder.png"
+    },
+    {
+      "name": "marine",
+      "download": "models-glb/marine.glb",
+      "image": "models-png/marine.png"
+    },
+    {
+      "name": "marine_remastered",
+      "download": "models-glb/marine_remastered.glb",
+      "image": "models-png/marine_remastered.png"
+    },
+    {
+      "name": "marine_umojan",
+      "download": "models-glb/marine_umojan.glb",
+      "image": "models-png/marine_umojan.png"
+    },
+    {
+      "name": "massalisk",
+      "download": "models-glb/massalisk.glb",
+      "image": "models-png/massalisk.png"
+    },
+    {
+      "name": "medivacex1",
+      "download": "models-glb/medivacex1.glb",
+      "image": "models-png/medivacex1.png"
+    },
+    {
+      "name": "medivacplatform",
+      "download": "models-glb/medivacplatform.glb",
+      "image": "models-png/medivacplatform.png"
+    },
+    {
+      "name": "mendling",
+      "download": "models-glb/mendling.glb",
+      "image": "models-png/mendling.png"
+    },
+    {
+      "name": "meridian",
+      "download": "models-glb/meridian.glb",
+      "image": "models-png/meridian.png"
+    },
+    {
+      "name": "miningdrone",
+      "download": "models-glb/miningdrone.glb",
+      "image": "models-png/miningdrone.png"
+    },
+    {
+      "name": "missileturret",
+      "download": "models-glb/missileturret.glb",
+      "image": "models-png/missileturret.png"
+    },
+    {
+      "name": "mole",
+      "download": "models-glb/mole.glb",
+      "image": "models-png/mole.png"
+    },
+    {
+      "name": "mothership",
+      "download": "models-glb/mothership.glb",
+      "image": "models-png/mothership.png"
+    },
+    {
+      "name": "mutagenchamber",
+      "download": "models-glb/mutagenchamber.glb",
+      "image": "models-png/mutagenchamber.png"
+    },
+    {
+      "name": "mutalisk",
+      "download": "models-glb/mutalisk.glb",
+      "image": "models-png/mutalisk.png"
+    },
+    {
+      "name": "mutaliskex1a",
+      "download": "models-glb/mutaliskex1a.glb",
+      "image": "models-png/mutaliskex1a.png"
+    },
+    {
+      "name": "myriad",
+      "download": "models-glb/myriad.glb",
+      "image": "models-png/myriad.png"
+    },
+    {
+      "name": "ncmrls",
+      "download": "models-glb/ncmrls.glb",
+      "image": "models-png/ncmrls.png"
+    },
+    {
+      "name": "ncsupplydepot",
+      "download": "models-glb/ncsupplydepot.glb",
+      "image": "models-png/ncsupplydepot.png"
+    },
+    {
+      "name": "nc_guardiancannon",
+      "download": "models-glb/nc_guardiancannon.glb",
+      "image": "models-png/nc_guardiancannon.png"
+    },
+    {
+      "name": "nc_laserturret",
+      "download": "models-glb/nc_laserturret.glb",
+      "image": "models-png/nc_laserturret.png"
+    },
+    {
+      "name": "nc_object_188b",
+      "download": "models-glb/nc_object_188b.glb",
+      "image": "models-png/nc_object_188b.png"
+    },
+    {
+      "name": "nexusex1",
+      "download": "models-glb/nexusex1.glb",
+      "image": "models-png/nexusex1.png"
+    },
+    {
+      "name": "node",
+      "download": "models-glb/node.glb",
+      "image": "models-png/node.png"
+    },
+    {
+      "name": "nukepack",
+      "download": "models-glb/nukepack.glb",
+      "image": "models-png/nukepack.png"
+    },
+    {
+      "name": "nullifier",
+      "download": "models-glb/nullifier.glb",
+      "image": "models-png/nullifier.png"
+    },
+    {
+      "name": "nyduscanalex1",
+      "download": "models-glb/nyduscanalex1.glb",
+      "image": "models-png/nyduscanalex1.png"
+    },
+    {
+      "name": "nydusdragon",
+      "download": "models-glb/nydusdragon.glb",
+      "image": "models-png/nydusdragon.png"
+    },
+    {
+      "name": "nydusnetworkex1",
+      "download": "models-glb/nydusnetworkex1.glb",
+      "image": "models-png/nydusnetworkex1.png"
+    },
+    {
+      "name": "nyduswormcreeper",
+      "download": "models-glb/nyduswormcreeper.glb",
+      "image": "models-png/nyduswormcreeper.png"
+    },
+    {
+      "name": "observer",
+      "download": "models-glb/observer.glb",
+      "image": "models-png/observer.png"
+    },
+    {
+      "name": "oculus",
+      "download": "models-glb/oculus.glb",
+      "image": "models-png/oculus.png"
+    },
+    {
+      "name": "olympus",
+      "download": "models-glb/olympus.glb",
+      "image": "models-png/olympus.png"
+    },
+    {
+      "name": "ordnancecache",
+      "download": "models-glb/ordnancecache.glb",
+      "image": "models-png/ordnancecache.png"
+    },
+    {
+      "name": "osprey",
+      "download": "models-glb/osprey.glb",
+      "image": "models-png/osprey.png"
+    },
+    {
+      "name": "outfittingstation",
+      "download": "models-glb/outfittingstation.glb",
+      "image": "models-png/outfittingstation.png"
+    },
+    {
+      "name": "outlet",
+      "download": "models-glb/outlet.glb",
+      "image": "models-png/outlet.png"
+    },
+    {
+      "name": "overlord",
+      "download": "models-glb/overlord.glb",
+      "image": "models-png/overlord.png"
+    },
+    {
+      "name": "overlordtransport",
+      "download": "models-glb/overlordtransport.glb",
+      "image": "models-png/overlordtransport.png"
+    },
+    {
+      "name": "overseer",
+      "download": "models-glb/overseer.glb",
+      "image": "models-png/overseer.png"
+    },
+    {
+      "name": "overseeregg",
+      "download": "models-glb/overseeregg.glb",
+      "image": "models-png/overseeregg.png"
+    },
+    {
+      "name": "pantheon",
+      "download": "models-glb/pantheon.glb",
+      "image": "models-png/pantheon.png"
+    },
+    {
+      "name": "paradox",
+      "download": "models-glb/paradox.glb",
+      "image": "models-png/paradox.png"
+    },
+    {
+      "name": "paragon",
+      "download": "models-glb/paragon.glb",
+      "image": "models-png/paragon.png"
+    },
+    {
+      "name": "pariah",
+      "download": "models-glb/pariah.glb",
+      "image": "models-png/pariah.png"
+    },
+    {
+      "name": "penumbra_mkiii",
+      "download": "models-glb/penumbra_mkiii.glb",
+      "image": "models-png/penumbra_mkiii.png"
+    },
+    {
+      "name": "phoenix_ex2",
+      "download": "models-glb/phoenix_ex2.glb",
+      "image": "models-png/phoenix_ex2.png"
+    },
+    {
+      "name": "photoncannonex2",
+      "download": "models-glb/photoncannonex2.glb",
+      "image": "models-png/photoncannonex2.png"
+    },
+    {
+      "name": "popupturret",
+      "download": "models-glb/popupturret.glb",
+      "image": "models-png/popupturret.png"
+    },
+    {
+      "name": "powersatellite_stetmann_coop",
+      "download": "models-glb/powersatellite_stetmann_coop.glb",
+      "image": "models-png/powersatellite_stetmann_coop.png"
+    },
+    {
+      "name": "predator",
+      "download": "models-glb/predator.glb",
+      "image": "models-png/predator.png"
+    },
+    {
+      "name": "predatorfighter",
+      "download": "models-glb/predatorfighter.glb",
+      "image": "models-png/predatorfighter.png"
+    },
+    {
+      "name": "predatortank",
+      "download": "models-glb/predatortank.glb",
+      "image": "models-png/predatortank.png"
+    },
+    {
+      "name": "primalbasedefense",
+      "download": "models-glb/primalbasedefense.glb",
+      "image": "models-png/primalbasedefense.png"
+    },
+    {
+      "name": "primalking",
+      "download": "models-glb/primalking.glb",
+      "image": "models-png/primalking.png"
+    },
+    {
+      "name": "primalproductiona",
+      "download": "models-glb/primalproductiona.glb",
+      "image": "models-png/primalproductiona.png"
+    },
+    {
+      "name": "primalsunkencolony",
+      "download": "models-glb/primalsunkencolony.glb",
+      "image": "models-png/primalsunkencolony.png"
+    },
+    {
+      "name": "primaltownhall",
+      "download": "models-glb/primaltownhall.glb",
+      "image": "models-png/primaltownhall.png"
+    },
+    {
+      "name": "primalzergmeleeheavy_00",
+      "download": "models-glb/primalzergmeleeheavy_00.glb",
+      "image": "models-png/primalzergmeleeheavy_00.png"
+    },
+    {
+      "name": "primalzergmelee_00",
+      "download": "models-glb/primalzergmelee_00.glb",
+      "image": "models-png/primalzergmelee_00.png"
+    },
+    {
+      "name": "primalzergranged_00",
+      "download": "models-glb/primalzergranged_00.glb",
+      "image": "models-png/primalzergranged_00.png"
+    },
+    {
+      "name": "probe",
+      "download": "models-glb/probe.glb",
+      "image": "models-png/probe.png"
+    },
+    {
+      "name": "processingcore",
+      "download": "models-glb/processingcore.glb",
+      "image": "models-png/processingcore.png"
+    },
+    {
+      "name": "processor",
+      "download": "models-glb/processor.glb",
+      "image": "models-png/processor.png"
+    },
+    {
+      "name": "protossshield_battery",
+      "download": "models-glb/protossshield_battery.glb",
+      "image": "models-png/protossshield_battery.png"
+    },
+    {
+      "name": "prowler",
+      "download": "models-glb/prowler.glb",
+      "image": "models-png/prowler.png"
+    },
+    {
+      "name": "prowleregg",
+      "download": "models-glb/prowleregg.glb",
+      "image": "models-png/prowleregg.png"
+    },
+    {
+      "name": "psiindoctrinator_mp_fix",
+      "download": "models-glb/psiindoctrinator_mp_fix.glb",
+      "image": "models-png/psiindoctrinator_mp_fix.png"
+    },
+    {
+      "name": "pulsar",
+      "download": "models-glb/pulsar.glb",
+      "image": "models-png/pulsar.png"
+    },
+    {
+      "name": "purifiermp",
+      "download": "models-glb/purifiermp.glb",
+      "image": "models-png/purifiermp.png"
+    },
+    {
+      "name": "pylonex2",
+      "download": "models-glb/pylonex2.glb",
+      "image": "models-png/pylonex2.png"
+    },
+    {
+      "name": "queenclassic",
+      "download": "models-glb/queenclassic.glb",
+      "image": "models-png/queenclassic.png"
+    },
+    {
+      "name": "queen_ex3",
+      "download": "models-glb/queen_ex3.glb",
+      "image": "models-png/queen_ex3.png"
+    },
+    {
+      "name": "rct_lizard_v3_e",
+      "download": "models-glb/rct_lizard_v3_e.glb",
+      "image": "models-png/rct_lizard_v3_e.png"
+    },
+    {
+      "name": "raptor",
+      "download": "models-glb/raptor.glb",
+      "image": "models-png/raptor.png"
+    },
+    {
+      "name": "raptorjet",
+      "download": "models-glb/raptorjet.glb",
+      "image": "models-png/raptorjet.png"
+    },
+    {
+      "name": "ravager",
+      "download": "models-glb/ravager.glb",
+      "image": "models-png/ravager.png"
+    },
+    {
+      "name": "ravager_egg",
+      "download": "models-glb/ravager_egg.glb",
+      "image": "models-png/ravager_egg.png"
+    },
+    {
+      "name": "raven",
+      "download": "models-glb/raven.glb",
+      "image": "models-png/raven.png"
+    },
+    {
+      "name": "raven_umojan",
+      "download": "models-glb/raven_umojan.glb",
+      "image": "models-png/raven_umojan.png"
+    },
+    {
+      "name": "reactorex1",
+      "download": "models-glb/reactorex1.glb",
+      "image": "models-png/reactorex1.png"
+    },
+    {
+      "name": "reaper",
+      "download": "models-glb/reaper.glb",
+      "image": "models-png/reaper.png"
+    },
+    {
+      "name": "reaper_umojan",
+      "download": "models-glb/reaper_umojan.glb",
+      "image": "models-png/reaper_umojan.png"
+    },
+    {
+      "name": "redstonelavacritter",
+      "download": "models-glb/redstonelavacritter.glb",
+      "image": "models-png/redstonelavacritter.png"
+    },
+    {
+      "name": "refineryex1",
+      "download": "models-glb/refineryex1.glb",
+      "image": "models-png/refineryex1.png"
+    },
+    {
+      "name": "relaytower",
+      "download": "models-glb/relaytower.glb",
+      "image": "models-png/relaytower.png"
+    },
+    {
+      "name": "reliquary",
+      "download": "models-glb/reliquary.glb",
+      "image": "models-png/reliquary.png"
+    },
+    {
+      "name": "repulsor",
+      "download": "models-glb/repulsor.glb",
+      "image": "models-png/repulsor.png"
+    },
+    {
+      "name": "reviler",
+      "download": "models-glb/reviler.glb",
+      "image": "models-png/reviler.png"
+    },
+    {
+      "name": "roach",
+      "download": "models-glb/roach.glb",
+      "image": "models-png/roach.png"
+    },
+    {
+      "name": "roachwarrenex1",
+      "download": "models-glb/roachwarrenex1.glb",
+      "image": "models-png/roachwarrenex1.png"
+    },
+    {
+      "name": "roamer",
+      "download": "models-glb/roamer.glb",
+      "image": "models-png/roamer.png"
+    },
+    {
+      "name": "roboticsfacilityex1",
+      "download": "models-glb/roboticsfacilityex1.glb",
+      "image": "models-png/roboticsfacilityex1.png"
+    },
+    {
+      "name": "roboticssupportbayex1",
+      "download": "models-glb/roboticssupportbayex1.glb",
+      "image": "models-png/roboticssupportbayex1.png"
+    },
+    {
+      "name": "routhetank",
+      "download": "models-glb/routhetank.glb",
+      "image": "models-png/routhetank.png"
+    },
+    {
+      "name": "scv",
+      "download": "models-glb/scv.glb",
+      "image": "models-png/scv.png"
+    },
+    {
+      "name": "scv_umojan",
+      "download": "models-glb/scv_umojan.glb",
+      "image": "models-png/scv_umojan.png"
+    },
+    {
+      "name": "sabotage_drone_mp",
+      "download": "models-glb/sabotage_drone_mp.glb",
+      "image": "models-png/sabotage_drone_mp.png"
+    },
+    {
+      "name": "sanctum",
+      "download": "models-glb/sanctum.glb",
+      "image": "models-png/sanctum.png"
+    },
+    {
+      "name": "scavenger",
+      "download": "models-glb/scavenger.glb",
+      "image": "models-png/scavenger.png"
+    },
+    {
+      "name": "scavengernest",
+      "download": "models-glb/scavengernest.glb",
+      "image": "models-png/scavengernest.png"
+    },
+    {
+      "name": "sciencefacility",
+      "download": "models-glb/sciencefacility.glb",
+      "image": "models-png/sciencefacility.png"
+    },
+    {
+      "name": "scorpalisk",
+      "download": "models-glb/scorpalisk.glb",
+      "image": "models-png/scorpalisk.png"
+    },
+    {
+      "name": "scourge",
+      "download": "models-glb/scourge.glb",
+      "image": "models-png/scourge.png"
+    },
+    {
+      "name": "sensortower",
+      "download": "models-glb/sensortower.glb",
+      "image": "models-png/sensortower.png"
+    },
+    {
+      "name": "sensortower_silver",
+      "download": "models-glb/sensortower_silver.glb",
+      "image": "models-png/sensortower_silver.png"
+    },
+    {
+      "name": "sentry",
+      "download": "models-glb/sentry.glb",
+      "image": "models-png/sentry.png"
+    },
+    {
+      "name": "shredderex3",
+      "download": "models-glb/shredderex3.glb",
+      "image": "models-png/shredderex3.png"
+    },
+    {
+      "name": "siegetank",
+      "download": "models-glb/siegetank.glb",
+      "image": "models-png/siegetank.png"
+    },
+    {
+      "name": "siegetank_umojan",
+      "download": "models-glb/siegetank_umojan.glb",
+      "image": "models-png/siegetank_umojan.png"
+    },
+    {
+      "name": "siegetank_umojan_sieged",
+      "download": "models-glb/siegetank_umojan_sieged.glb",
+      "image": "models-png/siegetank_umojan_sieged.png"
+    },
+    {
+      "name": "silo",
+      "download": "models-glb/silo.glb",
+      "image": "models-png/silo.png"
+    },
+    {
+      "name": "siphoner",
+      "download": "models-glb/siphoner.glb",
+      "image": "models-png/siphoner.png"
+    },
+    {
+      "name": "snakecaster",
+      "download": "models-glb/snakecaster.glb",
+      "image": "models-png/snakecaster.png"
+    },
+    {
+      "name": "spacecow",
+      "download": "models-glb/spacecow.glb",
+      "image": "models-png/spacecow.png"
+    },
+    {
+      "name": "spacemine_mp",
+      "download": "models-glb/spacemine_mp.glb",
+      "image": "models-png/spacemine_mp.png"
+    },
+    {
+      "name": "spaceturbine_00_mp",
+      "download": "models-glb/spaceturbine_00_mp.glb",
+      "image": "models-png/spaceturbine_00_mp.png"
+    },
+    {
+      "name": "spaceturbine_01_mp",
+      "download": "models-glb/spaceturbine_01_mp.glb",
+      "image": "models-png/spaceturbine_01_mp.png"
+    },
+    {
+      "name": "spaceutilitybot",
+      "download": "models-glb/spaceutilitybot.glb",
+      "image": "models-png/spaceutilitybot.png"
+    },
+    {
+      "name": "spawningpoolex1",
+      "download": "models-glb/spawningpoolex1.glb",
+      "image": "models-png/spawningpoolex1.png"
+    },
+    {
+      "name": "spidermine",
+      "download": "models-glb/spidermine.glb",
+      "image": "models-png/spidermine.png"
+    },
+    {
+      "name": "spinecrawlerex1",
+      "download": "models-glb/spinecrawlerex1.glb",
+      "image": "models-png/spinecrawlerex1.png"
+    },
+    {
+      "name": "spireex1",
+      "download": "models-glb/spireex1.glb",
+      "image": "models-png/spireex1.png"
+    },
+    {
+      "name": "spitfire",
+      "download": "models-glb/spitfire.glb",
+      "image": "models-png/spitfire.png"
+    },
+    {
+      "name": "spitter",
+      "download": "models-glb/spitter.glb",
+      "image": "models-png/spitter.png"
+    },
+    {
+      "name": "sporecannon",
+      "download": "models-glb/sporecannon.glb",
+      "image": "models-png/sporecannon.png"
+    },
+    {
+      "name": "sporecrawler",
+      "download": "models-glb/sporecrawler.glb",
+      "image": "models-png/sporecrawler.png"
+    },
+    {
+      "name": "stalker",
+      "download": "models-glb/stalker.glb",
+      "image": "models-png/stalker.png"
+    },
+    {
+      "name": "starbase",
+      "download": "models-glb/starbase.glb",
+      "image": "models-png/starbase.png"
+    },
+    {
+      "name": "stargateex1",
+      "download": "models-glb/stargateex1.glb",
+      "image": "models-png/stargateex1.png"
+    },
+    {
+      "name": "starportex1",
+      "download": "models-glb/starportex1.glb",
+      "image": "models-png/starportex1.png"
+    },
+    {
+      "name": "starport_hornerhan_coop",
+      "download": "models-glb/starport_hornerhan_coop.glb",
+      "image": "models-png/starport_hornerhan_coop.png"
+    },
+    {
+      "name": "starport_umojan",
+      "download": "models-glb/starport_umojan.glb",
+      "image": "models-png/starport_umojan.png"
+    },
+    {
+      "name": "stasisward",
+      "download": "models-glb/stasisward.glb",
+      "image": "models-png/stasisward.png"
+    },
+    {
+      "name": "stinger",
+      "download": "models-glb/stinger.glb",
+      "image": "models-png/stinger.png"
+    },
+    {
+      "name": "stratus",
+      "download": "models-glb/stratus.glb",
+      "image": "models-png/stratus.png"
+    },
+    {
+      "name": "supplydepotex1",
+      "download": "models-glb/supplydepotex1.glb",
+      "image": "models-png/supplydepotex1.png"
+    },
+    {
+      "name": "supplydepot_umojan",
+      "download": "models-glb/supplydepot_umojan.glb",
+      "image": "models-png/supplydepot_umojan.png"
+    },
+    {
+      "name": "swannvespenedrone",
+      "download": "models-glb/swannvespenedrone.glb",
+      "image": "models-png/swannvespenedrone.png"
+    },
+    {
+      "name": "swarmguardian",
+      "download": "models-glb/swarmguardian.glb",
+      "image": "models-png/swarmguardian.png"
+    },
+    {
+      "name": "swarmhost",
+      "download": "models-glb/swarmhost.glb",
+      "image": "models-png/swarmhost.png"
+    },
+    {
+      "name": "swarmhostspawn",
+      "download": "models-glb/swarmhostspawn.glb",
+      "image": "models-png/swarmhostspawn.png"
+    },
+    {
+      "name": "swarmhostspawnflyer",
+      "download": "models-glb/swarmhostspawnflyer.glb",
+      "image": "models-png/swarmhostspawnflyer.png"
+    },
+    {
+      "name": "symbiote",
+      "download": "models-glb/symbiote.glb",
+      "image": "models-png/symbiote.png"
+    },
+    {
+      "name": "syphon",
+      "download": "models-glb/syphon.glb",
+      "image": "models-png/syphon.png"
+    },
+    {
+      "name": "tr17",
+      "download": "models-glb/tr17.glb",
+      "image": "models-png/tr17.png"
+    },
+    {
+      "name": "tankex1",
+      "download": "models-glb/tankex1.glb",
+      "image": "models-png/tankex1.png"
+    },
+    {
+      "name": "tastelope",
+      "download": "models-glb/tastelope.glb",
+      "image": "models-png/tastelope.png"
+    },
+    {
+      "name": "techlabex1",
+      "download": "models-glb/techlabex1.glb",
+      "image": "models-png/techlabex1.png"
+    },
+    {
+      "name": "techvault",
+      "download": "models-glb/techvault.glb",
+      "image": "models-png/techvault.png"
+    },
+    {
+      "name": "tempestex1",
+      "download": "models-glb/tempestex1.glb",
+      "image": "models-png/tempestex1.png"
+    },
+    {
+      "name": "templararchivesex1",
+      "download": "models-glb/templararchivesex1.glb",
+      "image": "models-png/templararchivesex1.png"
+    },
+    {
+      "name": "terran_watcher_collection",
+      "download": "models-glb/terran_watcher_collection.glb",
+      "image": "models-png/terran_watcher_collection.png"
+    },
+    {
+      "name": "terrorzor",
+      "download": "models-glb/terrorzor.glb",
+      "image": "models-png/terrorzor.png"
+    },
+    {
+      "name": "tesla",
+      "download": "models-glb/tesla.glb",
+      "image": "models-png/tesla.png"
+    },
+    {
+      "name": "thorex1",
+      "download": "models-glb/thorex1.glb",
+      "image": "models-png/thorex1.png"
+    },
+    {
+      "name": "thundertank",
+      "download": "models-glb/thundertank.glb",
+      "image": "models-png/thundertank.png"
+    },
+    {
+      "name": "titan",
+      "download": "models-glb/titan.glb",
+      "image": "models-png/titan.png"
+    },
+    {
+      "name": "torrent",
+      "download": "models-glb/torrent.glb",
+      "image": "models-png/torrent.png"
+    },
+    {
+      "name": "trooper_mengsk_coop_flamethrower",
+      "download": "models-glb/trooper_mengsk_coop_flamethrower.glb",
+      "image": "models-png/trooper_mengsk_coop_flamethrower.png"
+    },
+    {
+      "name": "trooper_mengsk_coop_rocket",
+      "download": "models-glb/trooper_mengsk_coop_rocket.glb",
+      "image": "models-png/trooper_mengsk_coop_rocket.png"
+    },
+    {
+      "name": "truck_xelnagacore",
+      "download": "models-glb/truck_xelnagacore.glb",
+      "image": "models-png/truck_xelnagacore.png"
+    },
+    {
+      "name": "twilightcouncilex1",
+      "download": "models-glb/twilightcouncilex1.glb",
+      "image": "models-png/twilightcouncilex1.png"
+    },
+    {
+      "name": "ued_a.r.e.s_v1",
+      "download": "models-glb/ued_a.r.e.s_v1.glb",
+      "image": "models-png/ued_a.r.e.s_v1.png"
+    },
+    {
+      "name": "ued_armory",
+      "download": "models-glb/ued_armory.glb",
+      "image": "models-png/ued_armory.png"
+    },
+    {
+      "name": "ued_beattle",
+      "download": "models-glb/ued_beattle.glb",
+      "image": "models-png/ued_beattle.png"
+    },
+    {
+      "name": "ued_biodomecommand_v1",
+      "download": "models-glb/ued_biodomecommand_v1.glb",
+      "image": "models-png/ued_biodomecommand_v1.png"
+    },
+    {
+      "name": "ued_dropship_v2",
+      "download": "models-glb/ued_dropship_v2.glb",
+      "image": "models-png/ued_dropship_v2.png"
+    },
+    {
+      "name": "ued_fusioncore_v3",
+      "download": "models-glb/ued_fusioncore_v3.glb",
+      "image": "models-png/ued_fusioncore_v3.png"
+    },
+    {
+      "name": "ued_hivemindemulator_v1",
+      "download": "models-glb/ued_hivemindemulator_v1.glb",
+      "image": "models-png/ued_hivemindemulator_v1.png"
+    },
+    {
+      "name": "ued_merccompound_v2",
+      "download": "models-glb/ued_merccompound_v2.glb",
+      "image": "models-png/ued_merccompound_v2.png"
+    },
+    {
+      "name": "ued_militarizedtransport_v1",
+      "download": "models-glb/ued_militarizedtransport_v1.glb",
+      "image": "models-png/ued_militarizedtransport_v1.png"
+    },
+    {
+      "name": "ued_sciencefacility_v1",
+      "download": "models-glb/ued_sciencefacility_v1.glb",
+      "image": "models-png/ued_sciencefacility_v1.png"
+    },
+    {
+      "name": "ued_shieldwall_v4",
+      "download": "models-glb/ued_shieldwall_v4.glb",
+      "image": "models-png/ued_shieldwall_v4.png"
+    },
+    {
+      "name": "ued_spectre_v1",
+      "download": "models-glb/ued_spectre_v1.glb",
+      "image": "models-png/ued_spectre_v1.png"
+    },
+    {
+      "name": "ued_valkyrie_v1",
+      "download": "models-glb/ued_valkyrie_v1.glb",
+      "image": "models-png/ued_valkyrie_v1.png"
+    },
+    {
+      "name": "ued_shadow's_pacifier_v3",
+      "download": "models-glb/ued_shadow's_pacifier_v3.glb",
+      "image": "models-png/ued_shadow's_pacifier_v3.png"
+    },
+    {
+      "name": "uplairstrip",
+      "download": "models-glb/uplairstrip.glb",
+      "image": "models-png/uplairstrip.png"
+    },
+    {
+      "name": "uplbillet",
+      "download": "models-glb/uplbillet.glb",
+      "image": "models-png/uplbillet.png"
+    },
+    {
+      "name": "uplcommstation",
+      "download": "models-glb/uplcommstation.glb",
+      "image": "models-png/uplcommstation.png"
+    },
+    {
+      "name": "uplelectrostaticdefensetower",
+      "download": "models-glb/uplelectrostaticdefensetower.glb",
+      "image": "models-png/uplelectrostaticdefensetower.png"
+    },
+    {
+      "name": "uplexhumer",
+      "download": "models-glb/uplexhumer.glb",
+      "image": "models-png/uplexhumer.png"
+    },
+    {
+      "name": "uplgenerator",
+      "download": "models-glb/uplgenerator.glb",
+      "image": "models-png/uplgenerator.png"
+    },
+    {
+      "name": "uplheadquarters",
+      "download": "models-glb/uplheadquarters.glb",
+      "image": "models-png/uplheadquarters.png"
+    },
+    {
+      "name": "uplmanufacturingfacility",
+      "download": "models-glb/uplmanufacturingfacility.glb",
+      "image": "models-png/uplmanufacturingfacility.png"
+    },
+    {
+      "name": "uplnightjar",
+      "download": "models-glb/uplnightjar.glb",
+      "image": "models-png/uplnightjar.png"
+    },
+    {
+      "name": "uplriotofficer",
+      "download": "models-glb/uplriotofficer.glb",
+      "image": "models-png/uplriotofficer.png"
+    },
+    {
+      "name": "uplrndfacility",
+      "download": "models-glb/uplrndfacility.glb",
+      "image": "models-png/uplrndfacility.png"
+    },
+    {
+      "name": "uplscout",
+      "download": "models-glb/uplscout.glb",
+      "image": "models-png/uplscout.png"
+    },
+    {
+      "name": "uplsolitaire",
+      "download": "models-glb/uplsolitaire.glb",
+      "image": "models-png/uplsolitaire.png"
+    },
+    {
+      "name": "uplspecops",
+      "download": "models-glb/uplspecops.glb",
+      "image": "models-png/uplspecops.png"
+    },
+    {
+      "name": "upl_trooper",
+      "download": "models-glb/upl_trooper.glb",
+      "image": "models-png/upl_trooper.png"
+    },
+    {
+      "name": "ultraliskcavernex1",
+      "download": "models-glb/ultraliskcavernex1.glb",
+      "image": "models-png/ultraliskcavernex1.png"
+    },
+    {
+      "name": "ultraliskex1",
+      "download": "models-glb/ultraliskex1.glb",
+      "image": "models-png/ultraliskex1.png"
+    },
+    {
+      "name": "ultraliskex1egg",
+      "download": "models-glb/ultraliskex1egg.glb",
+      "image": "models-png/ultraliskex1egg.png"
+    },
+    {
+      "name": "umbra",
+      "download": "models-glb/umbra.glb",
+      "image": "models-png/umbra.png"
+    },
+    {
+      "name": "unit_smallfighters_2",
+      "download": "models-glb/unit_smallfighters_2.glb",
+      "image": "models-png/unit_smallfighters_2.png"
+    },
+    {
+      "name": "vikingassault",
+      "download": "models-glb/vikingassault.glb",
+      "image": "models-png/vikingassault.png"
+    },
+    {
+      "name": "vikingfighter",
+      "download": "models-glb/vikingfighter.glb",
+      "image": "models-png/vikingfighter.png"
+    },
+    {
+      "name": "viper_operationscenter_v1",
+      "download": "models-glb/viper_operationscenter_v1.glb",
+      "image": "models-png/viper_operationscenter_v1.png"
+    },
+    {
+      "name": "viper_templeofviper_v3",
+      "download": "models-glb/viper_templeofviper_v3.glb",
+      "image": "models-png/viper_templeofviper_v3.png"
+    },
+    {
+      "name": "viper_warfactory1",
+      "download": "models-glb/viper_warfactory1.glb",
+      "image": "models-png/viper_warfactory1.png"
+    },
+    {
+      "name": "virtus",
+      "download": "models-glb/virtus.glb",
+      "image": "models-png/virtus.png"
+    },
+    {
+      "name": "voidray",
+      "download": "models-glb/voidray.glb",
+      "image": "models-png/voidray.png"
+    },
+    {
+      "name": "volatiledischarge",
+      "download": "models-glb/volatiledischarge.glb",
+      "image": "models-png/volatiledischarge.png"
+    },
+    {
+      "name": "volt",
+      "download": "models-glb/volt.glb",
+      "image": "models-png/volt.png"
+    },
+    {
+      "name": "war3_altarofdepths",
+      "download": "models-glb/war3_altarofdepths.glb",
+      "image": "models-png/war3_altarofdepths.png"
+    },
+    {
+      "name": "war3_coralbed",
+      "download": "models-glb/war3_coralbed.glb",
+      "image": "models-png/war3_coralbed.png"
+    },
+    {
+      "name": "war3_demongate",
+      "download": "models-glb/war3_demongate.glb",
+      "image": "models-png/war3_demongate.png"
+    },
+    {
+      "name": "war3_doomguard",
+      "download": "models-glb/war3_doomguard.glb",
+      "image": "models-png/war3_doomguard.png"
+    },
+    {
+      "name": "war3_dragonseaturtlerange",
+      "download": "models-glb/war3_dragonseaturtlerange.glb",
+      "image": "models-png/war3_dragonseaturtlerange.png"
+    },
+    {
+      "name": "war3_infernal",
+      "download": "models-glb/war3_infernal.glb",
+      "image": "models-png/war3_infernal.png"
+    },
+    {
+      "name": "war3_murgulreaver",
+      "download": "models-glb/war3_murgulreaver.glb",
+      "image": "models-png/war3_murgulreaver.png"
+    },
+    {
+      "name": "war3_murgulslave",
+      "download": "models-glb/war3_murgulslave.glb",
+      "image": "models-png/war3_murgulslave.png"
+    },
+    {
+      "name": "war3_nagamyrmidon",
+      "download": "models-glb/war3_nagamyrmidon.glb",
+      "image": "models-png/war3_nagamyrmidon.png"
+    },
+    {
+      "name": "war3_nagasiren",
+      "download": "models-glb/war3_nagasiren.glb",
+      "image": "models-png/war3_nagasiren.png"
+    },
+    {
+      "name": "war3_shrineofashjara",
+      "download": "models-glb/war3_shrineofashjara.glb",
+      "image": "models-png/war3_shrineofashjara.png"
+    },
+    {
+      "name": "war3_snapdragon",
+      "download": "models-glb/war3_snapdragon.glb",
+      "image": "models-png/war3_snapdragon.png"
+    },
+    {
+      "name": "war3_spawninggrounds",
+      "download": "models-glb/war3_spawninggrounds.glb",
+      "image": "models-png/war3_spawninggrounds.png"
+    },
+    {
+      "name": "war3_templeoftides",
+      "download": "models-glb/war3_templeoftides.glb",
+      "image": "models-png/war3_templeoftides.png"
+    },
+    {
+      "name": "war3_tidalguardian",
+      "download": "models-glb/war3_tidalguardian.glb",
+      "image": "models-png/war3_tidalguardian.png"
+    },
+    {
+      "name": "war3_windserpent",
+      "download": "models-glb/war3_windserpent.glb",
+      "image": "models-png/war3_windserpent.png"
+    },
+    {
+      "name": "war3_felhound",
+      "download": "models-glb/war3_felhound.glb",
+      "image": "models-png/war3_felhound.png"
+    },
+    {
+      "name": "ward",
+      "download": "models-glb/ward.glb",
+      "image": "models-png/ward.png"
+    },
+    {
+      "name": "warpprism",
+      "download": "models-glb/warpprism.glb",
+      "image": "models-png/warpprism.png"
+    },
+    {
+      "name": "watcher",
+      "download": "models-glb/watcher.glb",
+      "image": "models-png/watcher.png"
+    },
+    {
+      "name": "widowmine",
+      "download": "models-glb/widowmine.glb",
+      "image": "models-png/widowmine.png"
+    },
+    {
+      "name": "widowmine_junker_collection",
+      "download": "models-glb/widowmine_junker_collection.glb",
+      "image": "models-png/widowmine_junker_collection.png"
+    },
+    {
+      "name": "widowmine_umojan",
+      "download": "models-glb/widowmine_umojan.glb",
+      "image": "models-png/widowmine_umojan.png"
+    },
+    {
+      "name": "wraith_umojan_collection",
+      "download": "models-glb/wraith_umojan_collection.glb",
+      "image": "models-png/wraith_umojan_collection.png"
+    },
+    {
+      "name": "xayidden",
+      "download": "models-glb/xayidden.glb",
+      "image": "models-png/xayidden.png"
+    },
+    {
+      "name": "xayidling",
+      "download": "models-glb/xayidling.glb",
+      "image": "models-png/xayidling.png"
+    },
+    {
+      "name": "xayithoan",
+      "download": "models-glb/xayithoan.glb",
+      "image": "models-png/xayithoan.png"
+    },
+    {
+      "name": "xelnaga_darkshrine",
+      "download": "models-glb/xelnaga_darkshrine.glb",
+      "image": "models-png/xelnaga_darkshrine.png"
+    },
+    {
+      "name": "xelnaga_forge",
+      "download": "models-glb/xelnaga_forge.glb",
+      "image": "models-png/xelnaga_forge.png"
+    },
+    {
+      "name": "xelnaga_pylon",
+      "download": "models-glb/xelnaga_pylon.glb",
+      "image": "models-png/xelnaga_pylon.png"
+    },
+    {
+      "name": "xelnaga_roboticsfacility",
+      "download": "models-glb/xelnaga_roboticsfacility.glb",
+      "image": "models-png/xelnaga_roboticsfacility.png"
+    },
+    {
+      "name": "xelnaga_roboticssupportbay",
+      "download": "models-glb/xelnaga_roboticssupportbay.glb",
+      "image": "models-png/xelnaga_roboticssupportbay.png"
+    },
+    {
+      "name": "xelnaga_stasiscell",
+      "download": "models-glb/xelnaga_stasiscell.glb",
+      "image": "models-png/xelnaga_stasiscell.png"
+    },
+    {
+      "name": "yetistandard",
+      "download": "models-glb/yetistandard.glb",
+      "image": "models-png/yetistandard.png"
+    },
+    {
+      "name": "z1",
+      "download": "models-glb/z1.glb",
+      "image": "models-png/z1.png"
+    },
+    {
+      "name": "z2",
+      "download": "models-glb/z2.glb",
+      "image": "models-png/z2.png"
+    },
+    {
+      "name": "zealot_ex2",
+      "download": "models-glb/zealot_ex2.glb",
+      "image": "models-png/zealot_ex2.png"
+    },
+    {
+      "name": "zenith",
+      "download": "models-glb/zenith.glb",
+      "image": "models-png/zenith.png"
+    },
+    {
+      "name": "zergnydusattacker",
+      "download": "models-glb/zergnydusattacker.glb",
+      "image": "models-png/zergnydusattacker.png"
+    },
+    {
+      "name": "zergling",
+      "download": "models-glb/zergling.glb",
+      "image": "models-png/zergling.png"
+    },
+    {
+      "name": "zerglingupgrade",
+      "download": "models-glb/zerglingupgrade.glb",
+      "image": "models-png/zerglingupgrade.png"
+    },
+    {
+      "name": "zerusalientreehover",
+      "download": "models-glb/zerusalientreehover.glb",
+      "image": "models-png/zerusalientreehover.png"
+    },
+    {
+      "name": "index.db",
+      "download": "models-glb/index.db.glb",
+      "image": "models-png/index.db.png"
+    },
+    {
+      "name": "index.html",
+      "download": "models-glb/index.html.glb",
+      "image": "models-png/index.html.png"
+    },
+    {
+      "name": "mycochoir",
+      "download": "models-glb/mycochoir.glb",
+      "image": "models-png/mycochoir.png"
+    }
+  ]
+}

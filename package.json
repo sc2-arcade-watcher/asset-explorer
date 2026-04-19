@@ -1,12 +1,14 @@
 {
   "name": "explorer-tests",
   "private": true,
+  "type": "module",
   "scripts": {
     "test": "playwright test",
     "test:smoke": "playwright test --project=api",
     "test:browser": "playwright test --project=chromium"
   },
   "devDependencies": {
-    "@playwright/test": "^1.51.0"
+    "@playwright/test": "^1.51.0",
+    "zod": "^3.23.8"
   }
 }

@@ -1,5 +1,9 @@
-// Import JSZip for ZIP operations
-import JSZip from '../lib/jszip.js';
+/**
+ * Default `assetBase` used when a category JSON omits the field. Every current
+ * list ships without the override. Categories can override by setting
+ * `assetBase` at the top level of their JSON (e.g. future GitHub-hosted sets).
+ */
+export const DEFAULT_ASSET_BASE = 'https://dist.sc2arcade.com/star-assets/';
 
 /**
  * Wraps a remote image URL through the local imageproxy for resized thumbnails.
@@ -15,126 +19,17 @@ export function thumbUrl(url, options) {
 }
 
 /**
- * Downloads a StarCraft 2 model along with its textures into a ZIP file.
- * - Extracts .dds texture names from the model binary.
- * - Matches them with provided texture repositories.
- * - Downloads textures and packs them with the model.
- */
-export async function downloadModelWithTextures(modelUrl, texturesMap) {
-  const zip = new JSZip();
-
-  // 1. Fetch model as binary
-  const modelResp = await fetch(modelUrl);
-  if (!modelResp.ok) throw new Error("Failed to fetch model");
-  const modelBuffer = await modelResp.arrayBuffer();
-
-  // 2. Extract .dds texture names from model binary
-  const modelText = bufferToAscii(modelBuffer);
-  const ddsRegex = /([\w\-/\\]+\.(?:dds))/gi;
-  const foundTextures = [...modelText.matchAll(ddsRegex)]
-    .map(m => m[1].replace(/\\/g, '/').split('/').pop().toLowerCase());
-
-  const uniqueTextures = [...new Set(foundTextures)];
-
-  // 3. Add model to zip
-  const modelName = modelUrl.split('/').pop();
-  zip.file(modelName, modelBuffer);
-
-  // 4. Download matching textures
-  for (const texName of uniqueTextures) {
-    const repo = texturesMap[texName];
-    if (!repo) {
-      console.warn(`Missing repo for texture: ${texName}`);
-      continue;
-    }
-
-    const texUrl = `${repo}/${texName}`;
-    try {
-      const texBlob = await fetchAsBlob(texUrl);
-      zip.file(texName, texBlob);
-    } catch (err) {
-      console.warn(`Failed to fetch texture ${texUrl}`, err);
-    }
-  }
-
-  // 5. Generate ZIP and trigger download
-  const zipBlob = await zip.generateAsync({ type: 'blob' });
-  triggerDownload(zipBlob, modelName.replace(/\.m3$/, '') + '_with_textures.zip');
-}
-
-/**
- * Converts an ArrayBuffer to an ASCII string (non-printable bytes replaced with spaces).
- */
-function bufferToAscii(buffer) {
-  const view = new Uint8Array(buffer);
-  return Array.from(view, char => (char >= 32 && char <= 126) ? String.fromCharCode(char) : ' ').join('');
-}
-
-/**
- * Fetches a binary file as Blob.
- */
-async function fetchAsBlob(url) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Failed to fetch ${url}`);
-  return res.blob();
-}
-
-/**
- * Triggers a browser download of a Blob.
- */
-function triggerDownload(blob, filename) {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  URL.revokeObjectURL(a.href);
-  document.body.removeChild(a);
-}
-
-/**
- * Parses INI text into an object: { sectionName: [lines...] }
- */
-export function parseIniString(iniText) {
-  const result = {};
-  let currentSection = null;
-
-  const lines = iniText.split(/\r?\n/);
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith(';') || trimmed.startsWith('#')) continue;
-
-    const sectionMatch = trimmed.match(/^\[(.+?)\]$/);
-    if (sectionMatch) {
-      currentSection = sectionMatch[1];
-      result[currentSection] = [];
-    } else if (currentSection) {
-      result[currentSection].push(trimmed);
-    }
-  }
-
-  return result;
-}
-
-/**
- * Flattens repo structure {repo: [files]} into array of {file, repo}
- */
-export function flattenRepoFiles(repoMap) {
-  return Object.entries(repoMap).flatMap(([repo, files]) =>
-    files.map(file => ({ file, repo }))
-  );
-}
-
-/**
- * Loads an INI file from ./list/{list}.ini and parses it.
+ * Loads a JSON asset list from ./list/{list}.json. See `test/list-schema.js`
+ * for the authoritative shape.
+ *
  * @param {string} list
  * @param {AbortSignal} [signal]
+ * @returns {Promise<{category:string, name:string, assetBase?:string, items:Array<{name:string, download:string, image:string, description?:string}>}>}
  */
-export async function loadIniFile(list, signal) {
-  const response = await fetch(`./list/${list}.ini`, signal ? { signal } : undefined);
+export async function loadAssetList(list, signal) {
+  const response = await fetch(`./list/${list}.json`, signal ? { signal } : undefined);
   if (!response.ok) throw new Error(`Failed to load ${list}`);
-  const text = await response.text();
-  return parseIniString(text);
+  return response.json();
 }
 
 /**
@@ -231,12 +126,12 @@ function measureImage(src) {
 async function openLightbox(items, index, triggerImg) {
   const PhotoSwipe = await loadPhotoSwipe();
 
-  const clickedDims = await measureImage(items[index].icon);
+  const clickedDims = await measureImage(items[index].image);
   const fallbackW = clickedDims?.width  || triggerImg?.naturalWidth  || 1024;
   const fallbackH = clickedDims?.height || triggerImg?.naturalHeight || 1024;
 
   const dataSource = items.map((it, i) => ({
-    src: it.icon,
+    src: it.image,
     width:  i === index && clickedDims ? clickedDims.width  : fallbackW,
     height: i === index && clickedDims ? clickedDims.height : fallbackH,
     alt: it.name,
@@ -344,26 +239,24 @@ export function watchImages({ selector = 'img', onLoad = null, onError = null, f
  * only set when a tile enters the viewport (with a 200px look-ahead), so off-screen
  * tiles never issue network requests.
  *
- * INI file fetches use AbortController so a rapid reload/search won't leave
- * stale network requests queued behind the new one.
+ * JSON fetches use AbortController so a rapid reload/search won't leave stale
+ * network requests queued behind the new one.
  *
  * Default renderer is composed from `thumbnail` + `hrefBuilder` + optional
  * `onItemClick`. Pages needing materially different markup (models.html) pass
  * their own `renderItemFn` as an escape hatch.
  *
  * @param {object} options
- * @param {string} options.list - INI list key (loads list/{list}.ini and list/{list}-png.ini)
- * @param {Function} [options.loadFn] - Optional custom async loader: (signal) => [{file, icon, name}].
- *   When provided, skips the default dual-INI loading and merging.
- * @param {string} [options.assetBase=''] - URL prefix applied to `{repo}/{file}` when using the
- *   default loader. Not used when `loadFn` is provided.
+ * @param {string} options.list - JSON list key (loads list/{list}.json).
+ * @param {Function} [options.loadFn] - Optional custom async loader: (signal) => [{name, download, image}].
+ *   When provided, skips the default JSON loading.
  * @param {{size: string}} [options.thumbnail] - imageproxy option string, e.g. {size: '152x152,fit'}.
  *   Required unless `renderItemFn` is provided.
- * @param {(item) => string} [options.hrefBuilder] - URL for the tile's anchor. Defaults to item.file.
+ * @param {(item) => string} [options.hrefBuilder] - URL for the tile's anchor. Defaults to item.download.
  * @param {(item, event) => void} [options.onItemClick] - If provided, preventDefault + call this
  *   instead of opening the anchor href in a new tab. Overrides the default lightbox.
  * @param {boolean} [options.lightbox=true] - When true (the default) and no `onItemClick` is
- *   given, clicking a tile opens `item.icon` in a PhotoSwipe overlay. Middle-click and
+ *   given, clicking a tile opens `item.image` in a PhotoSwipe overlay. Middle-click and
  *   ctrl/cmd-click are left to the browser so the anchor's download still works.
  * @param {Function} [options.renderItemFn] - Escape hatch: full custom renderer (item) => HTMLElement.
  *   When provided, overrides thumbnail/hrefBuilder/onItemClick/lightbox.
@@ -384,9 +277,8 @@ export function createItemList({
   loadFn,
   containerSelector,
   searchInputSelector,
-  assetBase = '',
   thumbnail,
-  hrefBuilder = (item) => item.file,
+  hrefBuilder = (item) => item.download,
   onItemClick,
   lightbox = true,
   renderItemFn,
@@ -494,7 +386,7 @@ export function createItemList({
   } : null);
   const render = renderItemFn ?? ((item) => {
     const href = hrefBuilder(item);
-    const imgSrc = thumbUrl(item.icon, thumbnail.size);
+    const imgSrc = thumbUrl(item.image, thumbnail.size);
     const div = document.createElement('div');
     div.className = 'icon-item';
     div.innerHTML = `
@@ -518,7 +410,7 @@ export function createItemList({
   let rendered = 0;             // count of items currently in DOM
 
   let debounceTimer = null;
-  let loadController = null;    // AbortController for INI fetch cancellation
+  let loadController = null;    // AbortController for JSON fetch cancellation
   let imageObserver = null;     // IntersectionObserver for lazy image reveal
   let sentinelObserver = null;  // IntersectionObserver for infinite scroll
 
@@ -534,27 +426,15 @@ export function createItemList({
       if (loadFn) {
         allItems = await loadFn(signal);
       } else {
-        const [ddsFiles, pngFiles] = await Promise.all([
-          loadIniFile(list, signal),
-          loadIniFile(`${list}-png`, signal)
-        ]);
-
-        const ddsList = flattenRepoFiles(ddsFiles);
-        const pngList = flattenRepoFiles(pngFiles);
-
-        const ddsIndex = Object.fromEntries(ddsList.map(({ file, repo }) => [file.toLowerCase(), { file, repo }]));
-        const pngIndex = Object.fromEntries(pngList.map(({ file, repo }) => [file.toLowerCase(), { file, repo }]));
-
-        allItems = Object.keys(ddsIndex).map(key => {
-          const dds = ddsIndex[key];
-          const png = pngIndex[key];
-          if (!png) return null;
-          return {
-            file: `${assetBase}${dds.repo}/${dds.file}.dds`,
-            icon: `${assetBase}${png.repo}/${png.file}.png`,
-            name: png.file
-          };
-        }).filter(Boolean);
+        const data = await loadAssetList(list, signal);
+        const base = data.assetBase ?? DEFAULT_ASSET_BASE;
+        const join = (p) => !p ? '' : /^https?:\/\//.test(p) ? p : base + p;
+        allItems = data.items.map((it) => ({
+          name: it.name,
+          download: join(it.download),
+          image: join(it.image),
+          ...(it.description ? { description: it.description } : {}),
+        }));
       }
 
       filteredItems = allItems;
@@ -661,26 +541,4 @@ export function createItemList({
   });
 
   return { load };
-}
-
-/**
- * Variant of createItemList for locally-hosted single-file assets (e.g. JPGs in assets/).
- * Loads a single INI file where the section header is the folder path and entries are
- * filenames without extension. Produces items with file === icon === "{folder}/{name}.jpg".
- */
-export function createLocalItemList({ list, ext = 'jpg', baseUrl = '', ...rest }) {
-  return createItemList({
-    ...rest,
-    list,
-    loadFn: async (signal) => {
-      const iniData = await loadIniFile(list, signal);
-      return Object.entries(iniData).flatMap(([folder, files]) =>
-        files.map(name => {
-          const path = `${folder}/${encodeURIComponent(name)}.${ext}`;
-          const url = baseUrl ? `${baseUrl}/${path}` : path;
-          return { file: url, icon: url, name };
-        })
-      );
-    },
-  });
 }

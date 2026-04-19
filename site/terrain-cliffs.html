@@ -11,7 +11,7 @@
 <body>
 <script type="module">
     import { initPage } from './src/init-page.js';
-    import { createLocalItemList } from './src/script.js';
+    import { createItemList } from './src/script.js';
 
     initPage({
         title: 'Terrain Cliffs',
@@ -22,9 +22,8 @@
         preloaderLabel: 'Loading cliffs',
     });
 
-    createLocalItemList({
+    createItemList({
         list: 'terrain-cliffs',
-        baseUrl: 'https://dist.sc2arcade.com/star-assets',
         containerSelector: '.icons-grid',
         searchInputSelector: '#icon-search',
         thumbnail: { size: '300x200,fit' },

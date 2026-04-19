@@ -11,7 +11,7 @@
 <body>
 <script type="module">
     import { initPage } from './src/init-page.js';
-    import { createLocalItemList } from './src/script.js';
+    import { createItemList } from './src/script.js';
 
     initPage({
         title: 'Terrain Doodads',
@@ -21,9 +21,8 @@
         preloaderLabel: 'Loading doodads',
     });
 
-    createLocalItemList({
+    createItemList({
         list: 'terrain-doodads',
-        baseUrl: 'https://dist.sc2arcade.com/star-assets',
         containerSelector: '.icons-grid',
         searchInputSelector: '#icon-search',
         thumbnail: { size: '152x152,fit' },

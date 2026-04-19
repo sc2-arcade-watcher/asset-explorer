@@ -25,14 +25,11 @@ const assets = [
   '/src/discord-widgets.js',
 ];
 
-// INI data files — a subset covering the standard pair + special types
-const iniFiles = [
-  '/list/buttons.ini',
-  '/list/buttons-png.ini',
-  '/list/models.ini',
-  '/list/models-png.ini',
-  '/list/models-glb.ini',
-  '/list/textures.ini',
+// Asset list JSON — a subset covering the three category shapes
+const listFiles = [
+  '/list/buttons.json',
+  '/list/models.json',
+  '/list/terrain-cliffs.json',
 ];
 
 test.describe('pages', () => {
@@ -53,8 +50,8 @@ test.describe('static assets', () => {
   }
 });
 
-test.describe('INI data files', () => {
-  for (const path of iniFiles) {
+test.describe('asset list JSON', () => {
+  for (const path of listFiles) {
     test(path, async ({ request }) => {
       const res = await request.get(path);
       expect(res.status()).toBe(200);

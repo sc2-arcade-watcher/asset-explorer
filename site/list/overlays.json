@@ -1,0 +1,546 @@
+{
+  "category": "overlays",
+  "name": "Overlays",
+  "items": [
+    {
+      "name": "Storm_UI_Glues_Lobby_Ranked_Heroleague_Left",
+      "download": "overlays/Storm_UI_Glues_Lobby_Ranked_Heroleague_Left.dds",
+      "image": "overlays-png/Storm_UI_Glues_Lobby_Ranked_Heroleague_Left.png"
+    },
+    {
+      "name": "Storm_UI_Glues_Lobby_Ranked_Heroleague_Right",
+      "download": "overlays/Storm_UI_Glues_Lobby_Ranked_Heroleague_Right.dds",
+      "image": "overlays-png/Storm_UI_Glues_Lobby_Ranked_Heroleague_Right.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreenBackGround_Chromie_Portal_Prop",
+      "download": "overlays/Storm_UI_HomeScreenBackGround_Chromie_Portal_Prop.dds",
+      "image": "overlays-png/Storm_UI_HomeScreenBackGround_Chromie_Portal_Prop.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreenBackGround_Eternalconflict_Strata1",
+      "download": "overlays/Storm_UI_HomeScreenBackGround_Eternalconflict_Strata1.dds",
+      "image": "overlays-png/Storm_UI_HomeScreenBackGround_Eternalconflict_Strata1.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreenBackGround_Eternalconflict_Strata3",
+      "download": "overlays/Storm_UI_HomeScreenBackGround_Eternalconflict_Strata3.dds",
+      "image": "overlays-png/Storm_UI_HomeScreenBackGround_Eternalconflict_Strata3.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreenBackGround_Ghostkerrigan_Chair",
+      "download": "overlays/Storm_UI_HomeScreenBackGround_Ghostkerrigan_Chair.dds",
+      "image": "overlays-png/Storm_UI_HomeScreenBackGround_Ghostkerrigan_Chair.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreenBackGround_Ghostkerrigan_Chair_On",
+      "download": "overlays/Storm_UI_HomeScreenBackGround_Ghostkerrigan_Chair_On.dds",
+      "image": "overlays-png/Storm_UI_HomeScreenBackGround_Ghostkerrigan_Chair_On.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreenBackGround_Towers_Vignette",
+      "download": "overlays/Storm_UI_HomeScreenBackGround_Towers_Vignette.dds",
+      "image": "overlays-png/Storm_UI_HomeScreenBackGround_Towers_Vignette.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreenBackGround_Varian_Mountain",
+      "download": "overlays/Storm_UI_HomeScreenBackGround_Varian_Mountain.dds",
+      "image": "overlays-png/Storm_UI_HomeScreenBackGround_Varian_Mountain.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreenBackGround_Varian_Shipbody",
+      "download": "overlays/Storm_UI_HomeScreenBackGround_Varian_Shipbody.dds",
+      "image": "overlays-png/Storm_UI_HomeScreenBackGround_Varian_Shipbody.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreen_Eternity_HeavenBuildings",
+      "download": "overlays/Storm_UI_HomeScreen_Eternity_HeavenBuildings.dds",
+      "image": "overlays-png/Storm_UI_HomeScreen_Eternity_HeavenBuildings.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreen_Eternity_HeavenBuildings_Dark",
+      "download": "overlays/Storm_UI_HomeScreen_Eternity_HeavenBuildings_Dark.dds",
+      "image": "overlays-png/Storm_UI_HomeScreen_Eternity_HeavenBuildings_Dark.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreen_Eternity_HellBuildings",
+      "download": "overlays/Storm_UI_HomeScreen_Eternity_HellBuildings.dds",
+      "image": "overlays-png/Storm_UI_HomeScreen_Eternity_HellBuildings.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreen_Eternity_HellBuildings_Dark",
+      "download": "overlays/Storm_UI_HomeScreen_Eternity_HellBuildings_Dark.dds",
+      "image": "overlays-png/Storm_UI_HomeScreen_Eternity_HellBuildings_Dark.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreen_Eternity_Hellgate",
+      "download": "overlays/Storm_UI_HomeScreen_Eternity_Hellgate.dds",
+      "image": "overlays-png/Storm_UI_HomeScreen_Eternity_Hellgate.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreen_Samuro_Monkeyking",
+      "download": "overlays/Storm_UI_HomeScreen_Samuro_Monkeyking.dds",
+      "image": "overlays-png/Storm_UI_HomeScreen_Samuro_Monkeyking.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreen_Samuro_Mountain",
+      "download": "overlays/Storm_UI_HomeScreen_Samuro_Mountain.dds",
+      "image": "overlays-png/Storm_UI_HomeScreen_Samuro_Mountain.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreen_Shrines_Huntgoblin",
+      "download": "overlays/Storm_UI_HomeScreen_Shrines_Huntgoblin.dds",
+      "image": "overlays-png/Storm_UI_HomeScreen_Shrines_Huntgoblin.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreen_ShrinesforeGround",
+      "download": "overlays/Storm_UI_HomeScreen_ShrinesforeGround.dds",
+      "image": "overlays-png/Storm_UI_HomeScreen_ShrinesforeGround.png"
+    },
+    {
+      "name": "Storm_UI_HomeScreen_Varian_BackGroundalpha",
+      "download": "overlays/Storm_UI_HomeScreen_Varian_BackGroundalpha.dds",
+      "image": "overlays-png/Storm_UI_HomeScreen_Varian_BackGroundalpha.png"
+    },
+    {
+      "name": "Storm_UI_Mecha_BackGroundMech_Valla",
+      "download": "overlays/Storm_UI_Mecha_BackGroundMech_Valla.dds",
+      "image": "overlays-png/Storm_UI_Mecha_BackGroundMech_Valla.png"
+    },
+    {
+      "name": "Storm_UI_Mecha_BackGroundMech_Yrel",
+      "download": "overlays/Storm_UI_Mecha_BackGroundMech_Yrel.dds",
+      "image": "overlays-png/Storm_UI_Mecha_BackGroundMech_Yrel.png"
+    },
+    {
+      "name": "Storm_UI_Promotional_Fanfare_Valla",
+      "download": "overlays/Storm_UI_Promotional_Fanfare_Valla.dds",
+      "image": "overlays-png/Storm_UI_Promotional_Fanfare_Valla.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Lucha2_Welcome_Announcer",
+      "download": "overlays/Storm_UI_Quest_Event_Lucha2_Welcome_Announcer.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Lucha2_Welcome_Announcer.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Lucha_DiaLog_Left_Hero",
+      "download": "overlays/Storm_UI_Quest_Event_Lucha_DiaLog_Left_Hero.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Lucha_DiaLog_Left_Hero.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Lucha_DiaLog_Right_Hero",
+      "download": "overlays/Storm_UI_Quest_Event_Lucha_DiaLog_Right_Hero.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Lucha_DiaLog_Right_Hero.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Alex",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Alex.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Alex.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Alex_Dark",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Alex_Dark.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Alex_Dark.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Alex_Lg",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Alex_Lg.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Alex_Lg.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Maiev",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Maiev.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Maiev.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Dark",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Dark.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Dark.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Lg",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Lg.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Lg.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Lg_FX",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Lg_FX.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Lg_FX.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Lg_FX_Mask",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Lg_FX_Mask.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Maiev_Lg_FX_Mask.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Raven",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Raven.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Raven.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_RavenLord",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_RavenLord.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_RavenLord.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Whitemane",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Whitemane.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Whitemane.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Whitemane_Dark",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Whitemane_Dark.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Whitemane_Dark.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Whitemane_Lg",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Whitemane_Lg.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Whitemane_Lg.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Zarya",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Zarya.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Zarya.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Zarya_Dark",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Zarya_Dark.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Zarya_Dark.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_Spooky_DiaLog_Zarya_Lg",
+      "download": "overlays/Storm_UI_Quest_Event_Spooky_DiaLog_Zarya_Lg.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_Spooky_DiaLog_Zarya_Lg.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_WCAV_DiaLog_Hero_Alliance",
+      "download": "overlays/Storm_UI_Quest_Event_WCAV_DiaLog_Hero_Alliance.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_WCAV_DiaLog_Hero_Alliance.png"
+    },
+    {
+      "name": "Storm_UI_Quest_Event_WCAV_DiaLog_Hero_Horde",
+      "download": "overlays/Storm_UI_Quest_Event_WCAV_DiaLog_Hero_Horde.dds",
+      "image": "overlays-png/Storm_UI_Quest_Event_WCAV_DiaLog_Hero_Horde.png"
+    },
+    {
+      "name": "Storm_UI_Tutorial_Tip_Mount",
+      "download": "overlays/Storm_UI_Tutorial_Tip_Mount.dds",
+      "image": "overlays-png/Storm_UI_Tutorial_Tip_Mount.png"
+    },
+    {
+      "name": "UI_Quests_Contentfeed_ReWard_BG",
+      "download": "overlays/UI_Quests_Contentfeed_ReWard_BG.dds",
+      "image": "overlays-png/UI_Quests_Contentfeed_ReWard_BG.png"
+    },
+    {
+      "name": "overlayUI_Abathursymbiote",
+      "download": "overlays/overlayUI_Abathursymbiote.dds",
+      "image": "overlays-png/overlayUI_Abathursymbiote.png"
+    },
+    {
+      "name": "sc2_ui_collection_warchest_purchasedialog_keyart",
+      "download": "overlays/sc2_ui_collection_warchest_purchasedialog_keyart.dds",
+      "image": "overlays-png/sc2_ui_collection_warchest_purchasedialog_keyart.png"
+    },
+    {
+      "name": "storm_ui_homescreenbackground_starcraft_zerg_midground",
+      "download": "overlays/storm_ui_homescreenbackground_starcraft_zerg_midground.dds",
+      "image": "overlays-png/storm_ui_homescreenbackground_starcraft_zerg_midground.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_accent_void",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_accent_void.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_accent_void.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_abathur",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_abathur.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_abathur.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_alarak",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_alarak.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_alarak.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_campaigncollection",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_campaigncollection.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_campaigncollection.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_commandernova",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_commandernova.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_commandernova.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_complete",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_complete.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_complete.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_dehaka",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_dehaka.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_dehaka.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_fenix",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_fenix.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_fenix.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_hanandhorner",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_hanandhorner.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_hanandhorner.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_karax",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_karax.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_karax.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_liberty",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_liberty.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_liberty.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_mengsk",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_mengsk.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_mengsk.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_nova",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_nova.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_nova.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_stetmann",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_stetmann.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_stetmann.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_stukov",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_stukov.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_stukov.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_swann",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_swann.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_swann.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_swarm",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_swarm.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_swarm.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_tychus",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_tychus.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_tychus.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_void",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_void.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_void.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_vorazun",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_vorazun.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_vorazun.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_zagara",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_zagara.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_zagara.png"
+    },
+    {
+      "name": "ui_battlenet_glue_campaign_purchase_logo_zeratul",
+      "download": "overlays/ui_battlenet_glue_campaign_purchase_logo_zeratul.dds",
+      "image": "overlays-png/ui_battlenet_glue_campaign_purchase_logo_zeratul.png"
+    },
+    {
+      "name": "ui_battlenet_glue_coop_newuser_splashbg",
+      "download": "overlays/ui_battlenet_glue_coop_newuser_splashbg.dds",
+      "image": "overlays-png/ui_battlenet_glue_coop_newuser_splashbg.png"
+    },
+    {
+      "name": "ui_battlenet_glue_tournament_ghosttrophy",
+      "download": "overlays/ui_battlenet_glue_tournament_ghosttrophy.dds",
+      "image": "overlays-png/ui_battlenet_glue_tournament_ghosttrophy.png"
+    },
+    {
+      "name": "ui_battlenet_glue_tournament_ghosttrophy_blurmask",
+      "download": "overlays/ui_battlenet_glue_tournament_ghosttrophy_blurmask.dds",
+      "image": "overlays-png/ui_battlenet_glue_tournament_ghosttrophy_blurmask.png"
+    },
+    {
+      "name": "ui_battlenet_glue_tournament_ghosttrophybackglow",
+      "download": "overlays/ui_battlenet_glue_tournament_ghosttrophybackglow.dds",
+      "image": "overlays-png/ui_battlenet_glue_tournament_ghosttrophybackglow.png"
+    },
+    {
+      "name": "ui_battlenet_glues_collection_voicepack_characterframe_default_queen",
+      "download": "overlays/ui_battlenet_glues_collection_voicepack_characterframe_default_queen.dds",
+      "image": "overlays-png/ui_battlenet_glues_collection_voicepack_characterframe_default_queen.png"
+    },
+    {
+      "name": "ui_battlenet_glues_collection_voicepack_characterframe_default_queenhighlight",
+      "download": "overlays/ui_battlenet_glues_collection_voicepack_characterframe_default_queenhighlight.dds",
+      "image": "overlays-png/ui_battlenet_glues_collection_voicepack_characterframe_default_queenhighlight.png"
+    },
+    {
+      "name": "ui_battlenet_glues_pageassets_loadscreenvignette",
+      "download": "overlays/ui_battlenet_glues_pageassets_loadscreenvignette.dds",
+      "image": "overlays-png/ui_battlenet_glues_pageassets_loadscreenvignette.png"
+    },
+    {
+      "name": "ui_battlenet_loading_player_racialicon_protoss_l",
+      "download": "overlays/ui_battlenet_loading_player_racialicon_protoss_l.dds",
+      "image": "overlays-png/ui_battlenet_loading_player_racialicon_protoss_l.png"
+    },
+    {
+      "name": "ui_battlenet_loading_player_racialicon_protoss_r",
+      "download": "overlays/ui_battlenet_loading_player_racialicon_protoss_r.dds",
+      "image": "overlays-png/ui_battlenet_loading_player_racialicon_protoss_r.png"
+    },
+    {
+      "name": "ui_battlenet_loading_player_racialicon_random_l",
+      "download": "overlays/ui_battlenet_loading_player_racialicon_random_l.dds",
+      "image": "overlays-png/ui_battlenet_loading_player_racialicon_random_l.png"
+    },
+    {
+      "name": "ui_battlenet_loading_player_racialicon_random_r",
+      "download": "overlays/ui_battlenet_loading_player_racialicon_random_r.dds",
+      "image": "overlays-png/ui_battlenet_loading_player_racialicon_random_r.png"
+    },
+    {
+      "name": "ui_battlenet_loading_player_racialicon_terran_l",
+      "download": "overlays/ui_battlenet_loading_player_racialicon_terran_l.dds",
+      "image": "overlays-png/ui_battlenet_loading_player_racialicon_terran_l.png"
+    },
+    {
+      "name": "ui_battlenet_loading_player_racialicon_terran_r",
+      "download": "overlays/ui_battlenet_loading_player_racialicon_terran_r.dds",
+      "image": "overlays-png/ui_battlenet_loading_player_racialicon_terran_r.png"
+    },
+    {
+      "name": "ui_battlenet_loading_player_racialicon_zerg_l",
+      "download": "overlays/ui_battlenet_loading_player_racialicon_zerg_l.dds",
+      "image": "overlays-png/ui_battlenet_loading_player_racialicon_zerg_l.png"
+    },
+    {
+      "name": "ui_battlenet_loading_player_racialicon_zerg_r",
+      "download": "overlays/ui_battlenet_loading_player_racialicon_zerg_r.dds",
+      "image": "overlays-png/ui_battlenet_loading_player_racialicon_zerg_r.png"
+    },
+    {
+      "name": "ui_battlenet_loading_vignette_back",
+      "download": "overlays/ui_battlenet_loading_vignette_back.dds",
+      "image": "overlays-png/ui_battlenet_loading_vignette_back.png"
+    },
+    {
+      "name": "ui_battlenet_loading_vignette_top",
+      "download": "overlays/ui_battlenet_loading_vignette_top.dds",
+      "image": "overlays-png/ui_battlenet_loading_vignette_top.png"
+    },
+    {
+      "name": "ui_glues_pageassets_loading_mutatoroverlay",
+      "download": "overlays/ui_glues_pageassets_loading_mutatoroverlay.dds",
+      "image": "overlays-png/ui_glues_pageassets_loading_mutatoroverlay.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_abathur",
+      "download": "overlays/ui_loading_coop_hero_abathur.dds",
+      "image": "overlays-png/ui_loading_coop_hero_abathur.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_alarak",
+      "download": "overlays/ui_loading_coop_hero_alarak.dds",
+      "image": "overlays-png/ui_loading_coop_hero_alarak.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_artanis",
+      "download": "overlays/ui_loading_coop_hero_artanis.dds",
+      "image": "overlays-png/ui_loading_coop_hero_artanis.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_dehaka",
+      "download": "overlays/ui_loading_coop_hero_dehaka.dds",
+      "image": "overlays-png/ui_loading_coop_hero_dehaka.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_fenix",
+      "download": "overlays/ui_loading_coop_hero_fenix.dds",
+      "image": "overlays-png/ui_loading_coop_hero_fenix.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_hanandhorner",
+      "download": "overlays/ui_loading_coop_hero_hanandhorner.dds",
+      "image": "overlays-png/ui_loading_coop_hero_hanandhorner.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_karax",
+      "download": "overlays/ui_loading_coop_hero_karax.dds",
+      "image": "overlays-png/ui_loading_coop_hero_karax.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_kerrigan",
+      "download": "overlays/ui_loading_coop_hero_kerrigan.dds",
+      "image": "overlays-png/ui_loading_coop_hero_kerrigan.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_mengsk",
+      "download": "overlays/ui_loading_coop_hero_mengsk.dds",
+      "image": "overlays-png/ui_loading_coop_hero_mengsk.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_nova",
+      "download": "overlays/ui_loading_coop_hero_nova.dds",
+      "image": "overlays-png/ui_loading_coop_hero_nova.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_raynor",
+      "download": "overlays/ui_loading_coop_hero_raynor.dds",
+      "image": "overlays-png/ui_loading_coop_hero_raynor.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_stetmann",
+      "download": "overlays/ui_loading_coop_hero_stetmann.dds",
+      "image": "overlays-png/ui_loading_coop_hero_stetmann.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_stukov",
+      "download": "overlays/ui_loading_coop_hero_stukov.dds",
+      "image": "overlays-png/ui_loading_coop_hero_stukov.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_swann",
+      "download": "overlays/ui_loading_coop_hero_swann.dds",
+      "image": "overlays-png/ui_loading_coop_hero_swann.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_tychus",
+      "download": "overlays/ui_loading_coop_hero_tychus.dds",
+      "image": "overlays-png/ui_loading_coop_hero_tychus.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_vorazun",
+      "download": "overlays/ui_loading_coop_hero_vorazun.dds",
+      "image": "overlays-png/ui_loading_coop_hero_vorazun.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_zagara",
+      "download": "overlays/ui_loading_coop_hero_zagara.dds",
+      "image": "overlays-png/ui_loading_coop_hero_zagara.png"
+    },
+    {
+      "name": "ui_loading_coop_hero_zeratul",
+      "download": "overlays/ui_loading_coop_hero_zeratul.dds",
+      "image": "overlays-png/ui_loading_coop_hero_zeratul.png"
+    },
+    {
+      "name": "ui_void_spearofadun_vignette",
+      "download": "overlays/ui_void_spearofadun_vignette.dds",
+      "image": "overlays-png/ui_void_spearofadun_vignette.png"
+    }
+  ]
+}

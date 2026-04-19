@@ -1,0 +1,271 @@
+{
+  "category": "consoles",
+  "name": "Consoles",
+  "items": [
+    {
+      "name": "sc2_ui_collection_huds_large_consolegeneric_alliance",
+      "download": "consoles/sc2_ui_collection_huds_large_consolegeneric_alliance.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consolegeneric_alliance.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consolegeneric_arcadecabinetpurple",
+      "download": "consoles/sc2_ui_collection_huds_large_consolegeneric_arcadecabinetpurple.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consolegeneric_arcadecabinetpurple.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consolegeneric_classic",
+      "download": "consoles/sc2_ui_collection_huds_large_consolegeneric_classic.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consolegeneric_classic.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consolegeneric_horde",
+      "download": "consoles/sc2_ui_collection_huds_large_consolegeneric_horde.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consolegeneric_horde.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consolegeneric_scourge",
+      "download": "consoles/sc2_ui_collection_huds_large_consolegeneric_scourge.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consolegeneric_scourge.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consolegeneric_sentinels",
+      "download": "consoles/sc2_ui_collection_huds_large_consolegeneric_sentinels.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consolegeneric_sentinels.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleprotoss_classic",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleprotoss_classic.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleprotoss_classic.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleprotoss_forged",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleprotoss_forged.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleprotoss_forged.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleprotoss_ihanrii",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleprotoss_ihanrii.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleprotoss_ihanrii.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleprotoss_nerazim",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleprotoss_nerazim.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleprotoss_nerazim.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleskinprotossdefault",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleskinprotossdefault.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleskinprotossdefault.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleskinterrandefault",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleskinterrandefault.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleskinterrandefault.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleskinzergdefault",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleskinzergdefault.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleskinzergdefault.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleterran_classic",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleterran_classic.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleterran_classic.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleterran_covertops",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleterran_covertops.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleterran_covertops.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleterran_junker",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleterran_junker.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleterran_junker.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleterran_machined",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleterran_machined.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleterran_machined.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consoleterran_tyrador",
+      "download": "consoles/sc2_ui_collection_huds_large_consoleterran_tyrador.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consoleterran_tyrador.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consolezerg_abathur",
+      "download": "consoles/sc2_ui_collection_huds_large_consolezerg_abathur.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consolezerg_abathur.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consolezerg_cerberus",
+      "download": "consoles/sc2_ui_collection_huds_large_consolezerg_cerberus.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consolezerg_cerberus.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consolezerg_classic",
+      "download": "consoles/sc2_ui_collection_huds_large_consolezerg_classic.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consolezerg_classic.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_consolezerg_mecha",
+      "download": "consoles/sc2_ui_collection_huds_large_consolezerg_mecha.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_consolezerg_mecha.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_dehaka_consolezerg",
+      "download": "consoles/sc2_ui_collection_huds_large_dehaka_consolezerg.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_dehaka_consolezerg.png"
+    },
+    {
+      "name": "sc2_ui_collection_huds_large_fenix_consoleprotoss",
+      "download": "consoles/sc2_ui_collection_huds_large_fenix_consoleprotoss.dds",
+      "image": "consoles-png/sc2_ui_collection_huds_large_fenix_consoleprotoss.png"
+    },
+    {
+      "name": "ui_console_panel_command_alliance",
+      "download": "consoles/ui_console_panel_command_alliance.dds",
+      "image": "consoles-png/ui_console_panel_command_alliance.png"
+    },
+    {
+      "name": "ui_console_panel_command_alliance_ex",
+      "download": "consoles/ui_console_panel_command_alliance_ex.dds",
+      "image": "consoles-png/ui_console_panel_command_alliance_ex.png"
+    },
+    {
+      "name": "ui_console_panel_command_arcadecabinetpurple",
+      "download": "consoles/ui_console_panel_command_arcadecabinetpurple.dds",
+      "image": "consoles-png/ui_console_panel_command_arcadecabinetpurple.png"
+    },
+    {
+      "name": "ui_console_panel_command_cerberus",
+      "download": "consoles/ui_console_panel_command_cerberus.dds",
+      "image": "consoles-png/ui_console_panel_command_cerberus.png"
+    },
+    {
+      "name": "ui_console_panel_command_forged",
+      "download": "consoles/ui_console_panel_command_forged.dds",
+      "image": "consoles-png/ui_console_panel_command_forged.png"
+    },
+    {
+      "name": "ui_console_panel_command_horde",
+      "download": "consoles/ui_console_panel_command_horde.dds",
+      "image": "consoles-png/ui_console_panel_command_horde.png"
+    },
+    {
+      "name": "ui_console_panel_command_ihanrii",
+      "download": "consoles/ui_console_panel_command_ihanrii.dds",
+      "image": "consoles-png/ui_console_panel_command_ihanrii.png"
+    },
+    {
+      "name": "ui_console_panel_command_ihanrii_nolights",
+      "download": "consoles/ui_console_panel_command_ihanrii_nolights.dds",
+      "image": "consoles-png/ui_console_panel_command_ihanrii_nolights.png"
+    },
+    {
+      "name": "ui_console_panel_command_imperial",
+      "download": "consoles/ui_console_panel_command_imperial.dds",
+      "image": "consoles-png/ui_console_panel_command_imperial.png"
+    },
+    {
+      "name": "ui_console_panel_command_nerazim",
+      "download": "consoles/ui_console_panel_command_nerazim.dds",
+      "image": "consoles-png/ui_console_panel_command_nerazim.png"
+    },
+    {
+      "name": "ui_console_panel_command_scourge",
+      "download": "consoles/ui_console_panel_command_scourge.dds",
+      "image": "consoles-png/ui_console_panel_command_scourge.png"
+    },
+    {
+      "name": "ui_console_panel_command_sentinels",
+      "download": "consoles/ui_console_panel_command_sentinels.dds",
+      "image": "consoles-png/ui_console_panel_command_sentinels.png"
+    },
+    {
+      "name": "ui_console_panel_command_simulant",
+      "download": "consoles/ui_console_panel_command_simulant.dds",
+      "image": "consoles-png/ui_console_panel_command_simulant.png"
+    },
+    {
+      "name": "ui_console_panel_command_tyrador",
+      "download": "consoles/ui_console_panel_command_tyrador.dds",
+      "image": "consoles-png/ui_console_panel_command_tyrador.png"
+    },
+    {
+      "name": "ui_console_panel_command_xelnaga",
+      "download": "consoles/ui_console_panel_command_xelnaga.dds",
+      "image": "consoles-png/ui_console_panel_command_xelnaga.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_alliance",
+      "download": "consoles/ui_console_panel_minimap_alliance.dds",
+      "image": "consoles-png/ui_console_panel_minimap_alliance.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_alliance_ex",
+      "download": "consoles/ui_console_panel_minimap_alliance_ex.dds",
+      "image": "consoles-png/ui_console_panel_minimap_alliance_ex.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_arcadecabinetpurple",
+      "download": "consoles/ui_console_panel_minimap_arcadecabinetpurple.dds",
+      "image": "consoles-png/ui_console_panel_minimap_arcadecabinetpurple.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_cerberus",
+      "download": "consoles/ui_console_panel_minimap_cerberus.dds",
+      "image": "consoles-png/ui_console_panel_minimap_cerberus.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_forged",
+      "download": "consoles/ui_console_panel_minimap_forged.dds",
+      "image": "consoles-png/ui_console_panel_minimap_forged.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_horde",
+      "download": "consoles/ui_console_panel_minimap_horde.dds",
+      "image": "consoles-png/ui_console_panel_minimap_horde.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_ihanrii",
+      "download": "consoles/ui_console_panel_minimap_ihanrii.dds",
+      "image": "consoles-png/ui_console_panel_minimap_ihanrii.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_imperial",
+      "download": "consoles/ui_console_panel_minimap_imperial.dds",
+      "image": "consoles-png/ui_console_panel_minimap_imperial.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_nerazim",
+      "download": "consoles/ui_console_panel_minimap_nerazim.dds",
+      "image": "consoles-png/ui_console_panel_minimap_nerazim.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_scourge",
+      "download": "consoles/ui_console_panel_minimap_scourge.dds",
+      "image": "consoles-png/ui_console_panel_minimap_scourge.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_sentinels",
+      "download": "consoles/ui_console_panel_minimap_sentinels.dds",
+      "image": "consoles-png/ui_console_panel_minimap_sentinels.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_simulant",
+      "download": "consoles/ui_console_panel_minimap_simulant.dds",
+      "image": "consoles-png/ui_console_panel_minimap_simulant.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_tyrador",
+      "download": "consoles/ui_console_panel_minimap_tyrador.dds",
+      "image": "consoles-png/ui_console_panel_minimap_tyrador.png"
+    },
+    {
+      "name": "ui_console_panel_minimap_xelnaga",
+      "download": "consoles/ui_console_panel_minimap_xelnaga.dds",
+      "image": "consoles-png/ui_console_panel_minimap_xelnaga.png"
+    }
+  ]
+}
