@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+  {{- include "/_partials/head.html" -}}
   {{- $page := dict
       "fullTitle" "SC2Mapster Asset Explorer – StarCraft II Community Modding Resources"
       "description" "SC2Mapster Asset Explorer: Browse StarCraft II modding assets — buttons, icons, portraits, art, 3D models, UI elements, and more. A community resource for SC2 mapmakers."
@@ -13,8 +10,6 @@
       "ogDescription" "Browse StarCraft II modding assets. A community resource for SC2 mapmakers."
   -}}
   {{- include "/_partials/seo.html" $page -}}
-  <!-- Fonts -->
-  <link rel="stylesheet" href="src/styles.css">
   <script>
     window.BASE = ""
   </script>

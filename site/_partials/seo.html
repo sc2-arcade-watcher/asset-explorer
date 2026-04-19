@@ -35,7 +35,7 @@
 {{- end -}}
 {{- $ogTitle := index $p "ogTitle" -}}{{- if not $ogTitle -}}{{- $ogTitle = $fullTitle -}}{{- end -}}
 {{- $ogDescription := index $p "ogDescription" -}}{{- if not $ogDescription -}}{{- $ogDescription = $desc -}}{{- end -}}
-{{- $ogImage := index $p "ogImage" -}}{{- if not $ogImage -}}{{- $ogImage = "img/arc.png" -}}{{- end -}}
+{{- $ogImage := index $p "ogImage" -}}{{- if not $ogImage -}}{{- $ogImage = "/img/arc.png" -}}{{- end -}}
 {{- $ogType := index $p "ogType" -}}{{- if not $ogType -}}{{- $ogType = "website" -}}{{- end -}}
 {{- $keywords := index $p "keywords" -}}
 <title>{{ $fullTitle }}</title>
