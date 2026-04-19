@@ -51,36 +51,61 @@ function getScrollParent(el) {
   return null;
 }
 
+/* SVG icons for the view-size and layout toggle buttons. */
+const SIZE_ICONS = {
+  small:  `<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="4" height="4" rx="0.5"/><rect x="6" y="1" width="4" height="4" rx="0.5"/><rect x="11" y="1" width="4" height="4" rx="0.5"/><rect x="1" y="6" width="4" height="4" rx="0.5"/><rect x="6" y="6" width="4" height="4" rx="0.5"/><rect x="11" y="6" width="4" height="4" rx="0.5"/><rect x="1" y="11" width="4" height="4" rx="0.5"/><rect x="6" y="11" width="4" height="4" rx="0.5"/><rect x="11" y="11" width="4" height="4" rx="0.5"/></svg>`,
+  medium: `<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="6" height="6" rx="0.5"/><rect x="9" y="1" width="6" height="6" rx="0.5"/><rect x="1" y="9" width="6" height="6" rx="0.5"/><rect x="9" y="9" width="6" height="6" rx="0.5"/></svg>`,
+  large:  `<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="14" height="14" rx="1"/></svg>`,
+};
+const LAYOUT_ICONS = {
+  grid: `<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="6" height="6" rx="0.5"/><rect x="9" y="1" width="6" height="6" rx="0.5"/><rect x="1" y="9" width="6" height="6" rx="0.5"/><rect x="9" y="9" width="6" height="6" rx="0.5"/></svg>`,
+  list:   `<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="1" y="2" width="14" height="3" rx="0.5"/><rect x="1" y="7" width="14" height="3" rx="0.5"/><rect x="1" y="12" width="14" height="3" rx="0.5"/></svg>`,
+};
+
 /**
- * Builds a labelled `<select>` for the grid toolbar. Each option is either a
- * scalar (auto-stringified) or `{value, label}` for human-friendly labels.
+ * Builds a labelled icon-toggle group for the grid toolbar.
+ * options: array of {value, label, icon} (icon is an SVG string).
  */
-let selectIdCounter = 0;
-function buildSelect(labelText, value, options, className, onChange) {
-  const id = `${className}-${++selectIdCounter}`;
-  const label = document.createElement('label');
-  label.className = className + '-label';
-  label.setAttribute('for', id);
-  const span = document.createElement('span');
-  span.textContent = labelText;
-  const select = document.createElement('select');
-  select.id = id;
-  select.className = className;
-  select.setAttribute('aria-label', labelText);
+function buildToggleGroup(labelText, value, options, onChange) {
+  const group = document.createElement('span');
+  group.className = 'toolbar-group';
+
+  const lbl = document.createElement('span');
+  lbl.className = 'toolbar-group-label';
+  lbl.textContent = labelText;
+  group.appendChild(lbl);
+
+  const btnGroup = document.createElement('div');
+  btnGroup.className = 'toolbar-toggle-group';
+  btnGroup.setAttribute('role', 'group');
+  btnGroup.setAttribute('aria-label', labelText);
+
   for (const opt of options) {
-    const { value: v, label: l } = (opt && typeof opt === 'object')
+    const { value: v, label: l, icon } = (opt && typeof opt === 'object')
       ? opt
-      : { value: opt, label: String(opt).charAt(0).toUpperCase() + String(opt).slice(1) };
-    const o = document.createElement('option');
-    o.value = String(v);
-    o.textContent = l;
-    if (String(v) === String(value)) o.selected = true;
-    select.appendChild(o);
+      : { value: opt, label: String(opt), icon: null };
+    const btn = document.createElement('button');
+    const active = String(v) === String(value);
+    btn.className = 'toggle-btn' + (active ? ' active' : '');
+    btn.dataset.value = String(v);
+    btn.setAttribute('aria-pressed', String(active));
+    btn.type = 'button';
+    btn.title = l;
+    btn.innerHTML = icon || l;
+    btn.addEventListener('click', () => {
+      btnGroup.querySelectorAll('.toggle-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      onChange(String(v));
+    });
+    btnGroup.appendChild(btn);
   }
-  select.addEventListener('change', (e) => onChange(e.target.value));
-  label.appendChild(span);
-  label.appendChild(select);
-  return label;
+
+  group.appendChild(btnGroup);
+  return group;
 }
 
 /**
@@ -358,21 +383,48 @@ export function createItemList({
     return Math.max(50, Math.ceil(window.innerHeight / tileSize) * tilesPerRow * 2);
   }
 
-  // Toolbar with view-size and layout selects injected above the grid.
+  // Toolbar: item count on the left, icon-toggle groups on the right.
   let toolbar = null;
   if (previewSizeOptions || layoutOptions) {
     toolbar = document.createElement('div');
     toolbar.className = 'grid-toolbar';
-    if (previewSizeOptions) toolbar.appendChild(buildSelect('View', previewSize, previewSizeOptions, 'grid-size-select', (v) => {
-      previewSize = v;
-      container.dataset.previewSize = v;
-      writePref('preview', v);
-    }));
-    if (layoutOptions) toolbar.appendChild(buildSelect('Layout', layout, layoutOptions, 'grid-layout-select', (v) => {
-      layout = v;
-      container.dataset.layout = v;
-      writePref('layout', v);
-    }));
+
+    // Count span — updated by resetRender()
+    const countEl = document.createElement('span');
+    countEl.id = 'icons-count';
+    countEl.className = 'grid-toolbar-count';
+    toolbar.appendChild(countEl);
+
+    const controls = document.createElement('div');
+    controls.className = 'grid-toolbar-controls';
+
+    if (previewSizeOptions) {
+      const sizeOpts = previewSizeOptions.map(v => ({
+        value: v,
+        label: String(v).charAt(0).toUpperCase() + String(v).slice(1),
+        icon: SIZE_ICONS[v] ?? null,
+      }));
+      controls.appendChild(buildToggleGroup('View', previewSize, sizeOpts, (v) => {
+        previewSize = v;
+        container.dataset.previewSize = v;
+        writePref('preview', v);
+      }));
+    }
+
+    if (layoutOptions) {
+      const layOpts = layoutOptions.map(v => ({
+        value: v,
+        label: String(v).charAt(0).toUpperCase() + String(v).slice(1),
+        icon: LAYOUT_ICONS[v] ?? null,
+      }));
+      controls.appendChild(buildToggleGroup('Layout', layout, layOpts, (v) => {
+        layout = v;
+        container.dataset.layout = v;
+        writePref('layout', v);
+      }));
+    }
+
+    toolbar.appendChild(controls);
     container.before(toolbar);
   }
 
@@ -507,7 +559,7 @@ export function createItemList({
     sentinelObserver.observe(sentinel);
 
     const countEl = document.getElementById('icons-count');
-    if (countEl) countEl.textContent = `${filteredItems.length} / ${allItems.length} icons`;
+    if (countEl) countEl.innerHTML = `<b>${filteredItems.length.toLocaleString()}</b> / <b>${allItems.length.toLocaleString()}</b> items`;
 
     if (onRendered) onRendered(filteredItems, allItems);
   }

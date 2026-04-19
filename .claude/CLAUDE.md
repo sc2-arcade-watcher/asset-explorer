@@ -125,7 +125,7 @@ Deployment smoke tests hitting the live site are manual only:
     ├── 404.html
     ├── <category>.html
     ├── img/           (bg.jpg, arc.png, logo.png, favicon.ico, discord.svg)
-    ├── fonts/         (Starcraft-Regular, Michroma-Regular, SourceSansPro)
+    ├── fonts/         (Michroma-Regular)
     ├── lib/           (three/, jszip.js, photoswipe/)
     ├── list/          (JSON asset inventory files, one per category)
     └── src/           (init-page.js, script.js, player.js, styles.css, discord-widgets.js)

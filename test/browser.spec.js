@@ -69,17 +69,18 @@ test('icon-item border uses ::before overlay, not element border', async ({ page
   expect(pseudoBorder).toBe('1px');
 });
 
-test('grid toolbar renders size select (no batch select) and persists prefs', async ({ page }) => {
+test('grid toolbar renders size toggles (no batch select) and persists prefs', async ({ page }) => {
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
-  const sizeSelect = page.locator('.grid-size-select');
-  await expect(sizeSelect).toBeVisible();
+  // Toolbar should have icon toggle buttons for view size, not a select.
+  await expect(page.locator('.toolbar-toggle-group')).toHaveCount(2);
+  await expect(page.locator('.grid-size-select')).toHaveCount(0);
   await expect(page.locator('.grid-batch-select')).toHaveCount(0);
 
-  // Default preview size is medium; changing to large should update the grid
-  // dataset, bump the --tile-scale, and persist to localStorage.
-  await sizeSelect.selectOption('large');
+  // Default preview size is medium; clicking the large toggle should update
+  // the grid dataset and persist to localStorage.
+  await page.locator('.toggle-btn[data-value="large"]').first().click();
   await expect(page.locator('.icons-grid')).toHaveAttribute('data-preview-size', 'large');
 
   const stored = await page.evaluate(() => localStorage.getItem('grid:buttons:preview'));
@@ -95,8 +96,8 @@ test('list layout switches grid to single-column and persists independently of s
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
-  await page.locator('.grid-layout-select').selectOption('list');
-  await page.locator('.grid-size-select').selectOption('large');
+  await page.locator('.toggle-btn[data-value="list"]').click();
+  await page.locator('.toggle-btn[data-value="large"]').first().click();
 
   await expect(page.locator('.icons-grid')).toHaveAttribute('data-layout', 'list');
   await expect(page.locator('.icons-grid')).toHaveAttribute('data-preview-size', 'large');
@@ -124,7 +125,7 @@ test('list layout: clicking the name row opens the lightbox', async ({ page }) =
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
 
-  await page.locator('.grid-layout-select').selectOption('list');
+  await page.locator('.toggle-btn[data-value="list"]').click();
 
   // Click where the name text sits. tooltip has pointer-events:none so a real
   // mouse click at that coordinate lands on a::after (which covers the row),
@@ -138,7 +139,7 @@ test('list layout: clicking the name row opens the lightbox', async ({ page }) =
 test('list layout: name truncates with ellipsis and carries native title', async ({ page }) => {
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
-  await page.locator('.grid-layout-select').selectOption('list');
+  await page.locator('.toggle-btn[data-value="list"]').click();
 
   const tooltipStyle = await page.evaluate(() => {
     const t = document.querySelector('.icon-item .tooltip');
@@ -169,7 +170,7 @@ test('list layout: name truncates with ellipsis and carries native title', async
 test('list layout: rows share a consistent height and have no copy-btn', async ({ page }) => {
   await page.goto('/buttons.html');
   await page.waitForSelector('.icon-item');
-  await page.locator('.grid-layout-select').selectOption('list');
+  await page.locator('.toggle-btn[data-value="list"]').click();
 
   const heights = await page.evaluate(() => {
     const rows = Array.from(document.querySelectorAll('.icon-item')).slice(0, 10);
@@ -184,7 +185,7 @@ test('list layout: rows share a consistent height and have no copy-btn', async (
 test('list layout: art tiles are wider than tall, portraits taller than wide', async ({ page }) => {
   await page.goto('/art.html');
   await page.waitForSelector('.icon-item');
-  await page.locator('.grid-layout-select').selectOption('list');
+  await page.locator('.toggle-btn[data-value="list"]').click();
   const artImg = await page.evaluate(() => {
     const img = document.querySelector('.icon-item img');
     const r = img.getBoundingClientRect();
@@ -194,7 +195,7 @@ test('list layout: art tiles are wider than tall, portraits taller than wide', a
 
   await page.goto('/portraits.html');
   await page.waitForSelector('.icon-item');
-  await page.locator('.grid-layout-select').selectOption('list');
+  await page.locator('.toggle-btn[data-value="list"]').click();
   const portraitImg = await page.evaluate(() => {
     const img = document.querySelector('.icon-item img');
     const r = img.getBoundingClientRect();
