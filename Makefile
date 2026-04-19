@@ -9,7 +9,7 @@ BASE_URL ?= http://localhost:$(HTTP_PORT)
 CACHE_CONTROL ?= no-store
 export HTTP_PORT BASE_URL CACHE_CONTROL
 
-COMPOSE := HTTP_PORT=$(HTTP_PORT) docker compose
+COMPOSE := HTTP_PORT=$(HTTP_PORT) docker compose -f docker-compose.yml -f docker-compose.dev.yml
 
 .PHONY: up down logs ps wait-ready test test-fast test-lists test-smoke test-browser help
 

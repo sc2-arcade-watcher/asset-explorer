@@ -1,0 +1,11 @@
+# Dev-only overlay. Loaded by the Makefile via `-f docker-compose.dev.yml`.
+# NOT auto-loaded by `docker compose up`, so production (which uses
+# docker-compose.override.yml) is unaffected.
+#
+# Enables Caddy's --watch flag so Caddyfile edits apply without a restart.
+# --watch is documented as dev-only:
+# https://caddyserver.com/docs/command-line#caddy-run
+
+services:
+  explorer:
+    command: caddy run --config /etc/caddy/Caddyfile --adapter caddyfile --watch

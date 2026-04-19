@@ -68,6 +68,8 @@ Tests go through the real Caddy+imageproxy stack. `make` targets auto-start it v
 
 The stack defaults to `CACHE_CONTROL=no-store` locally; production overrides via `docker-compose.override.yml`.
 
+`make up` loads `docker-compose.dev.yml` on top of the base, enabling Caddy's `--watch` flag — `Caddyfile` edits reload automatically in dev. Production (`docker compose up` without the Makefile) never loads that overlay.
+
 ```bash
 cp .env.example .env && make up            # start stack
 make test                                  # list schema + api + browser; auto-starts stack
