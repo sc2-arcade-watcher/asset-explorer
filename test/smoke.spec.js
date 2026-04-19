@@ -64,6 +64,31 @@ test('unknown path → 404', async ({ request }) => {
   expect(res.status()).toBe(404);
 });
 
+test('404 page renders Caddy templates (meta tags present)', async ({ request }) => {
+  const res = await request.get('/definitely-does-not-exist');
+  const body = await res.text();
+
+  // Template tags must NOT appear raw in the response
+  expect(body).not.toContain('{{');
+
+  const title = body.match(/<title>([^<]+)<\/title>/);
+  expect(title, '<title> present').not.toBeNull();
+  expect(title[1].trim().length).toBeGreaterThan(0);
+
+  const metas = [
+    ['property', 'og:title'],
+    ['property', 'og:image'],
+    ['property', 'og:type'],
+  ];
+  for (const [attr, key] of metas) {
+    const re = new RegExp(
+      `<meta[^>]*${attr}=["']${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["'][^>]*content=["']([^"']+)["']`,
+      'i'
+    );
+    expect(body.match(re), `${attr}="${key}" present in 404`).not.toBeNull();
+  }
+});
+
 // Guard against wrong file being served at these paths
 test('script.js exports createItemList', async ({ request }) => {
   const body = await (await request.get('/src/script.js')).text();
