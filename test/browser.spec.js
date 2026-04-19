@@ -27,7 +27,7 @@ test('title and h1', async ({ page }) => {
 test('nav links are present', async ({ page }) => {
   await page.goto('/');
   const links = page.locator('nav.links a');
-  await expect(links).toHaveCount(12);
+  await expect(links).toHaveCount(13);
 });
 
 test('discord widget container renders fallback cards', async ({ page }) => {
@@ -458,6 +458,38 @@ test('art tiles have 3:2 aspect ratio and use object-fit: contain', async ({ pag
   });
   expect(result.objectFit).toBe('contain');
   expect(result.ratio).toBeCloseTo(3 / 2, 1);
+});
+
+test('terrain-gallery lightbox shows two-line caption: name larger than description', async ({ page }) => {
+  await page.route('**/dist.sc2arcade.com/star-assets/**', route => route.abort());
+  await page.goto('/terrain-gallery.html');
+  await page.waitForSelector('.icon-item');
+
+  const expectedName = await page.locator('.icon-item').first().locator('.tooltip').textContent();
+
+  await page.locator('.icon-item a').first().click();
+  const overlay = page.locator('.pswp');
+  await expect(overlay).toBeVisible();
+
+  const nameEl = overlay.locator('.pswp__caption-name');
+  const descEl = overlay.locator('.pswp__caption-desc');
+
+  await expect(nameEl).toBeVisible();
+  await expect(nameEl).toHaveText(expectedName);
+
+  await expect(descEl).toBeVisible();
+  const descText = await descEl.textContent();
+  expect(descText.trim().length).toBeGreaterThan(0);
+
+  const { nameFontSize, descFontSize } = await page.evaluate(() => {
+    const n = document.querySelector('.pswp__caption-name');
+    const d = document.querySelector('.pswp__caption-desc');
+    return {
+      nameFontSize: parseFloat(getComputedStyle(n).fontSize),
+      descFontSize: parseFloat(getComputedStyle(d).fontSize),
+    };
+  });
+  expect(nameFontSize).toBeGreaterThan(descFontSize);
 });
 
 test('portrait tiles have 2:3 aspect ratio and use object-fit: contain', async ({ page }) => {

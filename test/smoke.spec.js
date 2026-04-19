@@ -15,6 +15,7 @@ const pages = [
   '/terrain-cliffs.html',
   '/terrain-doodads.html',
   '/terrain-tilesets.html',
+  '/terrain-gallery.html',
 ];
 
 // Core JS/CSS that every page depends on

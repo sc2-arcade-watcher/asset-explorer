@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{- include "/_partials/head.html" -}}
+    {{- $page := dict "title" "Terrain Gallery" -}}
+    {{- include "/_partials/seo.html" $page -}}
+</head>
+<body>
+<script type="module">
+    import { initPage } from './src/init-page.js';
+    import { createItemList } from './src/script.js';
+
+    initPage({
+        title: 'Terrain Gallery',
+        searchPlaceholder: 'Search gallery...',
+        searchAriaLabel: 'Search gallery',
+        gridClass: 'art-grid',
+        intro: 'Browse cinematic StarCraft II terrain compositions.',
+        preloaderLabel: 'Loading gallery',
+    });
+
+    createItemList({
+        list: 'terrain-gallery',
+        containerSelector: '.icons-grid',
+        searchInputSelector: '#icon-search',
+        thumbnail: { size: '600x400,fit' },
+        previewSize: 'large',
+    }).load();
+</script>
+</body>
+</html>

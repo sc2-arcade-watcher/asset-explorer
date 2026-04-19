@@ -162,6 +162,7 @@ async function openLightbox(items, index, triggerImg, { showDownload = true } = 
     alt: it.name,
     name: it.name,
     download: it.download || '',
+    description: it.description || '',
     ...(i === index && triggerImg?.currentSrc
       ? { msrc: triggerImg.currentSrc }
       : {}),
@@ -245,10 +246,15 @@ async function openLightbox(items, index, triggerImg, { showDownload = true } = 
       order: 10,
       isButton: false,
       appendTo: 'root',
-      html: '',
+      html: '<div class="pswp__caption-name"></div><div class="pswp__caption-desc"></div>',
       onInit: (el) => {
+        const nameEl = el.querySelector('.pswp__caption-name');
+        const descEl = el.querySelector('.pswp__caption-desc');
         const update = () => {
-          el.textContent = pswp.currSlide?.data?.name ?? '';
+          const slide = pswp.currSlide?.data;
+          nameEl.textContent = slide?.name ?? '';
+          descEl.textContent = slide?.description ?? '';
+          el.classList.toggle('has-desc', !!(slide?.description));
         };
         update();
         pswp.on('change', update);

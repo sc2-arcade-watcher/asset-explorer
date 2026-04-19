@@ -1,0 +1,25 @@
+{
+  "category": "terrain-gallery",
+  "name": "Terrain — Gallery",
+  "assetBase": "https://dist.sc2arcade.com/star-assets/",
+  "items": [
+    {
+      "name": "(LotV) Protoss Ancient Statues — Aiur Ruins",
+      "download": "terrain-gallery/1715.jpg",
+      "image": "terrain-gallery/1715.jpg",
+      "description": "Close-up cinematic of large stone Protoss warrior statues on an Aiur jungle tileset, with Terran battlecruisers visible in the sky above."
+    },
+    {
+      "name": "(LotV) Protoss Heroes — Templar Archives Gate",
+      "download": "terrain-gallery/1716.jpg",
+      "image": "terrain-gallery/1716.jpg",
+      "description": "Three Protoss hero units — a teal-armored warrior, a gold-shielded Adept-style figure, and a dark Tal'darim warrior — standing before ornate Protoss stone archways on a jungle tileset."
+    },
+    {
+      "name": "(LotV) Dark Shrine — Purifier Beam Strike",
+      "download": "terrain-gallery/1717.jpg",
+      "image": "terrain-gallery/1717.jpg",
+      "description": "Isometric view of Protoss units under two converging purifier laser beams on a dark stone tileset, with fires burning across broken ruins and ice crystal terrain elements."
+    }
+  ]
+}

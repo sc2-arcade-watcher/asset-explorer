@@ -30,4 +30,5 @@ export const ALLOWED_LISTS = [
     'terrain-cliffs',
     'terrain-doodads',
     'terrain-tilesets',
+    'terrain-gallery',
 ];
