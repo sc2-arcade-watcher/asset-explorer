@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        "**/.worktrees": true,
+        "**/.claude/worktrees": true,
+    },
+    "git.detectWorktrees": false
+}
