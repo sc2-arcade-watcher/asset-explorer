@@ -58,7 +58,7 @@ One JSON file per category (13 total), validated by `test/list-schema.js` (Zod).
 `assetBase` defaults to `https://dist.sc2arcade.com/star-assets/`; category JSONs omit it unless overriding. Three category shapes:
 - **Paired** (art, buttons, consoles, icons, overlays, portraits, sprites, ui, wireframes) — `download` points at the DDS, `image` at the matching PNG. Pre-merged at generation time (only items present in both DDS and PNG indexes).
 - **Models** (`models.json`) — `download` is the GLB (`models-glb/<name>.glb`), `image` is the PNG preview. Items without a GLB are dropped; `download` may be an empty string for entries kept as preview-only.
-- **Terrain** (`terrain-cliffs`, `terrain-doodads`, `terrain-tilesets`) — `download === image`, both point at the JPG under `terrain-<category>/` with URL-encoded lowercase filenames. Display `name` preserves original casing.
+- **Terrain** (`terrain-cliffs`, `terrain-doodads`, `terrain-tilesets`) — `download === image`, both point at the JPG under `terrain-<category>/` using the original filename with literal spaces (no percent-encoding). Display `name` strips the `.jpg` extension but otherwise matches the filename exactly.
 
 `item.description` is an optional string. `download` may be empty — the UI hides the download/viewer affordance when it is.
 
