@@ -1,6 +1,6 @@
 services:
   explorer:
-    image: caddy:2-alpine
+    image: caddy:2.11-alpine
     restart: unless-stopped
     ports:
       - "${HTTP_PORT:-8080}:80"
@@ -14,7 +14,8 @@ services:
       - imageproxy
 
   imageproxy:
-    image: ghcr.io/willnorris/imageproxy
+    # No version tags published on ghcr.io; pinned by digest (corresponds to v0.13.0 / latest).
+    image: ghcr.io/willnorris/imageproxy@sha256:c56d6e231b068080e64a1247ab8570dbc50336838ea7277eecd86e44df9bc305
     restart: unless-stopped
     command: -addr 0.0.0.0:8222 -cache /cache -allowHosts ${IMAGEPROXY_ALLOW_HOSTS:-dist.sc2arcade.com}
     volumes:

@@ -2,10 +2,26 @@ import { test, expect } from '@playwright/test';
 
 // Block external services — Discord API and Google Fonts are not under test.
 // Discord widget code handles network failures gracefully (fallback cards).
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page }, testInfo) => {
   await page.route('**/discord.com/**',   route => route.abort());
   await page.route('**/googleapis.com/**', route => route.abort());
   await page.route('**/gstatic.com/**',   route => route.abort());
+
+  // Log unexpected HTTP errors and failed requests from external hosts.
+  // Captured in test output to help diagnose rate-limiting or CDN issues in CI.
+  page.on('response', (response) => {
+    const status = response.status();
+    const url = response.url();
+    if (status >= 400 && !url.includes('discord.com') && !url.includes('googleapis.com') && !url.includes('gstatic.com')) {
+      console.log(`[net] ${status} ${url}  [${testInfo.title}]`);
+    }
+  });
+  page.on('requestfailed', (request) => {
+    const url = request.url();
+    if (!url.includes('discord.com') && !url.includes('googleapis.com') && !url.includes('gstatic.com')) {
+      console.log(`[net] FAILED ${request.failure()?.errorText ?? '?'} ${url}  [${testInfo.title}]`);
+    }
+  });
 });
 
 test('loads without uncaught JS errors', async ({ page }) => {

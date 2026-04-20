@@ -41,7 +41,7 @@ jobs:
         run: make test-smoke
       - name: Collect docker logs on failure
         if: failure()
-        run: docker compose logs --no-color
+        run: make logs
       - name: Tear down stack
         if: always()
         run: make down
@@ -64,7 +64,16 @@ jobs:
         run: make test-browser
       - name: Collect docker logs on failure
         if: failure()
-        run: docker compose logs --no-color
+        run: make logs
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
       - name: Tear down stack
         if: always()
         run: make down

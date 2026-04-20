@@ -7,8 +7,13 @@ export default defineConfig({
   testDir: './test',
   use: {
     baseURL: process.env.BASE_URL || 'http://localhost:8080',
+    // Retain traces/screenshots on failure so CI artifacts can diagnose flakes.
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
   },
-  reporter: 'list',
+  reporter: process.env.CI
+    ? [['list'], ['html', { open: 'never' }]]
+    : 'list',
 
   projects: [
     // HTTP-only tests — no browser required

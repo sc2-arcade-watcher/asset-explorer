@@ -16,8 +16,8 @@ COMPOSE := HTTP_PORT=$(HTTP_PORT) docker compose -f docker-compose.yml -f docker
 up: ## Start stack
 	$(COMPOSE) up -d
 
-down: ## Stop and remove containers
-	$(COMPOSE) down --remove-orphans
+down: ## Stop and remove containers (--volumes removes named volumes including imageproxy cache)
+	$(COMPOSE) down --remove-orphans --volumes
 
 logs: ## Tail logs
 	$(COMPOSE) logs -f
