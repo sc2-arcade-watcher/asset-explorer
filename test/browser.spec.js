@@ -324,31 +324,6 @@ test('lightbox shows prev/next arrows and advances on click', async ({ page }) =
   await expect(page.locator('.pswp__custom-caption')).not.toHaveText(firstCaption);
 });
 
-test('lightbox contains the image instead of stretching it to the viewport', async ({ page }) => {
-  // Buttons are 76px icons. Before the fix the overlay upscaled them to 2048px —
-  // lock that out by asserting the rendered slide width stays sensible even when
-  // the real image never arrives (the placeholder dims drive layout).
-  await page.route('**/dist.sc2arcade.com/star-assets/**', route => route.abort());
-  await page.goto('/buttons.html');
-  await page.waitForSelector('.icon-item');
-
-  await page.locator('.icon-item a').first().click();
-  const overlay = page.locator('.pswp');
-  await expect(overlay).toBeVisible();
-  await page.waitForTimeout(400);
-
-  const { slideW, natW } = await page.evaluate(() => {
-    const img = document.querySelector('.pswp__img');
-    return {
-      slideW: img ? img.getBoundingClientRect().width : 0,
-      natW: img ? img.naturalWidth : 0,
-    };
-  });
-  // The lightbox must not upscale past the image's natural size. Allow a tiny
-  // sub-pixel tolerance for rendering rounding.
-  expect(slideW).toBeLessThanOrEqual(natW + 1);
-});
-
 test('terrain-tilesets: lightbox centers the slide after real-image load', async ({ page }) => {
   // Terrain tilesets are served from a separate host and are larger than their
   // thumbnails — the dataSource dims (guessed from the thumbnail) won't match

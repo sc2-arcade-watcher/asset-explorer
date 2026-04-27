@@ -8,8 +8,10 @@
 }
 
 (static_headers) {
-	@static path *.js *.css *.html *.png *.jpg *.svg *.woff *.woff2 *.ttf *.glb *.ini
+	@static path *.js *.css *.png *.jpg *.svg *.woff *.woff2 *.ttf *.glb *.ini
 	header @static Cache-Control "{$CACHE_CONTROL:public, max-age=3600}"
+	@html path *.html /
+	header @html Cache-Control "{$CACHE_CONTROL_HTML:public, max-age=60, s-maxage=300, must-revalidate}"
 }
 
 (error_pages) {
